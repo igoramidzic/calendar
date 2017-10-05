@@ -24,6 +24,12 @@
 							md-button>Login</button>
 					</li>
 				</ng-template><!--
+				--><li *ngIf="afAuth.auth.currentUser" class="hidden-mobile list-item">
+					<button
+						[routerLink]="['account']"
+						class="hidden-mobile nav-list-btn"
+						md-button>{{ (afAuth.auth.currentUser.displayName | truncate: 20) || (afAuth.auth.currentUser.email | truncate: 20) }}</button>
+				</li><!--
 				--><li class="list-item">
 					<button type="button" md-button (click)="onToggleSidebar.emit()">
 						<i class="fa fa-bars"></i>

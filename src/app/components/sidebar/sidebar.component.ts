@@ -15,7 +15,6 @@ export class SidebarComponent implements OnInit {
 	constructor(private modalService: ModalService, private authService: AuthService, public afAuth: AngularFireAuth) { }
 
 	ngOnInit() {
-		
 	}
 
 	onOpenSignupModal () {
