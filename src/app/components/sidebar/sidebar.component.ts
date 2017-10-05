@@ -11,10 +11,14 @@ import { AuthService } from '../../services/auth.service';
 export class SidebarComponent implements OnInit {
 
 	@Output() onToggleSidebar = new EventEmitter<boolean>();
+	user: any;
 	
 	constructor(private modalService: ModalService, private authService: AuthService, public afAuth: AngularFireAuth) { }
 
 	ngOnInit() {
+		this.user = this.afAuth.authState.subscribe(user => {
+			this.user = user;
+		})
 	}
 
 	onOpenSignupModal () {

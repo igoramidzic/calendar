@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService implements OnInit {
@@ -11,7 +12,7 @@ export class AuthService implements OnInit {
 		
 	}
 
-	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase) { }
+	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase, private router: Router) { }
 
 	// Signup | Email
 	signupUserWithEmail (first: string, last: string, email: string, password: string) {
@@ -80,5 +81,6 @@ export class AuthService implements OnInit {
 	// Logout
 	logoutUser () {
 		this.afAuth.auth.signOut();
+		this.router.navigate(['']);
 	}
 }
