@@ -74,7 +74,7 @@ export class SignupModalComponent implements OnInit {
 		}
 
 		if (first.value && last.value && email.value && password.value) {
-			this.authService.signupUserWithEmail(email.value, password.value)
+			this.authService.signupUserWithEmail(first.value, last.value, email.value, password.value)
 				.then(
 					res => {
 						this.successfulSignup();
