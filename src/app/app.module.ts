@@ -26,11 +26,12 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { SignupModalComponent } from './components/signup-modal/signup-modal.component';
 import { CheckmarkComponent } from './components/animations/checkmark/checkmark.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { AccountComponent } from './components/pages/account/account.component';
 
 @NgModule({
 	declarations: [
@@ -41,7 +42,8 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 		LoginModalComponent,
 		SignupModalComponent,
 		CheckmarkComponent,
-		DashboardComponent
+		DashboardComponent,
+		AccountComponent
 	],
 	imports: [
 		BrowserModule,
