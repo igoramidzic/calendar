@@ -8,21 +8,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AppRoutingModule } from "./app-routing.module";
+import { TruncateModule } from 'ng2-truncate';
 import { environment } from '../environments/environment';
 
 // Material Theme
 import { MatButtonModule, MatSidenavModule, MatDialogModule, MatListModule,
 	MatInputModule, MatCheckboxModule } from '@angular/material';
 
-// Modules
-import { AppRoutingModule } from "./app-routing.module";
-import { TruncateModule } from 'ng2-truncate';
-
 // Services
 import { ModalService } from './services/modal.service';
 import { AuthService } from './services/auth.service';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { NotAuthGuard } from './services/not-auth-guard.service';
 
+// Components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -68,7 +68,7 @@ import { AccountComponent } from './components/pages/account/account.component';
 		SignupModalComponent,
 		LoginModalComponent
 	],
-	providers: [ ModalService, AuthService, AuthGuardService ],
+	providers: [ ModalService, AuthService, AuthGuard, NotAuthGuard ],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,14 +1,14 @@
 <div class="sidebar-content">
-	<md-list *ngIf="!afAuth.auth.currentUser" class="hidden-desktop sidebar-list">
+	<md-list *ngIf="!user" class="hidden-desktop sidebar-list">
 		<h3 class="sidebar-section-header" md-subheader>Calendar</h3>
 		<md-list-item (click)="onOpenSignupModal()">Signup</md-list-item>
 		<md-list-item (click)="onOpenLoginModal()">Login</md-list-item>
 		<hr>
 	</md-list>
-	<ng-template [ngIf]="afAuth.auth.currentUser">
-		<md-list *ngIf="afAuth.auth.currentUser" class="sidebar-list">
+	<ng-template [ngIf]="user">
+		<md-list *ngIf="user" class="sidebar-list">
 			<h3 class="sidebar-section-header" md-subheader>
-				{{ (afAuth.auth.currentUser.displayName | truncate : 25) || (afAuth.auth.currentUser.email | truncate : 25) }}</h3>
+				{{ (user.displayName | truncate : 25) || (user.email | truncate : 25) }}</h3>
 			<md-list-item (click)="onToggleSidebar.emit()" [routerLink]="['account']">Account</md-list-item>
 			<md-list-item (click)="onLogout()">Logout</md-list-item>
 			<hr>
