@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { AuthService } from '../../services/auth.service';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
 	selector: 'app-navbar',
@@ -11,19 +10,20 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class NavbarComponent implements OnInit {
 
 	@Output() onToggleSidebar = new EventEmitter<boolean>();
+	user: Object;
 	
-	constructor(private modalService: ModalService, public afAuth: AngularFireAuth) { }
+	constructor(private modalService: ModalService, private authService: AuthService) { }
 
 	ngOnInit() {
-		
+		this.authService.afAuth.authState.subscribe(user => {
+			this.user = user;
+		})
 	}
 
-	// Open signup modal
 	onOpenSignupModal () {
 		this.modalService.openSignupModal();
 	}
 
-	// Open signup modal
 	onOpenLoginModal () {
 		this.modalService.openLoginModal();
 	}

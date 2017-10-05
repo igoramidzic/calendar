@@ -1,8 +1,6 @@
 <nav class="main-navbar">
 	<div class="content">
-		<!-- Left section -->
 		<div class="nav-section left-section">
-			<!-- Logo -->
 			<a class="logo-link" [routerLink]="['']">
 				<img src="assets/img/calendar3.svg" alt="">
 			</a>
@@ -10,27 +8,27 @@
 			Right section 
 		--><div class="nav-section right-section">
 			<ul class="nav-list">
-				<ng-template [ngIf]="!afAuth.auth.currentUser">
+				<ng-template [ngIf]="!user">
 					<li class="list-item">
 						<button
 							(click)="onOpenSignupModal()"
 							class="hidden-mobile nav-list-btn emphasis-btn"
 							md-button>Signup</button>
-					</li><!--
-					--><li class="hidden-mobile list-item">
+					</li>
+					<li class="hidden-mobile list-item">
 						<button
 							(click)="onOpenLoginModal()"
 							class="hidden-mobile nav-list-btn"
 							md-button>Login</button>
 					</li>
-				</ng-template><!--
-				--><li *ngIf="afAuth.auth.currentUser" class="hidden-mobile list-item">
+				</ng-template>
+				<li *ngIf="user" class="hidden-mobile list-item">
 					<button
 						[routerLink]="['account']"
 						class="hidden-mobile nav-list-btn"
-						md-button>{{ (afAuth.auth.currentUser.displayName | truncate: 20) || (afAuth.auth.currentUser.email | truncate: 20) }}</button>
-				</li><!--
-				--><li class="list-item">
+						md-button>{{ (user.displayName | truncate: 20) || (user.email | truncate: 20) }}</button>
+				</li>
+				<li class="list-item">
 					<button type="button" md-button (click)="onToggleSidebar.emit()">
 						<i class="fa fa-bars"></i>
 					</button>

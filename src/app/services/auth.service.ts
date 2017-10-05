@@ -4,12 +4,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 @Injectable()
 export class AuthService implements OnInit {
 
 	ngOnInit() {
-		
 	}
 
 	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase, private router: Router) { }
