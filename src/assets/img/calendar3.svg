@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="89px" height="19px" viewBox="0 0 89 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Calendar</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="24" font-family="AvenirNext-Medium, Avenir Next" font-weight="400">
+        <g id="Dashboard" transform="translate(-513.000000, -15.000000)" fill="#FFFFFF">
+            <text id="Calendar">
+                <tspan x="512" y="33">C</tspan>
+                <tspan x="528.992" y="33" font-size="21">alendar</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

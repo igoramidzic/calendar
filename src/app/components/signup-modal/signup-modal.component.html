@@ -1,0 +1,63 @@
+<div class="modal-content-holder">
+	<button class="close" md-dialog-close></button>
+	<h3 class="app-modal-header">Sign up</h3>
+	<form class="modal-form" [formGroup]="signupForm" (ngSubmit)="onSignupWithEmail()">
+		<md-input-container class="half-width">
+			<input
+				mdInput
+				placeholder="First name"
+				formControlName="first_name">
+		</md-input-container>
+		<md-input-container class="half-width">
+			<input
+				mdInput
+				placeholder="Last name"
+				formControlName="last_name">
+		</md-input-container>
+		<md-input-container class="full-width">
+			<input
+				mdInput
+				type="email"
+				placeholder="Email"
+				formControlName="email">
+		</md-input-container>
+		<md-input-container class="full-width">
+			<input type="password"
+				mdInput
+				placeholder="Password"
+				formControlName="password">
+		</md-input-container>
+		<div *ngIf="signupWithEmailError" class="error-container">{{ signupWithEmailError }}</div>
+		<p class="tos">By signing up, you agree to our <a target="_blank" href="">Terms of Use</a>.</p>
+		<button class="submit-btn" md-button type="submit">Signup</button>
+	</form>
+	<div class="signup-separator-container">
+		<div class="signup-separator"></div>
+		<div class="signup-separator-text">OR</div>
+		<div class="signup-separator"></div>
+	</div>
+	<div *ngIf="signupWithSocialError" class="error-container">{{ signupWithSocialError }}</div>
+	<div class="social-login-container">
+		<div class="btn-container google-container">
+			<button 
+				class="action-btn google-btn" 
+				md-button (click)="onSignupWithGoogle()">
+				<img class="logo" src="assets/img/google-logo.svg" alt="">
+				Google
+			</button>
+		</div><!--
+		--><div class="btn-container facebook-container">
+			<button 
+				class="action-btn facebook-btn" 
+				md-button (click)="onSignupWithFacebook()">
+				<i class="fa fa-facebook" aria-hidden="true"></i>
+				Facebook
+			</button>
+		</div>
+		<div class="login-signup-footer">
+			Already have an account? <span class="action-btn" (click)="onOpenLoginModal()">Log in</span>
+		</div>
+	</div>
+	<!-- Checkmark animation -->
+	<app-checkmark *ngIf="complete"></app-checkmark>
+</div>

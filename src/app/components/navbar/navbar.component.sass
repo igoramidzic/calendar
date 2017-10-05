@@ -1,0 +1,61 @@
+@import '../../app.component.sass'
+
+.main-navbar
+	background-color: $primary_color
+	color: #fff
+	height: 60px
+	display: flex
+	flex-direction: column
+	justify-content: center
+	.content
+		max-width: 980px
+		margin: auto
+		width: 100%
+		padding: 0px 15px
+	
+.nav-section
+	display: inline-block
+	width: 50%
+	vertical-align: middle
+
+.left-section
+	.logo-link
+		padding: 10px 12px
+
+.right-section
+	text-align: right
+	.nav-list
+		margin: 0
+		padding: 0
+		list-style-type: none
+		.list-item
+			display: inline-block
+			&:first-child
+				margin-right: 10px
+			&:nth-child(2)
+				margin-right: 10px
+			.mat-button
+				min-width: 50px
+				line-height: 1
+				padding: 10px 15px
+				font-weight: 400
+			.emphasis-btn
+				border: 1px solid #ffffff
+			.fa-bars
+				font-size: 23px
+				font-weight: 300
+
+
+@media only screen and (min-width: 480px) 
+	.right-section
+		.nav-list
+			.list-item
+				.mat-button
+					font-size: 16px
+
+@media only screen and (max-width: 479px)
+	.right-section
+		.nav-list
+			.list-item
+				.mat-button
+					font-size: 14px

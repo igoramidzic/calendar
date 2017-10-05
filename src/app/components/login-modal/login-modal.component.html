@@ -1,0 +1,53 @@
+<div class="modal-content-holder" style="max-width: 100vw;">
+	<button class="close" md-dialog-close></button>
+	<h3 class="app-modal-header">Login</h3>
+	<form class="modal-form" [formGroup]="loginForm" (ngSubmit)="onLoginWithEmail()">
+		<md-input-container class="full-width">
+			<input
+				mdInput
+				placeholder="Email"
+				formControlName="email">
+		</md-input-container>
+		<md-input-container class="full-width">
+			<input type="password"
+				mdInput
+				placeholder="Password"
+				formControlName="password">
+		</md-input-container>
+		<div *ngIf="loginWithEmailError" class="error-container">{{ loginWithEmailError }}</div>
+		<button class="submit-btn" md-button type="submit">Login</button>
+		<div class="forgot-password-container">
+			<span class="forgot-password-btn" (click)="onForgotPassword()">Forgot password?</span>
+		</div>
+	</form>
+	<div class="signup-separator-container">
+		<div class="signup-separator"></div>
+		<div class="signup-separator-text">OR</div>
+		<div class="signup-separator"></div>
+	</div>
+	<div *ngIf="loginWithSocialError" class="error-container">{{ loginWithSocialError }}</div>
+	<div class="social-login-container">
+		<div class="btn-container google-container">
+			<button 
+				class="action-btn google-btn" 
+				md-button (click)="onLoginWithGoogle()">
+				<img class="logo" src="assets/img/google-logo.svg" alt="">
+				Google
+			</button>
+		</div><!--
+		--><div class="btn-container facebook-container">
+			<button 
+				class="action-btn facebook-btn" 
+				md-button (click)="onLoginWithFacebook()">
+				<i class="fa fa-facebook" aria-hidden="true"></i>
+				Facebook
+			</button>
+		</div>
+	</div>
+	<div class="login-signup-footer">
+		Don't have an account? <span class="action-btn" (click)="onOpenSignupModal()">Sign up</span>
+	</div>
+
+	<!-- Checkmark animation -->
+	<app-checkmark *ngIf="complete"></app-checkmark>
+</div>

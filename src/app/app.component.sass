@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700')
+
+$primary_color: #288096
+$secondary_color: #77b4d1
+$accent_color: #ECFF00
+$danger_color: #ba3939
+$success_color: #22b748
+
+@media only screen and (min-width: 767px)
+	.hidden-desktop
+		display: none
+
+@media only screen and (max-width: 766px)
+	.hidden-mobile
+		display: none
+
+.mainSidenav-container
+	min-height: 500px
+	position: absolute
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	background-color: #fff
+
+.example-sidenav 
+	padding: 20px 0px
+
+.sidenav-content
+	min-width: 270px
+
+.sidenav-list
+	md-list-item
+		cursor: pointer
+		outline: none
+		&:hover
+			background-color: #ededed
+
+.error-container
+	border: 1px solid $danger_color
+	border-radius: 3px
+	background-color: lighten($danger_color, 45%)
+	margin-bottom: 1.25em
+	padding: 5px 10px
+	max-width: 300px
+	text-align: left

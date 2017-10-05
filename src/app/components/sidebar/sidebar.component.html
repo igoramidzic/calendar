@@ -1,0 +1,21 @@
+<div class="sidebar-content">
+	<md-list class="hidden-desktop sidebar-list">
+		<h3 class="sidebar-section-header" md-subheader>Calendar</h3>
+		<md-list-item (click)="onOpenSignupModal()">Signup</md-list-item>
+		<md-list-item (click)="onOpenLoginModal()">Login</md-list-item>
+		<hr>
+	</md-list>
+	<md-list *ngIf="afAuth.auth.currentUser" class="sidebar-list">
+		<h3 class="sidebar-section-header" md-subheader>Account</h3>
+		<md-list-item (click)="onToggleSidebar.emit()" [routerLink]="['account']">Account</md-list-item>
+		<md-list-item (click)="onLogout()">Logout</md-list-item>
+		<hr>
+	</md-list>
+	<md-list class="sidebar-list">
+		<h3 class="sidebar-section-header" md-subheader>Need help?</h3>
+		<md-list-item (click)="onToggleSidebar.emit()" [routerLink]="['']">Tutorials</md-list-item>
+		<md-list-item (click)="onToggleSidebar.emit()" [routerLink]="['']">About</md-list-item>
+		<md-list-item (click)="onToggleSidebar.emit()" [routerLink]="['']">Contact</md-list-item>
+		<hr>
+	</md-list>
+</div>

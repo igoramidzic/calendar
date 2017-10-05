@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="83px" height="17px" viewBox="0 0 83 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="20" font-family="AvenirNext-Medium, Avenir Next" font-weight="400">
+				<g id="Dashboard" transform="translate(-415.000000, -18.000000)" fill="#FFFFFF">
+						<text id="Calendar">
+								<tspan x="414" y="34">Calendar</tspan>
+						</text>
+				</g>
+		</g>
+</svg>

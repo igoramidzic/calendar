@@ -1,0 +1,13 @@
+<md-sidenav-container class="mainSidenav-container">
+	<!-- Sidenav content -->
+	<md-sidenav #mainSidenav align="end" class="example-sidenav">
+		<app-sidebar (onToggleSidebar)="mainSidenav.toggle()"></app-sidebar>	
+	</md-sidenav>
+
+	<div class="example-sidenav-content">
+		<!-- Main navbar -->
+		<app-navbar (onToggleSidebar)="mainSidenav.toggle()"></app-navbar>
+		<!-- Main router outlet -->
+		<router-outlet></router-outlet>
+	</div>
+</md-sidenav-container>
