@@ -10,7 +10,7 @@ export class ProfileComponent implements OnInit {
 
 	user: any;
 	profileNameForm: FormGroup;
-	savedName: boolean;
+	updateNameSubmitted: boolean;
 
 	constructor() { }
 
@@ -35,9 +35,9 @@ export class ProfileComponent implements OnInit {
 			'firstName': this.user.firstName,
 			'lastName': this.user.lastName
 		});
-		this.savedName = true;
+		this.updateNameSubmitted = true;
 		setTimeout(() => {
-			this.savedName = false;
+			this.updateNameSubmitted = false;
 		}, 1500)
 	}
 

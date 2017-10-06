@@ -1,1 +1,65 @@
-<input class="text-input" type="text" placeholder="First name">
+<div class="account-container">
+	<div class="row">
+		<form [formGroup]="updateEmailForm" (ngSubmit)="onUpdateUsersEmail()">
+			<div class="form-controls-container">
+				<div class="col-xs-12 controller-holder">
+					<label class="text-input-label">
+						Email
+						<md-hint class="">{{ updateEmailFormError }}</md-hint>
+					</label>
+					<input 
+						class="text-input"
+						[ngClass]="{ 'text-input-error': updateEmailFormError}"
+						type="text" 
+						formControlName="email">
+				</div>
+			</div>
+			<div class="col-xs-12 submit-btn-holder">
+				<span class="saved-notif" *ngIf="updateEmailSubmitted">Saved</span>
+				<button 
+					class="action-btn" 
+					[ngClass]="{ 'action-btn-available': !updateEmailForm.pristine && !updateEmailFormError }"
+					[disabled]="updateEmailForm.pristine || updateEmailFormError" 
+					md-button>Save</button>
+			</div>
+		</form>
+	</div>
+	<hr>
+	<div class="row">
+		<form [formGroup]="updatePasswordForm" (ngSubmit)="onUpdateUsersPassword()">
+			<div class="form-controls-container">
+				<div class="col-sm-6 controller-holder">
+					<label class="text-input-label">
+						New password
+						<md-hint>{{ updatePassword1FormError }}</md-hint>
+					</label>
+					<input 
+						class="text-input" 
+						[ngClass]="{ 'text-input-error': updatePassword1FormError}"
+						type="password" 
+						formControlName="password">
+				</div>
+				<div class="col-sm-6 controller-holder">
+					<label class="text-input-label">
+						Repeat password
+						<md-hint>{{ updatePassword2FormError }}</md-hint>
+					</label>
+					<input 
+						class="text-input" 
+						[ngClass]="{ 'text-input-error': updatePassword2FormError}"
+						type="password" 
+						formControlName="confirmPassword">
+				</div>
+			</div>
+			<div class="col-xs-12 submit-btn-holder">
+				<span class="saved-notif" *ngIf="updatePasswordSubmitted">Saved</span>
+				<button 
+					class="action-btn" 
+					[ngClass]="{ 'action-btn-available': !updatePasswordForm.get('password').pristine && !updatePasswordForm.get('confirmPassword').pristine && !updatePassword1FormError && !updatePassword2FormError }"
+					[disabled]="updatePasswordForm.get('password').pristine || updatePasswordForm.get('confirmPassword').pristine || updatePassword1FormError || updatePassword2FormError" 
+					md-button>Save</button>
+			</div>
+		</form>
+	</div>
+</div>
+	

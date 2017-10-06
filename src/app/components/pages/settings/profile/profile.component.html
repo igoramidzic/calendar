@@ -2,17 +2,17 @@
 	<div class="row">
 		<form [formGroup]="profileNameForm" (ngSubmit)="onUpdateUsersName()">
 			<div class="form-controls-container">
-				<div class="col-sm-6 name-controller-holder">
+				<div class="col-sm-6 controller-holder">
 					<label class="text-input-label">First name</label>
 					<input class="text-input" type="text" formControlName="firstName">
 				</div>
-				<div class="col-sm-6 name-controller-holder">
+				<div class="col-sm-6 controller-holder">
 					<label class="text-input-label">Last name</label>
 					<input class="text-input" type="text" formControlName="lastName">
 				</div>
 			</div>
 			<div class="col-xs-12 submit-btn-holder">
-				<span class="saved-notif" *ngIf="savedName">Saved</span>
+				<span class="saved-notif" *ngIf="updateNameSubmitted">Saved</span>
 				<button 
 					class="action-btn" 
 					[ngClass]="{ 'action-btn-touched': !profileNameForm.pristine }"
