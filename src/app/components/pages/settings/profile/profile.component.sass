@@ -1,26 +1,11 @@
 @import '../../../../app.component.sass'
-
-.text-input
-	&:focus
-		border-color: $primary_color
+@import '../settings.component.sass'
 
 .profile-container
 	.form-controls-container
 	.submit-btn-holder
 		text-align: right
 		margin-top: 15px
-
-.action-btn
-	color: #ffffff
-	background-color: #f3f5f8
-	width: 125px
-.action-btn-touched
-	background-color: $primary_color
-.saved-notif
-	color: $success_color
-	font-weight: 300
-	margin-right: 10px
-				
 
 // // Large
 // @media only screen and (min-width : 1200px) 
@@ -36,9 +21,10 @@
 // Extra small
 @media only screen and (max-width : 767px)
 	.profile-container
-		.name-controller-holder
-			&:first-child
-				margin-bottom: 15px
+		.controller-holder
+			margin-bottom: 15px
+			&:last-child
+				margin-bottom: 0
 
 // // Extra small
 // @media only screen and (max-width : 767px) and (min-width : 480px) 

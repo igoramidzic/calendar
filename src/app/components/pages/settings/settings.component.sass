@@ -1,6 +1,7 @@
 @import '../../../app.component.sass'
 
 .main-settings-page
+	padding-bottom: 100px
 	.main-header
 		font-size: 30px
 		font-weight: 300
@@ -35,6 +36,22 @@
 	.setting-content-container
 		padding: 15px
 
+.text-input
+	&:focus
+		border-color: $primary_color
+.text-input-error
+	border-color: $danger_color !important
+.action-btn
+	color: #ffffff
+	background-color: #f3f5f8
+	width: 125px
+.action-btn-available
+	background-color: $primary_color
+.saved-notif
+	color: $success_color
+	font-weight: 300
+	margin-right: 10px
+
 // Large
 @media only screen and (min-width : 1200px) 
 	.main-settings-page
@@ -53,7 +70,7 @@
 		.main-header
 			font-size: 28px
 
-@media only screen and (min-width : 767px)
+@media only screen and (min-width : 768px)
 	.sidebar-list
 		md-list-item
 			border-top: 1px solid #d1d5da
@@ -66,6 +83,8 @@
 
 // Extra small
 @media only screen and (max-width : 767px)
+	.main-settings-page
+		max-width: 550px
 	.tabs-holder
 		margin-bottom: 15px
 		.sidebar-list
@@ -75,6 +94,8 @@
 				width: 33.33333333%
 				display: inline-block
 				border-right: 1px solid #d1d5da
+				&:last-child
+					border: none
 			.highlight
 				-webkit-box-shadow: inset 0px -2px 0px 0px $danger_color
 				-moz-box-shadow: inset 0px -2px 0px 0px $danger_color
