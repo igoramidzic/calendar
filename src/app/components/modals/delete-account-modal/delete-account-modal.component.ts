@@ -3,11 +3,11 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'app-delete-account',
-	templateUrl: './delete-account.component.html',
-	styleUrls: ['./delete-account.component.sass']
+	selector: 'app-delete-account-modal',
+	templateUrl: './delete-account-modal.component.html',
+	styleUrls: ['./delete-account-modal.component.sass']
 })
-export class DeleteAccountComponent implements OnInit {
+export class DeleteAccountModalComponent implements OnInit {
 
 	constructor(private authService: AuthService, private router: Router) { }
 

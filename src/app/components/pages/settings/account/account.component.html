@@ -1,86 +1,8 @@
 <div class="account-container">
-	<div class="setting-group-container row">
-		<form [formGroup]="updateEmailForm" (ngSubmit)="onUpdateUsersEmail()">
-			<div class="form-controls-container">
-				<div class="col-xs-12">
-					<h3 class="form-group-header">Update email</h3>
-					<hr class="setting-group-separator">
-				</div>
-				<div class="col-xs-12 controller-holder">
-					<label class="text-input-label">
-						Email
-						<md-hint class="">{{ updateEmailFormError }}</md-hint>
-					</label>
-					<input 
-						class="text-input"
-						[ngClass]="{ 'text-input-error': updateEmailFormError}"
-						type="text" 
-						formControlName="email">
-				</div>
-			</div>
-			<div class="col-xs-12 submit-btn-holder">
-				<span class="saved-notif" *ngIf="updateEmailSubmitted">Saved</span>
-				<button 
-					class="action-btn" 
-					[ngClass]="{ 'action-btn-available': !updateEmailForm.pristine && !updateEmailFormError }"
-					[disabled]="updateEmailForm.pristine || updateEmailFormError" 
-					md-button>Update email</button>
-			</div>
-		</form>
-	</div>
+	<app-update-email></app-update-email>
 	
-	<div class="setting-group-container row">
-		<form [formGroup]="updatePasswordForm" (ngSubmit)="onUpdateUsersPassword()">
-			<div class="form-controls-container">
-				<div class="col-xs-12">
-					<h3 class="form-group-header">Change password</h3>
-					<hr class="setting-group-separator">
-				</div>
-				<div class="col-sm-6 controller-holder">
-					<label class="text-input-label">
-						New password
-						<md-hint>{{ updatePassword1FormError }}</md-hint>
-					</label>
-					<input 
-						class="text-input" 
-						[ngClass]="{ 'text-input-error': updatePassword1FormError}"
-						type="password" 
-						formControlName="password">
-				</div>
-				<div class="col-sm-6 controller-holder">
-					<label class="text-input-label">
-						Repeat password
-						<md-hint>{{ updatePassword2FormError }}</md-hint>
-					</label>
-					<input 
-						class="text-input" 
-						[ngClass]="{ 'text-input-error': updatePassword2FormError}"
-						type="password" 
-						formControlName="confirmPassword">
-				</div>
-			</div>
-			<div class="col-xs-12 submit-btn-holder">
-				<span class="saved-notif" *ngIf="updatePasswordSubmitted">Saved</span>
-				<button 
-					class="action-btn" 
-					[ngClass]="{ 'action-btn-available': !updatePasswordForm.get('password').pristine && !updatePasswordForm.get('confirmPassword').pristine && !updatePassword1FormError && !updatePassword2FormError }"
-					[disabled]="updatePasswordForm.get('password').pristine || updatePasswordForm.get('confirmPassword').pristine || updatePassword1FormError || updatePassword2FormError" 
-					md-button>Change password</button>
-			</div>
-		</form>
-	</div>
+	<app-update-password></app-update-password>
 	
-	<div class="setting-group-container row">
-		<div class="form-controls-container">
-			<div class="col-xs-12">
-				<h3 class="form-group-header form-group-header-danger">Delete account</h3>
-				<hr class="setting-group-separator">
-			</div>
-			<div class="col-xs-12 controller-holder">
-				<p class="deletion-disclaimer">Once you delete your account, there is no going back. Please be certain.</p>
-				<button class="danger-btn" (click)="onOpenDeleteAccountModal()" md-button>Delete account</button>
-			</div>
-		</div>
-	</div>
+	<app-delete-account></app-delete-account>
 </div>
 	

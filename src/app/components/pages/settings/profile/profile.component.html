@@ -1,25 +1,3 @@
 <div class="profile-container">
-	<div class="setting-group-container row">
-		<form [formGroup]="profileDisplayNameForm" (ngSubmit)="onUpdateUsersDisplayName()">
-			<div class="form-controls-container">
-				<div class="col-xs-12">
-					<h3 class="form-group-header">Update name</h3>
-					<hr class="setting-group-separator">
-				</div>
-				<div class="col-xs-12 controller-holder">
-					<label class="text-input-label">Name</label>
-					<input class="text-input" type="text" formControlName="displayName">
-				</div>
-			</div>
-			<div class="col-xs-12 submit-btn-holder">
-				<span class="success-notif" *ngIf="updateDisplayNameSuccess">Saved</span>
-				<span class="danger-notif" *ngIf="updateDisplayNameError">Try again</span>
-				<button 
-					class="action-btn" 
-					[ngClass]="{ 'action-btn-available': !profileDisplayNameForm.pristine }"
-					[disabled]="profileDisplayNameForm.pristine" 
-					md-button>Save</button>
-			</div>
-		</form>
-	</div>
+	<app-update-displayname></app-update-displayname>
 </div>

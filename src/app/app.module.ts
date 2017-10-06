@@ -36,7 +36,11 @@ import { SettingsComponent } from './components/pages/settings/settings.componen
 import { HomeComponent } from './components/pages/home/home.component';
 import { NotificationsComponent } from './components/pages/settings/notifications/notifications.component';
 import { ProfileComponent } from './components/pages/settings/profile/profile.component';
-import { DeleteAccountComponent } from './components/modals/delete-account/delete-account.component';
+import { UpdateEmailComponent } from './components/pages/settings/account/update-email/update-email.component';
+import { UpdatePasswordComponent } from './components/pages/settings/account/update-password/update-password.component';
+import { UpdateDisplaynameComponent } from './components/pages/settings/profile/update-displayname/update-displayname.component';
+import { DeleteAccountComponent } from './components/pages/settings/account/delete-account/delete-account.component';
+import { DeleteAccountModalComponent } from './components/modals/delete-account-modal/delete-account-modal.component';
 
 @NgModule({
 	declarations: [
@@ -54,6 +58,10 @@ import { DeleteAccountComponent } from './components/modals/delete-account/delet
 		NotificationsComponent,
 		ProfileComponent,
 		DeleteAccountComponent,
+		DeleteAccountModalComponent,
+		UpdateEmailComponent,
+		UpdatePasswordComponent,
+		UpdateDisplaynameComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -77,7 +85,7 @@ import { DeleteAccountComponent } from './components/modals/delete-account/delet
 	entryComponents: [
 		SignupModalComponent,
 		LoginModalComponent,
-		DeleteAccountComponent
+		DeleteAccountModalComponent
 	],
 	providers: [ ModalService, AuthService, AuthGuard, NotAuthGuard ],
 	bootstrap: [ AppComponent ]
