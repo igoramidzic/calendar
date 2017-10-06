@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { SignupModalComponent } from '../components/signup-modal/signup-modal.component';
 import { LoginModalComponent } from '../components/login-modal/login-modal.component';
-import { DeleteAccountComponent } from '../components/modals/delete-account/delete-account.component';
+import { DeleteAccountModalComponent } from '../components/modals/delete-account-modal/delete-account-modal.component';
 
 @Injectable()
 export class ModalService {
@@ -22,7 +22,7 @@ export class ModalService {
 	}
 
 	openDeleteAccountModal () {
-		this.myModals.open(DeleteAccountComponent);
+		this.myModals.open(DeleteAccountModalComponent);
 	}
 	
 }
