@@ -1,5 +1,5 @@
 <nav class="main-navbar">
-	<div class="content">
+	<div class="content large-max-width">
 		<div class="nav-section left-section">
 			<a class="logo-link" [routerLink]="['']">
 				<img src="assets/img/calendar3.svg" alt="">
@@ -24,7 +24,7 @@
 				</ng-template>
 				<li *ngIf="user" class="hidden-mobile list-item">
 					<button
-						[routerLink]="['account']"
+						[routerLink]="['dashboard']"
 						class="hidden-mobile nav-list-btn"
 						md-button>{{ (user.displayName | truncate: 20) || (user.email | truncate: 20) }}</button>
 				</li>

@@ -1,0 +1,50 @@
+@import '../../../../app.component.sass'
+
+.text-input
+	&:focus
+		border-color: $primary_color
+
+.profile-container
+	.form-controls-container
+	.submit-btn-holder
+		text-align: right
+		margin-top: 15px
+
+.action-btn
+	color: #ffffff
+	background-color: #f3f5f8
+	width: 125px
+.action-btn-touched
+	background-color: $primary_color
+.saved-notif
+	color: $success_color
+	font-weight: 300
+	margin-right: 10px
+				
+
+// // Large
+// @media only screen and (min-width : 1200px) 
+
+// // Medium
+// @media only screen and (max-width : 1199px) and (min-width : 979px) 
+
+// // small
+// @media only screen and (max-width : 978px) and (min-width : 768px) 
+
+// @media only screen and (min-width : 767px)
+
+// Extra small
+@media only screen and (max-width : 767px)
+	.profile-container
+		.name-controller-holder
+			&:first-child
+				margin-bottom: 15px
+
+// // Extra small
+// @media only screen and (max-width : 767px) and (min-width : 480px) 
+
+// // Mobile
+// @media only screen and (max-width : 479px) and (min-width : 320px) 
+
+// // Extra small mobile
+// @media only screen and (max-width : 319px)
