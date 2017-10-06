@@ -3,16 +3,26 @@
 $primary_color: #288096
 $secondary_color: #77b4d1
 $accent_color: #ECFF00
-$danger_color: #ba3939
+$danger_color: #fc2525
 $success_color: #22b748
 
-@media only screen and (min-width: 767px)
+@media only screen and (min-width: 768px)
 	.hidden-desktop
 		display: none
 
-@media only screen and (max-width: 766px)
+@media only screen and (max-width: 767px)
 	.hidden-mobile
 		display: none
+
+.large-max-width
+	max-width: 1600px
+	margin: auto
+.medium-max-width
+	max-width: 1200px
+	margin: auto
+.small-max-width
+	max-width: 980px
+	margin: auto
 
 .mainSidenav-container
 	min-height: 500px
@@ -44,3 +54,14 @@ $success_color: #22b748
 	padding: 5px 10px
 	max-width: 300px
 	text-align: left
+
+.text-input
+	border: 1px solid #d1d5da
+	outline: none
+	padding: 8px
+	border-radius: 3px
+	width: 100%
+
+.text-input-label
+	font-weight: 400
+	

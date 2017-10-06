@@ -31,7 +31,11 @@ import { LoginModalComponent } from './components/login-modal/login-modal.compon
 import { SignupModalComponent } from './components/signup-modal/signup-modal.component';
 import { CheckmarkComponent } from './components/animations/checkmark/checkmark.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
-import { AccountComponent } from './components/pages/account/account.component';
+import { AccountComponent } from './components/pages/settings/account/account.component';
+import { SettingsComponent } from './components/pages/settings/settings.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { NotificationsComponent } from './components/pages/settings/notifications/notifications.component';
+import { ProfileComponent } from './components/pages/settings/profile/profile.component';
 
 @NgModule({
 	declarations: [
@@ -43,7 +47,11 @@ import { AccountComponent } from './components/pages/account/account.component';
 		SignupModalComponent,
 		CheckmarkComponent,
 		DashboardComponent,
-		AccountComponent
+		AccountComponent,
+		SettingsComponent,
+		HomeComponent,
+		NotificationsComponent,
+		ProfileComponent,
 	],
 	imports: [
 		BrowserModule,

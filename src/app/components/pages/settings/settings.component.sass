@@ -1,0 +1,99 @@
+@import '../../../app.component.sass'
+
+.main-settings-page
+	.main-header
+		font-size: 30px
+		font-weight: 300
+		margin: 0px
+		padding: 30px 0
+
+.settings-container
+
+.tabs-holder
+	border: 1px solid #d1d5da
+	.sidebar-section-header
+		background-color: #f3f5f8
+	.sidebar-list
+		md-list-item
+			cursor: pointer
+			outline: none
+			&:hover
+				background-color: #f2f2f2
+		.highlight
+			font-weight: 500
+
+.settings-holder
+	border: 1px solid #d1d5da
+	.header-container
+		padding: 15px
+		border-bottom: 1px solid #d1d5da
+		background-color: #f3f5f8
+		.setting-header
+			font-weight: 300
+			font-size: 22px
+			margin: 0
+	.setting-content-container
+		padding: 15px
+
+// Large
+@media only screen and (min-width : 1200px) 
+	.main-settings-page
+		.main-header
+			font-size: 30px
+
+// Medium
+@media only screen and (max-width : 1199px) and (min-width : 979px) 
+	.main-settings-page
+		.main-header
+			font-size: 28px
+
+// small
+@media only screen and (max-width : 978px) and (min-width : 768px) 
+	.main-settings-page
+		.main-header
+			font-size: 28px
+
+@media only screen and (min-width : 767px)
+	.sidebar-list
+		md-list-item
+			border-top: 1px solid #d1d5da
+			&:hover
+				background-color: #f2f2f2
+		.highlight
+			-webkit-box-shadow: inset 2px 0px 0px 0px $danger_color
+			-moz-box-shadow: inset 2px 0px 0px 0px $danger_color
+			box-shadow: inset 2px 0px 0px 0px $danger_color
+
+// Extra small
+@media only screen and (max-width : 767px)
+	.tabs-holder
+		margin-bottom: 15px
+		.sidebar-list
+			padding: 0
+			display: flex
+			md-list-item
+				width: 33.33333333%
+				display: inline-block
+				border-right: 1px solid #d1d5da
+			.highlight
+				-webkit-box-shadow: inset 0px -2px 0px 0px $danger_color
+				-moz-box-shadow: inset 0px -2px 0px 0px $danger_color
+				box-shadow: inset 0px -2px 0px 0px $danger_color
+
+// Extra small
+@media only screen and (max-width : 767px) and (min-width : 480px) 
+	.main-settings-page
+		.main-header
+			font-size: 26px
+
+// Mobile
+@media only screen and (max-width : 479px) and (min-width : 320px) 
+	.main-settings-page
+		.main-header
+			font-size: 24px
+
+// Extra small mobile
+@media only screen and (max-width : 319px)
+	.main-settings-page
+		.main-header
+			font-size: 22px
