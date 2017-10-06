@@ -17,15 +17,12 @@ export class AuthService implements OnInit {
 	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase, private router: Router) { }
 
 	// Signup | Email
-	signupUserWithEmail (first: string, last: string, email: string, password: string) {
+	signupUserWithEmail (name: string, email: string, password: string) {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.createUserWithEmailAndPassword(email, password)
 				.then(
 					success => {
-						this.afAuth.auth.currentUser.updateProfile({
-							displayName: `${first} ${last}`,
-							photoURL: ''
-						})
+						this.updateDisplayName(name);
 						resolve(success);
 					}
 				).catch(error => reject(error));
@@ -84,5 +81,42 @@ export class AuthService implements OnInit {
 	logoutUser () {
 		this.afAuth.auth.signOut();
 		this.router.navigate(['']);
+	}
+
+	// Delete account
+	deleteAccount () {
+		return new Promise((resolve, reject) => {
+			this.afAuth.auth.currentUser.delete()
+				.then(res => resolve())
+				.catch(error => {
+					reject(error);
+				})
+		});
+	}
+
+	// Update displayName
+	updateDisplayName (name) {
+		return new Promise((resolve, reject) => {
+			this.afAuth.auth.currentUser.updateProfile({
+				displayName: name,
+				photoURL: ''
+			}).then(success => resolve())
+			.catch(error => {
+				reject(error);
+			})
+		})
+	}
+
+	// Reauthenticate
+	reauthenticate (password) {
+		return new Promise((resolve, reject) => {
+			this.afAuth.auth.currentUser.reauthenticateWithCredential(this.afAuth.auth.currentUser)
+				.then(res => resolve())
+				.catch(
+					error => {
+						reject(error);
+					}
+				)
+		})
 	}
 }

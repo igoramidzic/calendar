@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ModalService } from '../../../../services/modal.service';
 
 @Component({
 	selector: 'app-account',
@@ -20,7 +21,7 @@ export class AccountComponent implements OnInit {
 	updatePassword2FormError: string;
 	updatePasswordAttempted: boolean;
 	
-	constructor() { }
+	constructor(private modalService: ModalService) { }
 
 	ngOnInit() {
 		this.user = {
@@ -103,5 +104,9 @@ export class AccountComponent implements OnInit {
 				}, 1500)
 			}
 		}
+	}
+
+	onOpenDeleteAccountModal () {
+		this.modalService.openDeleteAccountModal();
 	}
 }

@@ -78,11 +78,11 @@ export class LoginModalComponent implements OnInit {
 					error => {
 						if (error.code === "auth/invalid-email") {
 							// ...
-						}
-
-						if (error.code === "auth/wrong-password") {
 							this.loginWithEmailError = "Incorrect email or password.";
-							password.patchValue('');
+						} else if (error.code === "auth/user-not-found") {
+							this.loginWithEmailError = "Incorrect email or password.";
+						} else if (error.code === "auth/wrong-password") {
+							this.loginWithEmailError = "Incorrect email or password.";
 						} else if (error.code === "auth/too-many-requests") {
 							this.loginWithEmailError = "Try again in a few seconds."
 						}

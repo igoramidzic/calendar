@@ -21,8 +21,7 @@ export class SignupModalComponent implements OnInit {
 
 	ngOnInit() {
 		this.signupForm = new FormGroup({
-			'first_name': new FormControl(null),
-			'last_name': new FormControl(null),
+			'displayName': new FormControl(null),
 			'email': new FormControl(null),
 			'password': new FormControl(null)
 		})
@@ -55,16 +54,12 @@ export class SignupModalComponent implements OnInit {
 	onSignupWithEmail () {
 		this.resetLoginErrors();
 		
-		var first = this.signupForm.get('first_name');
-		var last = this.signupForm.get('last_name');
+		var displayName = this.signupForm.get('displayName');
 		var email = this.signupForm.get('email');
 		var password = this.signupForm.get('password');
 
-		if (!first.value) {
-			first.setErrors({ 'empty': true });
-		}
-		if (!last.value) {
-			last.setErrors({ 'empty': true });
+		if (!displayName.value) {
+			displayName.setErrors({ 'empty': true });
 		}
 		if (!email.value) {
 			email.setErrors({ 'empty': true });
@@ -73,8 +68,8 @@ export class SignupModalComponent implements OnInit {
 			password.setErrors({ 'empty': true });
 		}
 
-		if (first.value && last.value && email.value && password.value) {
-			this.authService.signupUserWithEmail(first.value, last.value, email.value, password.value)
+		if (displayName.value && email.value && password.value) {
+			this.authService.signupUserWithEmail(displayName.value, email.value, password.value)
 				.then(
 					res => {
 						this.successfulSignup();

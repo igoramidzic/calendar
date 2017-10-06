@@ -36,6 +36,7 @@ import { SettingsComponent } from './components/pages/settings/settings.componen
 import { HomeComponent } from './components/pages/home/home.component';
 import { NotificationsComponent } from './components/pages/settings/notifications/notifications.component';
 import { ProfileComponent } from './components/pages/settings/profile/profile.component';
+import { DeleteAccountComponent } from './components/modals/delete-account/delete-account.component';
 
 @NgModule({
 	declarations: [
@@ -52,6 +53,7 @@ import { ProfileComponent } from './components/pages/settings/profile/profile.co
 		HomeComponent,
 		NotificationsComponent,
 		ProfileComponent,
+		DeleteAccountComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -74,7 +76,8 @@ import { ProfileComponent } from './components/pages/settings/profile/profile.co
 	],
 	entryComponents: [
 		SignupModalComponent,
-		LoginModalComponent
+		LoginModalComponent,
+		DeleteAccountComponent
 	],
 	providers: [ ModalService, AuthService, AuthGuard, NotAuthGuard ],
 	bootstrap: [ AppComponent ]
