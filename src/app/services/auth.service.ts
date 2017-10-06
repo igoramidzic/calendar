@@ -107,6 +107,17 @@ export class AuthService implements OnInit {
 		})
 	}
 
+	// Update email
+	updateEmail (email) {
+		return new Promise((resolve, reject) => {
+			this.afAuth.auth.currentUser.updateEmail(email)
+				.then(success => resolve())
+				.catch(error => {
+					reject(error);
+				})
+		})
+	}
+
 	// Reauthenticate
 	reauthenticate (password) {
 		return new Promise((resolve, reject) => {

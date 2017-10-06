@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalService } from '../../../../services/modal.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
 	selector: 'app-account',
@@ -21,15 +22,16 @@ export class AccountComponent implements OnInit {
 	updatePassword2FormError: string;
 	updatePasswordAttempted: boolean;
 	
-	constructor(private modalService: ModalService) { }
+	constructor(private modalService: ModalService, private authService: AuthService) { }
 
 	ngOnInit() {
-		this.user = {
-			email: 'amidzicigor@yahoo.com'
-		}
+		this.authService.afAuth.authState.subscribe(user => {
+			this.user = user;
+			this.updateEmailForm.get('email').patchValue(this.user.email);
+		})
 
 		this.updateEmailForm = new FormGroup({
-			'email': new FormControl(this.user.email, [ Validators.required ])
+			'email': new FormControl(null, [ Validators.required ])
 		})
 
 		this.updateEmailForm.valueChanges.subscribe(res => {
@@ -68,20 +70,29 @@ export class AccountComponent implements OnInit {
 	onUpdateUsersEmail () {
 		var newEmail = this.updateEmailForm.get('email').value;
 
-		if (newEmail === 'invalid') { // Check if Firebase returns invalid email error
-			this.updateEmailFormError = 'is invalid.';
-		} else if (newEmail === 'taken') { // Check if Firebase returns taken email error
-			this.updateEmailFormError = 'is already taken.';
-		} else {
-			this.user.email = newEmail;
-			this.updateEmailForm.reset({
-				'email': this.user.email
-			});
-			this.updateEmailSubmitted = true;
-			setTimeout(() => {
-				this.updateEmailSubmitted = false;
-			}, 1500)
+		this.user = {
+			email: 'amidzicigor@yahoo.com'
 		}
+
+		this.authService.updateEmail(newEmail)
+			.then(success => {
+				this.updateEmailForm.reset({
+					'email': newEmail
+				});
+				this.updateEmailSubmitted = true;
+				setTimeout(() => {
+					this.updateEmailSubmitted = false;
+				}, 1500)
+			})
+			.catch(error => {
+				console.log(error);
+			})
+
+		// if (newEmail === 'invalid') { // Check if Firebase returns invalid email error
+		// 	this.updateEmailFormError = 'is invalid.';
+		// } else if (newEmail === 'taken') { // Check if Firebase returns taken email error
+		// 	this.updateEmailFormError = 'is already taken.';
+		// }
 	}
 	
 	onUpdateUsersPassword () {
