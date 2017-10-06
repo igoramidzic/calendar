@@ -64,3 +64,39 @@ $success_color: #22b748
 .text-input-label
 	font-weight: 400
 	
+.text-input
+	&:focus
+		border-color: $primary_color
+.text-input-error
+	border-color: $danger_color !important
+.action-btn
+	color: #ffffff
+	background-color: #f3f5f8
+.danger-btn
+	color: darken($danger_color, 20%)
+	background-color: #f3f5f8
+.action-btn-available
+	background-color: $primary_color
+
+.close
+	position: absolute
+	right: 0
+	top: -3px
+	width: 26px
+	height: 26px
+	opacity: 0.3
+	outline: none
+	&:hover 
+		opacity: 1
+	&:before, &:after 
+		position: absolute
+		top: 0
+		left: 12px
+		content: ' '
+		height: 28px
+		width: 2px
+		background-color: #545252
+	&:before 
+		transform: rotate(45deg)
+	&:after 
+		transform: rotate(-45deg)

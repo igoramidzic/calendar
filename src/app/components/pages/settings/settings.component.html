@@ -1,23 +1,14 @@
 <div class="main-settings-page container-fluid small-max-width">
-	<h1 class="main-header">Settings for {{ user.displayName }}</h1>
+	<h1 class="main-header">Settings for {{ (user.displayName || user.email) | truncate : 18 }}</h1>
 	
 	<div class="settings-container row">
 		<div class="col-sm-4">
 			<div class="tabs-holder">
 				<md-list class="sidebar-list">
 					<h3 class="hidden-mobile sidebar-section-header" md-subheader>Personal settings</h3>
-					<md-list-item 
-						routerLinkActive="highlight"
-						[routerLink]="['profile']">
-					Profile</md-list-item>
-					<md-list-item 
-						routerLinkActive="highlight"
-						[routerLink]="['account']">
-					Account</md-list-item>
-					<md-list-item 
-						routerLinkActive="highlight"
-						[routerLink]="['notifications']">
-					Notifications</md-list-item>
+					<md-list-item routerLinkActive="highlight" [routerLink]="['profile']">Profile</md-list-item>
+					<md-list-item routerLinkActive="highlight" [routerLink]="['account']">Account</md-list-item>
+					<md-list-item routerLinkActive="highlight" [routerLink]="['notifications']">Notifications</md-list-item>
 				</md-list>
 			</div>
 		</div>

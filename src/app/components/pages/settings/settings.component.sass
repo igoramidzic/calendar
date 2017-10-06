@@ -34,23 +34,29 @@
 			font-size: 22px
 			margin: 0
 	.setting-content-container
-		padding: 15px
+		padding: 0 15px
 
-.text-input
-	&:focus
-		border-color: $primary_color
-.text-input-error
-	border-color: $danger_color !important
-.action-btn
-	color: #ffffff
-	background-color: #f3f5f8
-	width: 125px
-.action-btn-available
-	background-color: $primary_color
-.saved-notif
+.success-notif
 	color: $success_color
 	font-weight: 300
 	margin-right: 10px
+.danger-notif
+	color: $danger_color
+	font-weight: 300
+	margin-right: 10px
+
+.setting-group-container
+	padding-top: 15px
+	padding-bottom: 15px
+
+.setting-group-separator
+	margin: 15px 0
+
+.form-group-header
+	margin: 0
+	font-weight: 400
+.form-group-header-danger
+	color: darken($danger_color, 20%)
 
 // Large
 @media only screen and (min-width : 1200px) 
@@ -81,6 +87,9 @@
 			-moz-box-shadow: inset 2px 0px 0px 0px $danger_color
 			box-shadow: inset 2px 0px 0px 0px $danger_color
 
+	.form-group-header
+		font-size: 25px
+
 // Extra small
 @media only screen and (max-width : 767px)
 	.main-settings-page
@@ -100,6 +109,9 @@
 				-webkit-box-shadow: inset 0px -2px 0px 0px $danger_color
 				-moz-box-shadow: inset 0px -2px 0px 0px $danger_color
 				box-shadow: inset 0px -2px 0px 0px $danger_color
+			
+	.form-group-header
+		font-size: 22px
 
 // Extra small
 @media only screen and (max-width : 767px) and (min-width : 480px) 

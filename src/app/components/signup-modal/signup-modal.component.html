@@ -2,17 +2,12 @@
 	<button class="close" md-dialog-close></button>
 	<h3 class="app-modal-header">Sign up</h3>
 	<form class="modal-form" [formGroup]="signupForm" (ngSubmit)="onSignupWithEmail()">
-		<md-input-container class="half-width">
+		<md-input-container class="full-width">
 			<input
 				mdInput
-				placeholder="First name"
-				formControlName="first_name">
-		</md-input-container>
-		<md-input-container class="half-width">
-			<input
-				mdInput
-				placeholder="Last name"
-				formControlName="last_name">
+				type="text"
+				placeholder="Full name"
+				formControlName="displayName">
 		</md-input-container>
 		<md-input-container class="full-width">
 			<input
@@ -55,7 +50,7 @@
 			</button>
 		</div>
 		<div class="login-signup-footer">
-			Already have an account? <span class="action-btn" (click)="onOpenLoginModal()">Log in</span>
+			Already have an account? <span class="action-link" (click)="onOpenLoginModal()">Log in</span>
 		</div>
 	</div>
 	<!-- Checkmark animation -->

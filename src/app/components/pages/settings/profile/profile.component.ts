@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
 	selector: 'app-profile',
@@ -9,36 +10,40 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class ProfileComponent implements OnInit {
 
 	user: any;
-	profileNameForm: FormGroup;
-	updateNameSubmitted: boolean;
+	profileDisplayNameForm: FormGroup;
+	updateDisplayNameSuccess: boolean;
+	updateDisplayNameError: boolean;
 
-	constructor() { }
+	constructor(private authService: AuthService) { }
 
 	ngOnInit() {
 		this.user = {
-			firstName: 'Igor',
-			lastName: 'Amidzic'
+			displayName: 'Igor Amidzic'
 		}
 
-		this.profileNameForm = new FormGroup({
-			'firstName': new FormControl(this.user.firstName),
-			'lastName': new FormControl(this.user.lastName)
+		this.profileDisplayNameForm = new FormGroup({
+			'displayName': new FormControl(this.user.displayName)
 		});
 	}
 
-	onUpdateUsersName () {
-		var first = this.profileNameForm.get('firstName').value;
-		var last = this.profileNameForm.get('lastName').value;
-		this.user.firstName = first;
-		this.user.lastName = last;
-		this.profileNameForm.reset({
-			'firstName': this.user.firstName,
-			'lastName': this.user.lastName
-		});
-		this.updateNameSubmitted = true;
-		setTimeout(() => {
-			this.updateNameSubmitted = false;
-		}, 1500)
+	onUpdateUsersDisplayName () {
+		var newDisplayName = this.profileDisplayNameForm.get('displayName').value;
+		this.updateDisplayNameSuccess = false;
+		this.updateDisplayNameError = false;
+
+		this.authService.updateDisplayName(newDisplayName)
+			.then(success => {
+				this.updateDisplayNameSuccess = true;
+				this.profileDisplayNameForm.reset({
+					'displayName': newDisplayName
+				});
+				setTimeout(() => {
+					this.updateDisplayNameSuccess = false;
+				}, 1500)
+			})
+			.catch(error => {
+				this.updateDisplayNameError = true;
+			})
 	}
 
 }

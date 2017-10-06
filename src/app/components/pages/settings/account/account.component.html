@@ -1,7 +1,11 @@
 <div class="account-container">
-	<div class="row">
+	<div class="setting-group-container row">
 		<form [formGroup]="updateEmailForm" (ngSubmit)="onUpdateUsersEmail()">
 			<div class="form-controls-container">
+				<div class="col-xs-12">
+					<h3 class="form-group-header">Update email</h3>
+					<hr class="setting-group-separator">
+				</div>
 				<div class="col-xs-12 controller-holder">
 					<label class="text-input-label">
 						Email
@@ -20,14 +24,18 @@
 					class="action-btn" 
 					[ngClass]="{ 'action-btn-available': !updateEmailForm.pristine && !updateEmailFormError }"
 					[disabled]="updateEmailForm.pristine || updateEmailFormError" 
-					md-button>Save</button>
+					md-button>Update email</button>
 			</div>
 		</form>
 	</div>
-	<hr>
-	<div class="row">
+	
+	<div class="setting-group-container row">
 		<form [formGroup]="updatePasswordForm" (ngSubmit)="onUpdateUsersPassword()">
 			<div class="form-controls-container">
+				<div class="col-xs-12">
+					<h3 class="form-group-header">Change password</h3>
+					<hr class="setting-group-separator">
+				</div>
 				<div class="col-sm-6 controller-holder">
 					<label class="text-input-label">
 						New password
@@ -57,9 +65,22 @@
 					class="action-btn" 
 					[ngClass]="{ 'action-btn-available': !updatePasswordForm.get('password').pristine && !updatePasswordForm.get('confirmPassword').pristine && !updatePassword1FormError && !updatePassword2FormError }"
 					[disabled]="updatePasswordForm.get('password').pristine || updatePasswordForm.get('confirmPassword').pristine || updatePassword1FormError || updatePassword2FormError" 
-					md-button>Save</button>
+					md-button>Change password</button>
 			</div>
 		</form>
+	</div>
+	
+	<div class="setting-group-container row">
+		<div class="form-controls-container">
+			<div class="col-xs-12">
+				<h3 class="form-group-header form-group-header-danger">Delete account</h3>
+				<hr class="setting-group-separator">
+			</div>
+			<div class="col-xs-12 controller-holder">
+				<p class="deletion-disclaimer">Once you delete your account, there is no going back. Please be certain.</p>
+				<button class="danger-btn" (click)="onOpenDeleteAccountModal()" md-button>Delete account</button>
+			</div>
+		</div>
 	</div>
 </div>
 	
