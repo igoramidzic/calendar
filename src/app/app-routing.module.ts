@@ -14,7 +14,7 @@ import { NotificationsComponent } from "./components/pages/settings/notification
 
 // Routes
 const appRoutes: Routes = [
-	{ path: '', component: HomeComponent, canActivate: [ NotAuthGuard] },
+	{ path: '', component: HomeComponent, canActivate: [ ] },
 	{ path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
 	{ path: 'settings', component: SettingsComponent, canActivateChild: [ AuthGuard ], children: [
 		{ path: '', pathMatch: 'full', redirectTo: 'profile' },

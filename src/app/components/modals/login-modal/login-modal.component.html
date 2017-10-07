@@ -2,18 +2,14 @@
 	<button class="close" md-dialog-close></button>
 	<h3 class="app-modal-header">Login</h3>
 	<form class="modal-form" [formGroup]="loginForm" (ngSubmit)="onLoginWithEmail()">
-		<md-input-container class="full-width">
-			<input
-				mdInput
-				placeholder="Email"
-				formControlName="email">
-		</md-input-container>
-		<md-input-container class="full-width">
-			<input type="password"
-				mdInput
-				placeholder="Password"
-				formControlName="password">
-		</md-input-container>
+		<input
+			class="text-input"
+			placeholder="Email"
+			formControlName="email">
+		<input type="password"
+			class="text-input"
+			placeholder="Password"
+			formControlName="password">
 		<div *ngIf="loginWithEmailError" class="error-container">{{ loginWithEmailError }}</div>
 		<button class="submit-btn" md-button type="submit">Login</button>
 		<div class="forgot-password-container">

@@ -17,7 +17,9 @@ export class SettingsComponent implements OnInit {
 
 	ngOnInit() {
 		this.user = this.authService.afAuth.authState.subscribe(user => {
-			this.user = user;
+			if (user) {
+				this.user = user;
+			}
 		})
 
 	}

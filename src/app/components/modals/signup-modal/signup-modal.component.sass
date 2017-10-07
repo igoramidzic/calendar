@@ -1,4 +1,4 @@
-@import '../../app.component.sass'
+@import '../../../app.component.sass'
 
 .modal-content-holder
 	position: relative
@@ -10,13 +10,11 @@
 	color: #374151
 
 .modal-form
-	padding: 15px 0 0 0
+	padding: 25px 0 0 0
 	max-width: 300px
 	text-align: center
-.full-width
-	width: 100%
-.half-width
-	width: 49.3%
+	.text-input
+		margin-bottom: 15px
 
 .submit-btn
 	background-color: $primary_color
@@ -25,14 +23,15 @@
 	height: 45px
 	font-size: 18px
 
-.forgot-password-container
+.tos
+	margin: 0
+	padding: 0 0 8px 0
+	font-size: 10px
 	text-align: center
-	padding-top: 8px
-	.forgot-password-btn
-		cursor: pointer
-		color: #afafaf
-		&:hover
-			color: #9b9b9b
+	color: #606060
+	cursor: default
+	a
+		color: $primary_color
 
 .signup-separator-container
 	display: flex
