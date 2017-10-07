@@ -2,7 +2,6 @@ import { Component, OnInit, forwardRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -40,7 +39,7 @@ export class SignupModalComponent implements OnInit {
 		}, 1000)
 	}
 
-	resetLoginErrors () {
+	resetSignupErrors () {
 		this.signupWithEmailError = null;
 		this.signupWithSocialError = null;
 		this.hasEmailError = null;
@@ -48,17 +47,8 @@ export class SignupModalComponent implements OnInit {
 		this.hasPasswordError = null;
 	}
 
-	onOpenLoginModal () {
-		this.myModal.closeAll();
-		setTimeout(() => {
-			this.myModal.open(LoginModalComponent, {
-				disableClose: true
-			});
-		}, 500)
-	}
-
 	onSignupWithEmail () {
-		this.resetLoginErrors();
+		this.resetSignupErrors();
 		
 		var displayName = this.signupForm.get('displayName');
 		var email = this.signupForm.get('email');
@@ -104,7 +94,7 @@ export class SignupModalComponent implements OnInit {
 	}
 
 	onSignupWithGoogle () {
-		this.resetLoginErrors();
+		this.resetSignupErrors();
 		this.authService.loginUserWithGoogle()
 			.then(
 				res => {
@@ -120,7 +110,7 @@ export class SignupModalComponent implements OnInit {
 	}
 
 	onSignupWithFacebook () {
-		this.resetLoginErrors();
+		this.resetSignupErrors();
 		this.authService.loginUserWithFacebook()
 			.then(
 				res => {
