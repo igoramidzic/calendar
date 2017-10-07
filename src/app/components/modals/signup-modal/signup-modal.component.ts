@@ -1,9 +1,9 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
 	selector: 'app-signup-modal',
@@ -16,6 +16,9 @@ export class SignupModalComponent implements OnInit {
 	complete: boolean;
 	signupWithEmailError: string;
 	signupWithSocialError: string;
+	hasDisplayNameError: boolean;
+	hasEmailError: boolean;
+	hasPasswordError: boolean;
 
 	constructor(private authService: AuthService, private myModal: MdDialog, private router: Router) { }
 
@@ -40,6 +43,9 @@ export class SignupModalComponent implements OnInit {
 	resetLoginErrors () {
 		this.signupWithEmailError = null;
 		this.signupWithSocialError = null;
+		this.hasEmailError = null;
+		this.hasDisplayNameError = null;
+		this.hasPasswordError = null;
 	}
 
 	onOpenLoginModal () {
@@ -59,13 +65,13 @@ export class SignupModalComponent implements OnInit {
 		var password = this.signupForm.get('password');
 
 		if (!displayName.value) {
-			displayName.setErrors({ 'empty': true });
+			this.hasDisplayNameError = true;
 		}
 		if (!email.value) {
-			email.setErrors({ 'empty': true });
+			this.hasEmailError = true;
 		}
 		if (!password.value) {
-			password.setErrors({ 'empty': true });
+			this.hasPasswordError = true;
 		}
 
 		if (displayName.value && email.value && password.value) {
@@ -79,16 +85,16 @@ export class SignupModalComponent implements OnInit {
 					error => {
 						if (error.code === "auth/email-already-in-use") {
 							this.signupWithEmailError = "This email address has already been used.";
-							email.setErrors({ 'duplicate': true });
+							this.hasEmailError = true;
 							password.patchValue('');
 						} else if (error.code === "auth/invalid-email") {
 							this.signupWithEmailError = "Please enter a valid email.";
-							email.setErrors({ 'duplicate': true });
+							this.hasEmailError = true;
 							password.patchValue('');
 						} else if (error.code === "auth/weak-password") {
 							this.signupWithEmailError = "Password must be at least 6 characters.";
+							this.hasPasswordError = true;
 							password.patchValue('');
-							password.setErrors({ 'tooShort': true });
 						} else {
 							this.signupWithEmailError = "Something went wrong. Please try again.";
 						}

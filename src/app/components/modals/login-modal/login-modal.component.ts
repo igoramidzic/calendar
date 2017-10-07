@@ -1,9 +1,9 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { MdDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { SignupModalComponent } from '../signup-modal/signup-modal.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
 	selector: 'app-login-modal',

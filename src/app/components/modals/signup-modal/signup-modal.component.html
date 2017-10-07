@@ -2,26 +2,23 @@
 	<button class="close" md-dialog-close></button>
 	<h3 class="app-modal-header">Sign up</h3>
 	<form class="modal-form" [formGroup]="signupForm" (ngSubmit)="onSignupWithEmail()">
-		<md-input-container class="full-width">
-			<input
-				mdInput
-				type="text"
-				placeholder="Full name"
-				formControlName="displayName">
-		</md-input-container>
-		<md-input-container class="full-width">
-			<input
-				mdInput
-				type="email"
-				placeholder="Email"
-				formControlName="email">
-		</md-input-container>
-		<md-input-container class="full-width">
-			<input type="password"
-				mdInput
-				placeholder="Password"
-				formControlName="password">
-		</md-input-container>
+		<input
+			class="text-input"
+			[ngClass]="{ 'text-input-error': hasDisplayNameError }"
+			type="text"
+			placeholder="Full name"
+			formControlName="displayName">
+		<input
+			class="text-input"
+			[ngClass]="{ 'text-input-error': hasEmailError }"
+			type="email"
+			placeholder="Email"
+			formControlName="email">
+		<input type="password"
+			class="text-input"
+			[ngClass]="{ 'text-input-error': hasPasswordError }"
+			placeholder="Password"
+			formControlName="password">
 		<div *ngIf="signupWithEmailError" class="error-container">{{ signupWithEmailError }}</div>
 		<p class="tos">By signing up, you agree to our <a target="_blank" href="">Terms of Use</a>.</p>
 		<button class="submit-btn" md-button type="submit">Signup</button>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { SignupModalComponent } from '../components/signup-modal/signup-modal.component';
-import { LoginModalComponent } from '../components/login-modal/login-modal.component';
 import { DeleteAccountModalComponent } from '../components/modals/delete-account-modal/delete-account-modal.component';
+import { SignupModalComponent } from '../components/modals/signup-modal/signup-modal.component';
+import { LoginModalComponent } from '../components/modals/login-modal/login-modal.component';
 
 @Injectable()
 export class ModalService {
