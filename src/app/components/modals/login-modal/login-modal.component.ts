@@ -60,13 +60,6 @@ export class LoginModalComponent implements OnInit {
 		var email = this.loginForm.get('email');
 		var password = this.loginForm.get('password');
 
-		if (!email.value) {
-			email.setErrors({ 'empty': true });
-		}
-		if (!password.value) {
-			password.setErrors({ 'empty': true });
-		}
-
 		if (email.value && password.value) {
 			this.authService.loginUserWithEmail(email.value, password.value)
 				.then(
