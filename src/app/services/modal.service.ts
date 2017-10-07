@@ -10,17 +10,19 @@ export class ModalService {
 	constructor(private myModals: MdDialog) { }
 
 	openSignupModal () {
-		const dialogRef = this.myModals.open(SignupModalComponent, {
+		const signupModalRef = this.myModals.open(SignupModalComponent, {
 			disableClose: true
 		});
 
-		return dialogRef;
+		return signupModalRef;
 	}
 
 	openLoginModal () {
-		this.myModals.open(LoginModalComponent, {
+		const loginModalRef = this.myModals.open(LoginModalComponent, {
 			disableClose: true
 		});
+
+		return loginModalRef;
 	}
 
 	openDeleteAccountModal () {
