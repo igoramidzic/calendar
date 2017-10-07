@@ -10,17 +10,24 @@ import { AuthService } from '../../../../../services/auth.service';
 export class UpdatePasswordComponent implements OnInit {
 
 	updatePasswordForm: FormGroup;
-	updatePasswordSubmitted: boolean;
+	updatePasswordSuccess: boolean;
+	updatePasswordError: string;
 	updatePassword1FormError: string;
 	updatePassword2FormError: string;
 	updatePasswordAttempted: boolean;
+	btnMessage: string;
+	currentlySaving: boolean;
+	requiresRecentLogin: boolean;
 
 	constructor(private authService: AuthService) { }
 
 	ngOnInit() {
+		this.btnMessage = 'Change password';
+
 		this.updatePasswordForm = new FormGroup({
 			'password': new FormControl(null),
-			'confirmPassword': new FormControl(null)
+			'confirmPassword': new FormControl(null),
+			'currentPassword': new FormControl(null)
 		})
 
 		this.updatePasswordForm.valueChanges.subscribe(res => {
@@ -42,25 +49,70 @@ export class UpdatePasswordComponent implements OnInit {
 			}
 		})
 	}
+
+	passwordSavedSuccessfully () {
+		this.updatePasswordForm.reset();
+		this.btnMessage = 'Update password';
+		this.currentlySaving = null;
+		this.updatePasswordSuccess = true;
+		this.updatePasswordAttempted = null;
+		this.updatePasswordForm.disable();
+		this.updatePasswordForm.enable();
+		this.requiresRecentLogin = false;
+		this.updatePasswordError = null;
+		setTimeout(() => {
+			this.updatePasswordSuccess = false;
+		}, 2000)
+	}
 	
 	onUpdateUsersPassword () {
+		this.updatePasswordAttempted = true;
 		var password = this.updatePasswordForm.get('password').value;
 		var confirmPassword = this.updatePasswordForm.get('confirmPassword').value;
+		this.btnMessage = 'updating..';
+		this.currentlySaving = true;
 
 		if (password) {
 			if (password.length < 6) {
 				this.updatePassword1FormError = "is too short.";
-				this.updatePasswordAttempted = true;
+				this.btnMessage = 'Update password';
+				this.currentlySaving = null;
 			} else if (password != confirmPassword) {
 				this.updatePassword2FormError = "does not match.";
-				this.updatePasswordAttempted = true;
+				this.btnMessage = 'Update password';
+				this.currentlySaving = null;
 			} else {
-				this.updatePasswordForm.reset();
-				this.updatePasswordSubmitted = true;
-				this.updatePasswordAttempted = null;
-				setTimeout(() => {
-					this.updatePasswordSubmitted = false;
-				}, 1500)
+				this.authService.updatePassword(password)
+				.then(() => {
+					this.passwordSavedSuccessfully();
+				})
+				.catch(error => {
+					this.btnMessage = 'Update password';
+					this.currentlySaving = null;
+					if (error.code === "auth/requires-recent-login") {
+						this.updatePasswordForm.disable();
+						this.updatePasswordForm.enable();
+						this.requiresRecentLogin = true;
+						this.updatePasswordError = "Please confirm your password"
+						const currentPassword = this.updatePasswordForm.get('currentPassword').value;
+						if (currentPassword) {
+							this.authService.reauthenticate(currentPassword)
+							.then(() => {
+								this.passwordSavedSuccessfully();
+							})
+							.catch(error => {
+								if (error.code === "auth/wrong-password") {
+									this.updatePasswordError = "Incorrect password."
+								} else if (error.code === "auth/too-many-requests") {
+									this.updatePasswordError = "Too many attempts"
+								}
+								console.log(error);
+							})
+						}
+					} else if (error.code === "auth/weak-password") {
+						this.updatePassword1FormError = "is too short.";
+					}
+				})
 			}
 		}
 	}

@@ -118,10 +118,25 @@ export class AuthService implements OnInit {
 		})
 	}
 
+	// Update password
+	updatePassword (password) {
+		return new Promise((resolve, reject) => {
+			this.afAuth.auth.currentUser.updatePassword(password)
+				.then(success => resolve())
+				.catch(error => {
+					reject(error);
+				})
+		})
+	}
+
 	// Reauthenticate
 	reauthenticate (password) {
+		const credential = firebase.auth.EmailAuthProvider.credential(
+			this.afAuth.auth.currentUser.email, 
+			password
+		);
 		return new Promise((resolve, reject) => {
-			this.afAuth.auth.currentUser.reauthenticateWithCredential(this.afAuth.auth.currentUser)
+			this.afAuth.auth.currentUser.reauthenticateWithCredential(credential)
 				.then(res => resolve())
 				.catch(
 					error => {

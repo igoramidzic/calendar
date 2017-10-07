@@ -10,7 +10,7 @@
 			<h3 class="sidebar-section-header" md-subheader>
 				{{ (user.displayName | truncate : 25) || (user.email | truncate : 25) }}</h3>
 			<md-list-item (click)="onToggleSidebar.emit()" [routerLink]="['dashboard']">Dashboard</md-list-item>
-			<md-list-item (click)="onToggleSidebar.emit()" [routerLink]="['settings']">Settings</md-list-item>
+			<md-list-item (click)="onToggleSidebar.emit()" [routerLink]="['settings', 'profile']">Settings</md-list-item>
 			<md-list-item (click)="onLogout()">Logout</md-list-item>
 			<hr>
 		</md-list>

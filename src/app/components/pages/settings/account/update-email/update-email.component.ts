@@ -28,7 +28,9 @@ export class UpdateEmailComponent implements OnInit {
 		
 		this.authService.afAuth.authState.subscribe(user => {
 			this.user = user;
-			this.updateEmailForm.get('email').patchValue(this.user.email);
+			if (user) {
+				this.updateEmailForm.get('email').patchValue(this.user.email);
+			}
 		})
 
 		this.updateEmailForm = new FormGroup({
@@ -48,12 +50,8 @@ export class UpdateEmailComponent implements OnInit {
 	onUpdateUsersEmail () {
 		var newEmail = this.updateEmailForm.get('email').value;
 		this.updateEmailForm.disable();
-		this.btnMessage = "updating...";
+		this.btnMessage = "updating..";
 		this.currentlySaving = true;
-
-		this.user = {
-			email: 'amidzicigor@yahoo.com'
-		}
 
 		this.authService.updateEmail(newEmail)
 			.then(success => {
