@@ -21,7 +21,12 @@ export class NavbarComponent implements OnInit {
 	}
 
 	onOpenSignupModal () {
-		this.modalService.openSignupModal();
+		this.modalService.openSignupModal()
+			.afterClosed().subscribe(res => {
+				if (res === "loginModal") {
+					this.onOpenLoginModal();
+				}
+			})
 	}
 
 	onOpenLoginModal () {
