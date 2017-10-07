@@ -2,7 +2,6 @@ import { Component, OnInit, forwardRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import { SignupModalComponent } from '../signup-modal/signup-modal.component';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -29,15 +28,6 @@ export class LoginModalComponent implements OnInit {
 
 	onForgotPassword () {
 		console.log("Forgot password");
-	}
-
-	onOpenSignupModal () {
-		this.myModal.closeAll();
-		setTimeout(() => {
-			this.myModal.open(SignupModalComponent, {
-				disableClose: true
-			});
-		}, 500)
 	}
 
 	successfulLogin () {
