@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'app-settings',
@@ -13,12 +13,13 @@ export class SettingsComponent implements OnInit {
 	user: Object;
 	currentSetting: string;
 
-	constructor(private authService: AuthService, private router: Router) { }
+	constructor(private authService: AuthService, private router: Router, private ars: ActivatedRoute) { }
 
 	ngOnInit() {
 		this.user = this.authService.afAuth.authState.subscribe(user => {
 			this.user = user;
 		})
+
 	}
 
 }

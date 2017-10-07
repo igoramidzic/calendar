@@ -17,6 +17,7 @@ const appRoutes: Routes = [
 	{ path: '', component: HomeComponent, canActivate: [ NotAuthGuard] },
 	{ path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
 	{ path: 'settings', component: SettingsComponent, canActivateChild: [ AuthGuard ], children: [
+		{ path: '', pathMatch: 'full', redirectTo: 'profile' },
 		{ path: 'profile', component: ProfileComponent },
 		{ path: 'account', component: AccountComponent },
 		{ path: 'notifications', component: NotificationsComponent },
