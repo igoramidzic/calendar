@@ -80,7 +80,6 @@ export class AuthService implements OnInit {
 	// Logout
 	logoutUser () {
 		this.afAuth.auth.signOut();
-		this.router.navigate(['']);
 	}
 
 	// Delete account

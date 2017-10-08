@@ -8,34 +8,41 @@
 			<div class="col-xs-12 controller-holder">
 				<label class="text-input-label">
 					Email
-					<md-hint class="">{{ updateEmailFormError }}</md-hint>
+					<md-hint *ngIf="updateEmailForm.hasError('emailError')">
+						{{ updateEmailForm.errors.emailError }}
+					</md-hint>
+					<md-hint *ngIf="newEmailControl.hasError('required')">
+						cannot be empty.
+					</md-hint>
 				</label>
 				<input 
 					class="text-input"
-					[ngClass]="{ 'text-input-error': updateEmailFormError}"
-					type="text" 
-					formControlName="email">
+					[ngClass]="{ 'text-input-error': updateEmailForm.hasError('emailError') || newEmailControl.hasError('required')}"
+					type="email" 
+					formControlName="newEmail">
 			</div>
-			<div *ngIf="requiresRecentLogin" class="col-xs-12 controller-holder form-control-separator">
+			<div *ngIf="currentPasswordControl" class="col-xs-12 controller-holder form-control-separator-desktop">
 				<label class="text-input-label">
-					Confirm password
-					<md-hint class="">{{ updateEmailFormError }}</md-hint>
+					Confirm current password
+					<md-hint *ngIf="currentPasswordControl.hasError('incorrect')">is incorrect.</md-hint>
 				</label>
 				<input 
 					class="text-input"
-					[ngClass]="{ 'text-input-error': passwordRequired }"
+					[ngClass]="{ 'text-input-error': currentPasswordControl.hasError('incorrect') }"
 					type="password" 
-					formControlName="password">
+					formControlName="currentPassword">
 			</div>
 		</div>
 		<div class="col-xs-12 submit-btn-holder">
-			<span class="success-notif" *ngIf="updateEmailFormSuccess">Saved</span>
-			<span class="danger-notif" *ngIf="passwordRequired">{{ passwordRequired }}</span>
+			<md-hint class="success-notif" *ngIf="successfulUpdate">Updated</md-hint>
+			<md-hint class="danger-notif" *ngIf="updateEmailForm.hasError('reauthError')">
+				{{ updateEmailForm.errors.reauthError }}
+			</md-hint>
 			<button 
 				class="action-btn" 
-				[ngClass]="{ 'action-btn-available': !updateEmailForm.pristine && !currentlySaving }"
-				[disabled]="updateEmailForm.pristine || currentlySaving" 
-				md-button>{{ btnMessage }}</button>
+				[ngClass]="{ 'action-btn-available': updateEmailForm.valid && !updateEmailForm.pristine }"
+				[disabled]="updateEmailForm.pristine || updateEmailForm.invalid" 
+				md-button>{{ submitBtnText }}</button>
 		</div>
 	</form>
 </div>
