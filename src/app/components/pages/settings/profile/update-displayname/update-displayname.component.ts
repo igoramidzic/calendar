@@ -22,6 +22,9 @@ export class UpdateDisplaynameComponent implements OnInit {
 		}
 
 		this.authService.afAuth.authState.subscribe(user => {
+			if (!user) {
+				return;
+			}
 			this.user = user;
 			this.profileDisplayNameForm.get('displayName').patchValue(this.user.displayName);
 		})

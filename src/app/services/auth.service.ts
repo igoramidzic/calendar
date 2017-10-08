@@ -11,12 +11,9 @@ import { Observer } from 'rxjs/Observer';
 @Injectable()
 export class AuthService implements OnInit {
 
-	user: any;
-
 	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase, private router: Router) { }
 
 	ngOnInit() {
-		this.user = this.afAuth.authState.subscribe();
 	}
 
 	// Signup | Email
