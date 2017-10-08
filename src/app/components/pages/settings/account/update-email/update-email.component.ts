@@ -76,6 +76,7 @@ export class UpdateEmailComponent implements OnInit {
 			this.setSubmitBtnValue('Update email');
 		}
 	}
+	
 	patchCurrentPasswordControl () {
 		this.currentPasswordControl.patchValue('');
 	}

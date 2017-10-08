@@ -9,49 +9,81 @@ import { AuthService } from '../../../../../services/auth.service';
 })
 export class UpdateDisplaynameComponent implements OnInit {
 
-	user: any;
-	profileDisplayNameForm: FormGroup;
-	updateDisplayNameSuccess: boolean;
-	updateDisplayNameError: boolean;
+	updateDisplayNameForm: FormGroup;
+	displayNameControl: any;
+	submitBtnText: string;
+	successfulUpdate: boolean;
+	unsuccessfulUpdate: string;
 
 	constructor(private authService: AuthService) { }
 
 	ngOnInit() {
-		this.user = {
-			displayName: ''
-		}
+		this.setSubmitBtnValue('Update name');
+
+		this.updateDisplayNameForm = new FormGroup({
+			'displayName': new FormControl(null)
+		});
+
+		this.displayNameControl = this.updateDisplayNameForm.controls['displayName'];
 
 		this.authService.afAuth.authState.subscribe(user => {
-			if (!user) {
-				return;
-			}
-			this.user = user;
-			this.profileDisplayNameForm.get('displayName').patchValue(this.user.displayName);
+			this.displayNameControl.patchValue(user.displayName)
 		})
 
-		this.profileDisplayNameForm = new FormGroup({
-			'displayName': new FormControl(this.user.displayName)
-		});
+		this.updateDisplayNameForm.valueChanges.subscribe(values => {
+			this.displayNameControl = this.updateDisplayNameForm.controls['displayName'];
+		})
+	}
+
+	setSubmitBtnValue (value) {
+		this.submitBtnText = value;
+	}
+
+	submitting (bool) {
+		this.updateDisplayNameForm.setErrors({ 'submitting': bool });
+		if (bool) {
+			this.setSubmitBtnValue('updating..');
+		} else {
+			this.setSubmitBtnValue('Update name');
+		}
+	}
+
+	blurFormControls () {
+		// Not sure any other way to do it :(
+		this.updateDisplayNameForm.disable();
+		this.updateDisplayNameForm.enable();
+	}
+
+	blipSuccessMessage () {
+		this.successfulUpdate = true;
+		setTimeout(() => {
+			this.successfulUpdate = null;
+		}, 2000)
+	}
+
+	updateDisplayNameSuccessful () {
+		this.blurFormControls();
+		this.blipSuccessMessage();
+		this.updateDisplayNameForm.reset({
+			'displayName': this.displayNameControl.value
+		})
+	}
+
+	updateDisplayName (name) {
+		this.authService.updateDisplayName(name)
+			.then(() => {
+				this.submitting(false);
+				this.updateDisplayNameSuccessful();
+			})
+			.catch(error => {
+				this.unsuccessfulUpdate = error.message;
+			})
 	}
 	
 	onUpdateUsersDisplayName () {
-		var newDisplayName = this.profileDisplayNameForm.get('displayName').value;
-		this.updateDisplayNameSuccess = false;
-		this.updateDisplayNameError = false;
-
-		this.authService.updateDisplayName(newDisplayName)
-			.then(success => {
-				this.updateDisplayNameSuccess = true;
-				this.profileDisplayNameForm.reset({
-					'displayName': newDisplayName
-				});
-				setTimeout(() => {
-					this.updateDisplayNameSuccess = false;
-				}, 1500)
-			})
-			.catch(error => {
-				this.updateDisplayNameError = true;
-			})
+		this.unsuccessfulUpdate = null;
+		this.submitting(true);
+		this.updateDisplayName(this.displayNameControl.value);
 	}
 
 }
