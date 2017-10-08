@@ -14,37 +14,33 @@ export class UpdatePasswordComponent implements OnInit {
 	passwordConfirmControl: any;
 	currentPasswordControl: any;
 	submitBtnText: string;
-	updatePasswordSuccessful: boolean;
+	successfulUpdate: boolean;
 
 	constructor(private authService: AuthService) { }
 
 	ngOnInit() {
-		this.submitBtnText = 'Change password';
+		this.setSubmitBtnValue('Change password');
 		
 		this.updatePasswordForm = new FormGroup({
 			'password': new FormControl(null, [ Validators.required, Validators.minLength(6) ]),
 			'passwordConfirm': new FormControl(null, [ Validators.required ])
 		}, this.passwordMatchValidator)
 
-		this.passwordControl = this.updatePasswordForm.get('password');
-		this.passwordConfirmControl = this.updatePasswordForm.get('passwordConfirm');
+		this.passwordControl = this.updatePasswordForm.controls['password'];
+		this.passwordConfirmControl = this.updatePasswordForm.controls['passwordConfirm'];
 
 		this.updatePasswordForm.valueChanges.subscribe(values => {
-			this.passwordControl = this.updatePasswordForm.get('password');
-			this.passwordConfirmControl = this.updatePasswordForm.get('passwordConfirm');
-			this.currentPasswordControl = this.updatePasswordForm.get('currentPassword');
+			this.passwordControl = this.updatePasswordForm.controls['password'];
+			this.passwordConfirmControl = this.updatePasswordForm.controls['passwordConfirm'];
+			this.currentPasswordControl = this.updatePasswordForm.controls['currentPassword'];
 		})
 	}
 
-	addCurrentPasswordFormControl () {
-		if (!this.currentPasswordControl) {
+	toggleCurrentPasswordFormControl (bool) {
+		if (bool) {
 			const control = new FormControl(null, [ Validators.required ]);
 			this.updatePasswordForm.addControl('currentPassword', control);
-		}
-	}
-	
-	removeCurrentPasswordFormControl () {
-		if (this.currentPasswordControl) {
+		} else {
 			this.updatePasswordForm.removeControl('currentPassword');
 		}
 	}
@@ -61,20 +57,19 @@ export class UpdatePasswordComponent implements OnInit {
 		this.submitBtnText = value;
 	}
 
-	submitting () {
-		this.updatePasswordForm.setErrors({ 'submitting': true });
-		this.setSubmitBtnValue('updating..');
-	}
-
-	doneSubmitting () {
-		this.updatePasswordForm.setErrors({ 'submitting': false });
-		this.setSubmitBtnValue('Change password');
+	submitting (bool) {
+		this.updatePasswordForm.setErrors({ 'submitting': bool });
+		if (bool) {
+			this.setSubmitBtnValue('updating..');
+		} else {
+			this.setSubmitBtnValue('Change password');
+		}
 	}
 
 	blipSuccessMessage () {
-		this.updatePasswordSuccessful = true;
+		this.successfulUpdate = true;
 		setTimeout(() => {
-			this.updatePasswordSuccessful = null;
+			this.successfulUpdate = null;
 		}, 2000)
 	}
 
@@ -97,7 +92,7 @@ export class UpdatePasswordComponent implements OnInit {
 
 	passwordUpdateSuccessful () {
 		this.blurFormControls();
-		this.removeCurrentPasswordFormControl();
+		this.toggleCurrentPasswordFormControl(false);
 		this.updatePasswordForm.reset();
 		this.blipSuccessMessage();
 	}
@@ -105,15 +100,16 @@ export class UpdatePasswordComponent implements OnInit {
 	updatePassword (password) {
 		this.authService.updatePassword(password)
 			.then(success => {
-				this.doneSubmitting();
+				this.submitting(false);
 				this.passwordUpdateSuccessful();
 			})
 			.catch(error => {
 				if (this.currentPasswordControl) {
 					this.reauthenticateUser(this.currentPasswordControl.value);
 				} else {
-					this.doneSubmitting();
-					this.addCurrentPasswordFormControl();
+					this.submitting(false);
+					this.setSubmitBtnValue('Change password');
+					this.toggleCurrentPasswordFormControl(true);
 					this.setFormReauthError('Please confirm current password')
 				}
 			})
@@ -122,14 +118,16 @@ export class UpdatePasswordComponent implements OnInit {
 	reauthenticateUser (password) {
 		this.authService.reauthenticate(password)
 			.then(() => {
-				this.doneSubmitting();
+				this.submitting(false);
+				this.setSubmitBtnValue('Change password');
 				this.passwordUpdateSuccessful();
 			})
 			.catch(error => {
-				this.doneSubmitting();
+				this.submitting(false);
+				this.setSubmitBtnValue('Change password');
 				this.patchCurrentPasswordControl();
 				if (error.code === 'auth/wrong-password') {
-					this.currentPasswordControl.setErrors({ 'incorrect': 'is incorrect' });
+					this.currentPasswordControl.setErrors({ 'incorrect': 'is incorrect.' });
 				} else if (error.code === 'auth/too-many-requests') {
 					this.setFormReauthError('Too many attempts');
 				}
@@ -138,7 +136,8 @@ export class UpdatePasswordComponent implements OnInit {
 
 	onChangePassword () {
 		if (this.updatePasswordForm.valid) {
-			this.submitting();
+			this.submitting(true);
+			this.setSubmitBtnValue('updating..');
 			this.updatePassword(this.passwordControl.value);
 		}
 	}

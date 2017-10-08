@@ -9,82 +9,141 @@ import { AuthService } from '../../../../../services/auth.service';
 })
 export class UpdateEmailComponent implements OnInit {
 
-	user: any;
-	
 	updateEmailForm: FormGroup;
-	updateEmailSubmitted: boolean;
-	updateEmailFormSuccess: boolean;
-	updateEmailFormError: string;
-	passwordRequired: string;
-	requiresRecentLogin: boolean;
-	passwordError: string;
-	btnMessage: string;
-	currentlySaving: boolean;
+	newEmailControl: any;
+	currentPasswordControl: any;
+	submitBtnText: string;
+	successfulUpdate: boolean;
 
 	constructor(private authService: AuthService) { }
 
 	ngOnInit() {
-		this.btnMessage = 'Update email';
-		
-		this.authService.afAuth.authState.subscribe(user => {
-			this.user = user;
-			if (user) {
-				this.updateEmailForm.get('email').patchValue(this.user.email);
-			}
-		})
+		this.setSubmitBtnValue('Update email');
 
 		this.updateEmailForm = new FormGroup({
-			'email': new FormControl(null),
-			'password': new FormControl(null)
+			'newEmail': new FormControl(null, [ Validators.required ])
 		})
 
-		this.updateEmailForm.valueChanges.subscribe(res => {
-			if (this.updateEmailForm.controls.email.errors) {
-				this.updateEmailFormError = 'is required.';
-			} else {
-				this.updateEmailFormError = null;
+		this.newEmailControl = this.updateEmailForm.controls['newEmail'];
+
+		this.authService.afAuth.authState.subscribe(user => {
+			if (user) {
+				this.newEmailControl.patchValue(user.email);
 			}
+		})
+
+		this.updateEmailForm.valueChanges.subscribe(values => {
+			this.newEmailControl = this.updateEmailForm.controls['newEmail'];
+			this.currentPasswordControl = this.updateEmailForm.controls['currentPassword'];
 		})
 	}
 
-	onUpdateUsersEmail () {
-		var newEmail = this.updateEmailForm.get('email').value;
-		this.updateEmailForm.disable();
-		this.btnMessage = "updating..";
-		this.currentlySaving = true;
+	toggleCurrentEmailFormControl (bool) {
+		if (bool) {
+			const control = new FormControl(null, [ Validators.required ]);
+			this.updateEmailForm.addControl('currentPassword', control);
+		} else {
+			this.updateEmailForm.removeControl('currentPassword');
+		}
+	}
 
-		this.authService.updateEmail(newEmail)
-			.then(success => {
-				this.updateEmailForm.reset({
-					'email': newEmail
-				});
-				this.updateEmailForm.enable();
-				this.updateEmailFormSuccess = true;
-				this.requiresRecentLogin = null;
-				this.currentlySaving = null;
-				this.btnMessage = "Update email";
-				setTimeout(() => {
-					this.updateEmailFormSuccess = false;
-				}, 1500)
+	setSubmitBtnValue (value) {
+		this.submitBtnText = value;
+	}
+
+	displaySuccessMessage () {
+		this.updateEmailForm.setErrors({ 'successfulUpdate': true });
+	}
+
+	blipSuccessMessage () {
+		this.successfulUpdate = true;
+		setTimeout(() => {
+			this.successfulUpdate = null;
+		}, 2000)
+	}
+
+	blurFormControls () {
+		// Not sure any other way to do it :(
+		this.updateEmailForm.disable();
+		this.updateEmailForm.enable();
+	}
+
+	submitting (bool) {
+		this.updateEmailForm.setErrors({ 'submitting': bool });
+		if (bool) {
+			this.setSubmitBtnValue('updating..');
+		} else {
+			this.setSubmitBtnValue('Update email');
+		}
+	}
+	patchCurrentPasswordControl () {
+		this.currentPasswordControl.patchValue('');
+	}
+
+	setFormReauthError (error) {
+		// Set timeout here because V4.2+ bug. 'ExpressionChangedAfterItHasBeenCheckedError'
+		setTimeout(() => {
+			this.updateEmailForm.setErrors({ 'reauthError': error });
+		})
+	}
+
+	updateEmailSuccessful () {
+		this.blurFormControls();
+		this.toggleCurrentEmailFormControl(false);
+		this.updateEmailForm.reset({
+			'newEmail': this.newEmailControl.value
+		});
+		this.blipSuccessMessage();
+	}
+
+	reauthenticateUser (password) {
+		this.authService.reauthenticate(password)
+			.then(() => {
+				this.submitting(false);
+				this.setSubmitBtnValue('Change password');
+				this.updateEmailSuccessful();
 			})
 			.catch(error => {
-				this.btnMessage = "Update email";
-				this.currentlySaving = null;
-				this.updateEmailForm.enable();
-				console.log(error);
-				if (error.code === "auth/requires-recent-login") {
-					this.requiresRecentLogin = true;
-					this.passwordRequired = "Please enter your password"
-					setTimeout(() => {
-						this.passwordRequired = null;
-					}, 1500)
-				} 
-				if (error.code === "auth/invalid-email") {
-					this.updateEmailFormError = "is invalid.";
-				} else if (error.code === "auth/email-already-in-use") {
-					this.updateEmailFormError = "is already taken.";
+				this.submitting(false);
+				this.setSubmitBtnValue('Change password');
+				this.patchCurrentPasswordControl();
+				if (error.code === 'auth/wrong-password') {
+					this.currentPasswordControl.setErrors({ 'incorrect': 'is incorrect.' });
+				} else if (error.code === 'auth/too-many-requests') {
+					this.setFormReauthError('Too many attempts');
 				}
 			})
+	}
+
+	updateEmail (newEmail) {
+		this.authService.updateEmail(newEmail)
+			.then(success => {
+				this.submitting(false);
+				this.updateEmailSuccessful();
+			})
+			.catch(error => {
+				if (error.code === "auth/invalid-email") {
+					this.submitting(false);
+					this.updateEmailForm.setErrors({ 'emailError': 'is invalid.' });
+				} else {
+					if (this.currentPasswordControl) {
+						this.reauthenticateUser(this.currentPasswordControl.value);
+					} else {
+						this.submitting(false);
+						this.setSubmitBtnValue('Update email');
+						this.toggleCurrentEmailFormControl(true);
+						this.setFormReauthError('Please confirm current password')
+					}
+				}
+			})
+	}
+
+	onUpdateUsersEmail () {
+		if (this.updateEmailForm.valid) {
+			this.submitting(true);
+			this.setSubmitBtnValue('updating..');
+			this.updateEmail(this.newEmailControl.value);
+		}
 	}
 
 }

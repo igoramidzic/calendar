@@ -17,7 +17,6 @@ export class SettingsComponent implements OnInit {
 		this.user = {};
 		
 		this.authService.afAuth.authState.subscribe(user => {
-			console.log(user);
 			if (!user) {
 				return this.router.navigate(['']);
 			}
