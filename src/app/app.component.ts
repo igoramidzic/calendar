@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
 	selector: 'app-root',
@@ -6,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
+
+	user: any;
+
+	constructor (private authService: AuthService) {}
+
 	ngOnInit() {
+		console.log(this.authService.user);
 	}
 }

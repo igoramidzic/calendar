@@ -18,8 +18,13 @@ export class UpdateDisplaynameComponent implements OnInit {
 
 	ngOnInit() {
 		this.user = {
-			displayName: 'Igor Amidzic'
+			displayName: ''
 		}
+
+		this.authService.afAuth.authState.subscribe(user => {
+			this.user = user;
+			this.profileDisplayNameForm.get('displayName').patchValue(this.user.displayName);
+		})
 
 		this.profileDisplayNameForm = new FormGroup({
 			'displayName': new FormControl(this.user.displayName)
