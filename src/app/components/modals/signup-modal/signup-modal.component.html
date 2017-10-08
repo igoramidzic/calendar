@@ -1,5 +1,4 @@
 <div class="modal-content-holder">
-	<button class="close" md-dialog-close></button>
 	<h3 class="app-modal-header">Sign up</h3>
 	<form class="modal-form" [formGroup]="signupForm" (ngSubmit)="onSignupWithEmail()">
 		<input
@@ -52,4 +51,6 @@
 	</div>
 	<!-- Checkmark animation -->
 	<app-checkmark *ngIf="complete"></app-checkmark>
+	
+	<button class="close" md-dialog-close></button>
 </div>

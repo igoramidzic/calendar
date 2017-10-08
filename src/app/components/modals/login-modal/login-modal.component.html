@@ -1,13 +1,14 @@
 <div class="modal-content-holder" style="max-width: 100vw;">
-	<button class="close" md-dialog-close></button>
 	<h3 class="app-modal-header">Login</h3>
 	<form class="modal-form" [formGroup]="loginForm" (ngSubmit)="onLoginWithEmail()">
 		<input
 			class="text-input"
+			type="email"
 			placeholder="Email"
 			formControlName="email">
-		<input type="password"
+		<input
 			class="text-input"
+			type="password"
 			placeholder="Password"
 			formControlName="password">
 		<div *ngIf="loginWithEmailError" class="error-container">{{ loginWithEmailError }}</div>
@@ -46,4 +47,6 @@
 
 	<!-- Checkmark animation -->
 	<app-checkmark *ngIf="complete"></app-checkmark>
+
+	<button class="close" md-dialog-close></button>
 </div>
