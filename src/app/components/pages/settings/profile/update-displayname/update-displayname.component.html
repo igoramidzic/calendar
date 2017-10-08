@@ -1,5 +1,5 @@
 <div class="setting-group-container row">
-	<form [formGroup]="profileDisplayNameForm" (ngSubmit)="onUpdateUsersDisplayName()">
+	<form [formGroup]="updateDisplayNameForm" (ngSubmit)="onUpdateUsersDisplayName()">
 		<div class="form-controls-container">
 			<div class="col-xs-12">
 				<h3 class="form-group-header">Update name</h3>
@@ -11,13 +11,13 @@
 			</div>
 		</div>
 		<div class="col-xs-12 submit-btn-holder">
-			<span class="success-notif" *ngIf="updateDisplayNameSuccess">Saved</span>
+			<span class="success-notif" *ngIf="successfulUpdate">Updated</span>
 			<span class="danger-notif" *ngIf="updateDisplayNameError">Try again</span>
 			<button 
 				class="action-btn" 
-				[ngClass]="{ 'action-btn-available': !profileDisplayNameForm.pristine }"
-				[disabled]="profileDisplayNameForm.pristine" 
-				md-button>Save</button>
+				[ngClass]="{ 'action-btn-available': !updateDisplayNameForm.pristine && updateDisplayNameForm.valid }"
+				[disabled]="updateDisplayNameForm.pristine ||	updateDisplayNameForm.invalid" 
+				md-button>{{ submitBtnText }}</button>
 		</div>
 	</form>
 </div>
