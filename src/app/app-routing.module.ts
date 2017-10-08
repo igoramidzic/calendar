@@ -16,11 +16,11 @@ import { NotificationsComponent } from "./components/pages/settings/notification
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent, canActivate: [ ] },
 	{ path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
-	{ path: 'settings', component: SettingsComponent, canActivateChild: [ AuthGuard ], children: [
+	{ path: 'settings', data: { title: 'Settings' }, component: SettingsComponent, canActivateChild: [ AuthGuard ], children: [
 		{ path: '', pathMatch: 'full', redirectTo: 'profile' },
-		{ path: 'profile', component: ProfileComponent },
-		{ path: 'account', component: AccountComponent },
-		{ path: 'notifications', component: NotificationsComponent },
+		{ path: 'profile', data: { title: 'Profile' }, component: ProfileComponent },
+		{ path: 'account',	data: { title: 'Account' }, component: AccountComponent },
+		{ path: 'notifications',	data: { title: 'Notifications' }, component: NotificationsComponent },
 	] },
 	{ path: '**', component: PageNotFoundComponent }
 ];
