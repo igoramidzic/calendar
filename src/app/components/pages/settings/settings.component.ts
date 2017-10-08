@@ -19,10 +19,7 @@ export class SettingsComponent implements OnInit {
 
 		this.activatedRoute.firstChild.data.subscribe(data => {
 			this.title = data.title;
-			console.log("Hello")
 		})
-
-		console.log(this.router.navigated)
 
 		this.router.events.subscribe(() => {
 			this.activatedRoute.firstChild.data.subscribe(data => {
