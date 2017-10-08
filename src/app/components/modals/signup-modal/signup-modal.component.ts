@@ -104,6 +104,8 @@ export class SignupModalComponent implements OnInit {
 				error => {
 					if (error.code === "auth/account-exists-with-different-credential") {
 						this.signupWithSocialError = "An account associated with this email already exists. Please use a different method."
+					} else {
+						console.log(error)
 					}
 				}
 			);

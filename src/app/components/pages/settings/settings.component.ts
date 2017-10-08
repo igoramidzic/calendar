@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
-import { Observable } from 'rxjs/Observable';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-settings',
@@ -10,18 +9,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
 
-	user: Object;
-	currentSetting: string;
+	user: any;
 
-	constructor(private authService: AuthService, private router: Router, private ars: ActivatedRoute) { }
+	constructor(private authService: AuthService, public router: Router) { }
 
 	ngOnInit() {
-		this.user = this.authService.afAuth.authState.subscribe(user => {
-			if (user) {
-				this.user = user;
+		this.user = {};
+		
+		this.authService.afAuth.authState.subscribe(user => {
+			console.log(user);
+			if (!user) {
+				return this.router.navigate(['']);
 			}
-		})
-
+			this.user = user;
+		});
 	}
 
 }

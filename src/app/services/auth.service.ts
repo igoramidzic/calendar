@@ -11,10 +11,10 @@ import { Observer } from 'rxjs/Observer';
 @Injectable()
 export class AuthService implements OnInit {
 
+	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase, private router: Router) { }
+
 	ngOnInit() {
 	}
-
-	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase, private router: Router) { }
 
 	// Signup | Email
 	signupUserWithEmail (name: string, email: string, password: string) {

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../../../../services/auth.service';
 
 @Component({
 	selector: 'app-account',
@@ -8,10 +6,13 @@ import { AuthService } from '../../../../services/auth.service';
 	styleUrls: ['./account.component.sass']
 })
 export class AccountComponent implements OnInit {
+
+	user: any;
 	
-	constructor(private authService: AuthService) { }
+	constructor() { }
 
 	ngOnInit() {
+		
 	}
 	
 }
