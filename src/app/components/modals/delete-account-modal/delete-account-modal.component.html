@@ -1,7 +1,25 @@
 <div class="delete-account-modal-container">
-	<button class="close" md-dialog-close></button>
 	<h3 class="app-modal-header">Are you sure?</h3>
 	<div class="delete-account-content-container">
-		<button (click)="onDeleteAccount()" md-dialog-close class="danger-btn" md-button>Yes, delete my account.</button>
+		<form class="modal-form" [formGroup]="deleteAccountForm" (ngSubmit)="onDeleteAccount()">
+			<input 
+			class="text-input"
+			[ngClass]="{ 'text-input-error': deleteAccountForm.hasError('passwordError') }"
+			type="password"
+			placeholder="Confirm password"
+			formControlName="password">
+			<md-hint *ngIf="deleteAccountForm.hasError('passwordError')">
+				{{ deleteAccountForm.errors.passwordError }}
+			</md-hint>
+			<md-hint *ngIf="deleteAccountForm.hasError('mainFormError')">
+				{{ deleteAccountForm.errors.mainFormError }}
+			</md-hint>
+			<button 
+				type="submit" 
+				class="danger-btn"
+				[disabled]="deleteAccountForm.invalid"
+				md-button>Yes, delete my account.</button>
+		</form>
 	</div>
+	<button class="close" md-dialog-close></button>
 </div>
