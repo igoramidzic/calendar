@@ -61,6 +61,7 @@ export class DeleteAccountModalComponent implements OnInit {
 			})
 			.catch(error => {
 				this.submitting(false);
+				this.deleteAccountForm.reset();
 				if (error.code === "auth/wrong-password") {
 					this.deleteAccountForm.setErrors({ 'passwordError': 'Incorrect password'})
 				} else if (error.code === "auth/too-many-requests") {
