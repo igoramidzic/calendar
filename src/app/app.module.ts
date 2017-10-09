@@ -41,6 +41,7 @@ import { UpdatePasswordComponent } from './components/pages/settings/account/upd
 import { UpdateDisplaynameComponent } from './components/pages/settings/profile/update-displayname/update-displayname.component';
 import { DeleteAccountComponent } from './components/pages/settings/account/delete-account/delete-account.component';
 import { DeleteAccountModalComponent } from './components/modals/delete-account-modal/delete-account-modal.component';
+import { ForgotPasswordComponent } from './components/pages/forgot-password/forgot-password.component';
 
 @NgModule({
 	declarations: [
@@ -62,6 +63,7 @@ import { DeleteAccountModalComponent } from './components/modals/delete-account-
 		UpdateEmailComponent,
 		UpdatePasswordComponent,
 		UpdateDisplaynameComponent,
+		ForgotPasswordComponent,
 	],
 	imports: [
 		BrowserModule,

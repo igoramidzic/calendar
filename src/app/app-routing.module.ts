@@ -11,6 +11,7 @@ import { SettingsComponent } from "./components/pages/settings/settings.componen
 import { HomeComponent } from "./components/pages/home/home.component";
 import { ProfileComponent } from "./components/pages/settings/profile/profile.component";
 import { NotificationsComponent } from "./components/pages/settings/notifications/notifications.component";
+import { ForgotPasswordComponent } from "./components/pages/forgot-password/forgot-password.component";
 
 // Routes
 const appRoutes: Routes = [
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
 		{ path: 'account',	data: { title: 'Account' }, component: AccountComponent },
 		{ path: 'notifications',	data: { title: 'Notifications' }, component: NotificationsComponent },
 	] },
+	{ path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ ] },
 	{ path: '**', component: PageNotFoundComponent }
 ];
 
