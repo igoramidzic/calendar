@@ -14,7 +14,10 @@
 		<div *ngIf="loginWithEmailError" class="error-container">{{ loginWithEmailError }}</div>
 		<button class="submit-btn" md-button type="submit">Login</button>
 		<div class="forgot-password-container">
-			<span class="forgot-password-btn" (click)="onForgotPassword()">Forgot password?</span>
+			<button 
+				md-dialog-close 
+				class="forgot-password-btn" 
+				[routerLink]="['forgot-password']">Forgot password?</button>
 		</div>
 	</form>
 	<div class="signup-separator-container">

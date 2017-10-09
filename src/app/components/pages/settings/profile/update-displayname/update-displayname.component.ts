@@ -27,7 +27,9 @@ export class UpdateDisplaynameComponent implements OnInit {
 		this.displayNameControl = this.updateDisplayNameForm.controls['displayName'];
 
 		this.authService.afAuth.authState.subscribe(user => {
-			this.displayNameControl.patchValue(user.displayName)
+			if (user) {
+				this.displayNameControl.patchValue(user.displayName)
+			}
 		})
 
 		this.updateDisplayNameForm.valueChanges.subscribe(values => {

@@ -36,7 +36,7 @@ export class AuthService implements OnInit {
 				uid: uid,
 				first_name: first,
 				last_name: last
-			}).then(success => resolve())
+			}).then(() => resolve())
 				.catch(error => reject(error));
 		})
 	}
@@ -45,7 +45,7 @@ export class AuthService implements OnInit {
 	loginUserWithEmail (email: string, password: string) {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.signInWithEmailAndPassword(email, password)
-				.then(success => resolve(success))
+				.then(() => resolve())
 				.catch(error => reject(error));
 		})
 	}
@@ -61,7 +61,7 @@ export class AuthService implements OnInit {
 	loginUserWithGoogle () {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-				.then(success => resolve())
+				.then(() => resolve())
 				.catch(error => reject(error));
 		})
 	}
@@ -71,7 +71,7 @@ export class AuthService implements OnInit {
 		// Return as promise instead of callback
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-				.then(success => resolve())
+				.then(() => resolve())
 				.catch(error => reject(error));
 		})
 		
@@ -86,10 +86,8 @@ export class AuthService implements OnInit {
 	deleteAccount () {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.currentUser.delete()
-				.then(res => resolve())
-				.catch(error => {
-					reject(error);
-				})
+				.then(() => resolve())
+				.catch(error => reject(error))
 		});
 	}
 
@@ -99,10 +97,8 @@ export class AuthService implements OnInit {
 			this.afAuth.auth.currentUser.updateProfile({
 				displayName: name,
 				photoURL: ''
-			}).then(success => resolve())
-			.catch(error => {
-				reject(error);
-			})
+			}).then(() => resolve())
+			.catch(error => reject(error))
 		})
 	}
 
@@ -110,10 +106,17 @@ export class AuthService implements OnInit {
 	updateEmail (email) {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.currentUser.updateEmail(email)
-				.then(success => resolve())
-				.catch(error => {
-					reject(error);
-				})
+				.then(() => resolve())
+				.catch(error => reject(error))
+		})
+	}
+
+	// Reset password
+	resetPassword (email) {
+		return new Promise((resolve, reject) => {
+			this.afAuth.auth.sendPasswordResetEmail(email)
+				.then(() => resolve())
+				.catch(error => reject(error))
 		})
 	}
 
@@ -121,10 +124,8 @@ export class AuthService implements OnInit {
 	updatePassword (password) {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.currentUser.updatePassword(password)
-				.then(success => resolve())
-				.catch(error => {
-					reject(error);
-				})
+				.then(() => resolve())
+				.catch(error => reject(error))
 		})
 	}
 
@@ -137,11 +138,7 @@ export class AuthService implements OnInit {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.currentUser.reauthenticateWithCredential(credential)
 				.then(res => resolve())
-				.catch(
-					error => {
-						reject(error);
-					}
-				)
+				.catch(error => reject(error))
 		})
 	}
 }
