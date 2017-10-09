@@ -12,7 +12,11 @@
 			placeholder="Password"
 			formControlName="password">
 		<div *ngIf="loginWithEmailError" class="error-container">{{ loginWithEmailError }}</div>
-		<button class="submit-btn" md-button type="submit">Login</button>
+		<button 
+			class="action-btn"
+			[ngClass]="{ 'action-btn-available': !submitting }"
+			md-button type="submit"
+			[disabled]="submitting">Login</button>
 		<div class="forgot-password-container">
 			<button 
 				md-dialog-close 
