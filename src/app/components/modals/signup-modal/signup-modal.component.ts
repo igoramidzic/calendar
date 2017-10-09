@@ -18,6 +18,7 @@ export class SignupModalComponent implements OnInit {
 	hasDisplayNameError: boolean;
 	hasEmailError: boolean;
 	hasPasswordError: boolean;
+	submitting: boolean;
 
 	constructor(private authService: AuthService, private myModal: MdDialog, private router: Router) { }
 
@@ -65,14 +66,17 @@ export class SignupModalComponent implements OnInit {
 		}
 
 		if (displayName.value && email.value && password.value) {
+			this.submitting = true;
 			this.authService.signupUserWithEmail(displayName.value, email.value, password.value)
 				.then(
 					res => {
+						this.submitting = null;
 						this.successfulSignup();
 					}
 				)
 				.catch(
 					error => {
+						this.submitting = null;
 						if (error.code === "auth/email-already-in-use") {
 							this.signupWithEmailError = "This email address has already been used.";
 							this.hasEmailError = true;

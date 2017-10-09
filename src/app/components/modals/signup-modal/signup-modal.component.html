@@ -20,7 +20,11 @@
 			formControlName="password">
 		<div *ngIf="signupWithEmailError" class="error-container">{{ signupWithEmailError }}</div>
 		<p class="tos">By signing up, you agree to our <a target="_blank" href="">Terms of Use</a>.</p>
-		<button class="submit-btn" md-button type="submit">Signup</button>
+		<button
+		class="action-btn"
+		[ngClass]="{ 'action-btn-available': !submitting }"
+		md-button type="submit"
+		[disabled]="submitting">Signup</button>
 	</form>
 	<div class="signup-separator-container">
 		<div class="signup-separator"></div>

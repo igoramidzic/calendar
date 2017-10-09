@@ -14,6 +14,7 @@ export class LoginModalComponent implements OnInit {
 	loginForm: FormGroup;
 	loginWithEmailError: string;
 	loginWithSocialError: string;
+	submitting: boolean;
 	complete: boolean;
 	
 	constructor(private authService: AuthService, private myModal: MdDialog, private router: Router) { }
@@ -22,7 +23,7 @@ export class LoginModalComponent implements OnInit {
 		this.loginForm = new FormGroup({
 			'email': new FormControl(null),
 			'password': new FormControl(null)
-		})
+		});
 		this.complete = false;
 	}
 
@@ -51,6 +52,7 @@ export class LoginModalComponent implements OnInit {
 		var password = this.loginForm.get('password');
 
 		if (email.value && password.value) {
+			this.submitting = true;
 			this.authService.loginUserWithEmail(email.value, password.value)
 				.then(
 					res => {
@@ -59,6 +61,7 @@ export class LoginModalComponent implements OnInit {
 				)
 				.catch(
 					error => {
+						this.submitting = null;
 						if (error.code === "auth/invalid-email") {
 							// ...
 							this.loginWithEmailError = "Incorrect email or password.";
