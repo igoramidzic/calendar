@@ -7,13 +7,28 @@ import { Router } from '@angular/router';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import { StoreService } from './store.service';
 
 @Injectable()
 export class AuthService implements OnInit {
 
-	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase, private router: Router) { }
+	constructor(
+		public afAuth: AngularFireAuth, 
+		private afdb: AngularFireDatabase, 
+		private router: Router,
+		private storeService: StoreService
+	) { }
 
 	ngOnInit() {
+	}
+	
+	// Create database entries
+	createDocuments () {
+		let uid = this.afAuth.auth.currentUser.uid;
+		this.storeService.setData('accounts', uid, {});
+		this.storeService.setData('transactions', uid, {});
+		this.storeService.setData('income', uid, {});
+		this.storeService.setData('bills', uid, {});
 	}
 
 	// Signup | Email
@@ -23,6 +38,7 @@ export class AuthService implements OnInit {
 				.then(
 					success => {
 						this.updateDisplayName(name);
+						this.createDocuments();
 						resolve(success);
 					}
 				).catch(error => reject(error));
