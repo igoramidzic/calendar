@@ -1,19 +1,42 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import { StoreService } from './store.service';
 
 @Injectable()
-export class AuthService implements OnInit {
+export class AuthService {
 
-	constructor(public afAuth: AngularFireAuth, private afdb: AngularFireDatabase, private router: Router) { }
+	authState: any = null;
 
-	ngOnInit() {
+	constructor(
+		public afAuth: AngularFireAuth, 
+		private router: Router,
+		private storeService: StoreService
+	) {
+		this.afAuth.authState.subscribe((auth) => {
+			this.authState = auth;
+		});
+	}
+
+	// Returns true if user is logged in
+	get authenticated(): boolean {
+		return this.authState !== null;
+	}
+
+	// New user set documents
+	setNewUserDocuments (user) {
+		this.storeService.updateData('accounts', user.uid, {})
+			.catch(error => {
+				this.storeService.setData('accounts', user.uid, {});
+				this.storeService.setData('transactions', user.uid, {});
+				this.storeService.setData('bills', user.uid, {});
+				this.storeService.setData('income', user.uid, {});
+			})
 	}
 
 	// Signup | Email
@@ -23,22 +46,11 @@ export class AuthService implements OnInit {
 				.then(
 					success => {
 						this.updateDisplayName(name);
+						this.setNewUserDocuments(success);
 						resolve(success);
 					}
 				).catch(error => reject(error));
 		});
-	}
-
-	// Store user's first/last name in database
-	storeUserName (uid, first, last) {
-		return new Promise((resolve, reject) => {
-			this.afdb.database.ref('users/').set({
-				uid: uid,
-				first_name: first,
-				last_name: last
-			}).then(() => resolve())
-				.catch(error => reject(error));
-		})
 	}
 
 	// Login | Email
@@ -61,7 +73,10 @@ export class AuthService implements OnInit {
 	loginUserWithGoogle () {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-				.then(() => resolve())
+				.then(success => {
+					this.setNewUserDocuments(success.user);
+					resolve();
+				})
 				.catch(error => reject(error));
 		})
 	}
@@ -71,7 +86,10 @@ export class AuthService implements OnInit {
 		// Return as promise instead of callback
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-				.then(() => resolve())
+				.then(success => {
+					this.setNewUserDocuments(success.user);
+					resolve();
+				})
 				.catch(error => reject(error));
 		})
 		
