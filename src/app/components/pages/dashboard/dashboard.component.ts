@@ -1,7 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Accounts } from '../../../models/accounts';
-import { AccountsService } from '../../../services/accounts.service';
-import { AuthService } from '../../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'app-dashboard',
@@ -10,30 +7,9 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-	accounts: Accounts;
-	data: any;
-	amount: Number;
-	user: any;
+	constructor () {}
 
-	constructor(
-		private accountsService: AccountsService,
-		private authService: AuthService
-	) {
-		this.authService.afAuth.authState.subscribe(user => {
-			if (user) {
-				this.user = user;
-			}
-		})
-	}
-	
 	ngOnInit () {
-		this.accountsService.accounts.subscribe(accounts => {
-			this.accounts = accounts;
-		})
-	}
-	
-	onStore (account) {
-		this.accountsService.updateAccountData(this.user.uid, { [account]: Number(this.amount) });
 	}
 
 }

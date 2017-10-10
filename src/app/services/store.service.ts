@@ -9,11 +9,19 @@ export class StoreService {
 	constructor(private afs: AngularFirestore) { }
 
 	setData (collection, doc, data) {
-		this.afs.doc(`${collection}/${doc}`).set(data);
+		return new Promise((resolve, reject) => {
+			this.afs.doc(`${collection}/${doc}`).set(data)
+				.then(() => resolve())
+				.catch(error => reject(error))
+		})
 	}
 
 	updateData (collection, doc, data) {
-		this.afs.doc(`${collection}/${doc}`).update(data);
+		return new Promise((resolve, reject) => {
+			this.afs.doc(`${collection}/${doc}`).update(data)
+				.then(() => resolve())
+				.catch(error => reject(error))
+		})
 	}
 
 }

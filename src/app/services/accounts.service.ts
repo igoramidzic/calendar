@@ -17,14 +17,13 @@ export class AccountsService {
 		private authService: AuthService,
 		private storeService: StoreService
 	) {
-		// this.authService.afAuth.authState.subscribe(user => {
-		// 	if (user) {
-		// 		this.user = user;
-				
-		// 	}
-		// })
-		this.accountsCollection = this.afs.doc(`accounts/bfatdmYh5jYQ8VdEoTqGPKr1Cvz1`);
-		this.accounts = this.accountsCollection.valueChanges();
+		this.authService.afAuth.authState.subscribe(user => {
+			if (user) {
+				this.user = user;
+				this.accountsCollection = this.afs.doc(`accounts/${this.user.uid}`);
+				this.accounts = this.accountsCollection.valueChanges();
+			}
+		})
 	}
 
 	createAccountsData (doc, data) {

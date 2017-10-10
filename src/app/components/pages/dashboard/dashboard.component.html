@@ -1,10 +1,1 @@
-<input type="text" [(ngModel)]="amount">
-
-<button md-button (click)="onStore('cash')">Cash</button>
-<button md-button (click)="onStore('checking')">Checking</button>
-<button md-button (click)="onStore('savings')">Savings</button>
-<button md-button (click)="onStore('credit')">Credit</button>
-
-<div>
-	{{ accounts | json }}
-</div>
+<app-accounts></app-accounts>

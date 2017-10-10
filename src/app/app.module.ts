@@ -22,6 +22,7 @@ import { ModalService } from './services/modal.service';
 import { StoreService } from './services/store.service';
 import { AuthService } from './services/auth.service';
 import { AccountsService } from './services/accounts.service';
+import { UserService } from './services/user.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { NotAuthGuard } from './services/not-auth-guard.service';
 
@@ -45,6 +46,7 @@ import { UpdateDisplaynameComponent } from './components/pages/settings/profile/
 import { DeleteAccountComponent } from './components/pages/settings/account/delete-account/delete-account.component';
 import { DeleteAccountModalComponent } from './components/modals/delete-account-modal/delete-account-modal.component';
 import { ForgotPasswordComponent } from './components/pages/forgot-password/forgot-password.component';
+import { AccountsComponent } from './components/pages/dashboard/accounts/accounts.component';
 
 @NgModule({
 	declarations: [
@@ -67,6 +69,7 @@ import { ForgotPasswordComponent } from './components/pages/forgot-password/forg
 		UpdatePasswordComponent,
 		UpdateDisplaynameComponent,
 		ForgotPasswordComponent,
+		AccountsComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -94,7 +97,7 @@ import { ForgotPasswordComponent } from './components/pages/forgot-password/forg
 		DeleteAccountModalComponent
 	],
 	providers: [ ModalService, AuthService, AuthGuard, NotAuthGuard, StoreService,
-							AccountsService ],
+							AccountsService, UserService ],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule { }
