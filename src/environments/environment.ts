@@ -6,11 +6,11 @@
 export const environment = {
 	production: false,
 	firebase: {
-		apiKey: "AIzaSyANfjlLXRAhIkgIY0IrR3S3n1HiiNRQsgs",
-		authDomain: "calendar-99609.firebaseapp.com",
-		databaseURL: "https://calendar-99609.firebaseio.com",
-		projectId: "calendar-99609",
+		apiKey: "AIzaSyBLY_DCPEjdKgMbPeztFjGyr_3-g3Q4K4s",
+		authDomain: "utilitan-1.firebaseapp.com",
+		databaseURL: "https://utilitan-1.firebaseio.com",
+		projectId: "utilitan-1",
 		storageBucket: "",
-		messagingSenderId: "798298132766"
+		messagingSenderId: "42819788933"
 	}
 };
