@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class StoreService {
 
-	constructor(private afs: AngularFirestore) { }
+	constructor(public afs: AngularFirestore) { }
 
 	setData (collection, doc, data) {
 		return new Promise((resolve, reject) => {
@@ -17,11 +17,19 @@ export class StoreService {
 	}
 
 	updateData (collection, doc, data) {
-		return new Promise((resolve, reject) => {
-			this.afs.doc(`${collection}/${doc}`).update(data)
-				.then(() => resolve())
-				.catch(error => reject(error))
-		})
+		if (doc) {
+			return new Promise((resolve, reject) => {
+				this.afs.doc(`${collection}/${doc}`).update(data)
+					.then(() => resolve())
+					.catch(error => reject(error))
+			})
+		} else {
+			return new Promise((resolve, reject) => {
+				this.afs.doc(`${collection}`).update(data)
+					.then(() => resolve())
+					.catch(error => reject(error))
+			})
+		}
 	}
 
 }
