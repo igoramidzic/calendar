@@ -10,9 +10,6 @@ import { Account } from '../models/account';
 export class AccountsService {
 
 	accounts: Observable<Account[]>;
-	cashAccounts: Observable<Account[]>;
-	creditAccounts: Observable<Account[]>;
-	assetsAccounts: Observable<Account[]>;
 	user: any;
 
 	constructor(
@@ -23,27 +20,7 @@ export class AccountsService {
 		this.afAuth.authState.subscribe(user => {
 			if (user) {
 				this.user = user;
-				this.cashAccounts = this.afs.collection(`accounts/${this.user.uid}/accounts/Cash/accounts`)
-					.snapshotChanges()
-					.map(actions => {
-						return actions.map(a => {
-							const data = a.payload.doc.data() as Account;
-							const id = a.payload.doc.id;
-							return { id, ...data };
-						})
-					})
-
-				this.creditAccounts = this.afs.collection(`accounts/${this.user.uid}/accounts/Credit/accounts`)
-					.snapshotChanges()
-					.map(actions => {
-						return actions.map(a => {
-							const data = a.payload.doc.data() as Account;
-							const id = a.payload.doc.id;
-							return { id, ...data };
-						})
-					})
-
-				this.assetsAccounts = this.afs.collection(`accounts/${this.user.uid}/accounts/Assets/accounts`)
+				this.accounts = this.afs.collection(`accounts/${this.user.uid}/accounts`)
 					.snapshotChanges()
 					.map(actions => {
 						return actions.map(a => {
