@@ -1,10 +1,18 @@
-<input type="text" [(ngModel)]="amount">
-
-<button md-button (click)="onStore('cash')">Cash</button>
-<button md-button (click)="onStore('checking')">Checking</button>
-<button md-button (click)="onStore('savings')">Savings</button>
-<button md-button (click)="onStore('credit')">Credit</button>
-
-<div *ngIf="accounts">
-	{{ accounts | json }}
+<div class="card accounts-container">
+	<div class="card-header">
+		<h5 class="title">Accounts</h5>
+	</div>
+	<div class="card-content">
+		<ul class="accounts-list">
+			<li 
+				class="accounts-item" 
+				*ngFor="let accounts of accountTypes; let i = index;"
+				(click)="onToggleAccount()">
+				<span *ngIf="i == 0">Cash ${{ cashTotal }}</span>
+				<span *ngIf="i == 1">Credit ${{ creditTotal }}</span>
+				<span *ngIf="i == 2">Assets ${{ assetsTotal }}</span>
+				<div [@accountState]="state">Hello</div>
+			</li>
+		</ul>
+	</div>
 </div>

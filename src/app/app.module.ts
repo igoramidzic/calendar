@@ -15,14 +15,14 @@ import { environment } from '../environments/environment';
 
 // Material Theme
 import { MatButtonModule, MatSidenavModule, MatDialogModule, MatListModule,
-	MatInputModule, MatCheckboxModule } from '@angular/material';
+	MatInputModule, MatCheckboxModule, MdExpansionModule } from '@angular/material';
 
 // Services
 import { ModalService } from './services/modal.service';
 import { StoreService } from './services/store.service';
 import { AuthService } from './services/auth.service';
 import { AccountsService } from './services/accounts.service';
-import { UserService } from './services/user.service';
+import { TransactionsService } from './services/transactions.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { NotAuthGuard } from './services/not-auth-guard.service';
 
@@ -47,6 +47,7 @@ import { DeleteAccountComponent } from './components/pages/settings/account/dele
 import { DeleteAccountModalComponent } from './components/modals/delete-account-modal/delete-account-modal.component';
 import { ForgotPasswordComponent } from './components/pages/forgot-password/forgot-password.component';
 import { AccountsComponent } from './components/pages/dashboard/accounts/accounts.component';
+import { TransactionsComponent } from './components/pages/dashboard/transactions/transactions.component';
 
 @NgModule({
 	declarations: [
@@ -70,6 +71,7 @@ import { AccountsComponent } from './components/pages/dashboard/accounts/account
 		UpdateDisplaynameComponent,
 		ForgotPasswordComponent,
 		AccountsComponent,
+		TransactionsComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -89,7 +91,8 @@ import { AccountsComponent } from './components/pages/dashboard/accounts/account
 		MatListModule,
 		MatInputModule,
 		MatCheckboxModule,
-		TruncateModule
+		TruncateModule,
+		MdExpansionModule
 	],
 	entryComponents: [
 		SignupModalComponent,
@@ -97,7 +100,7 @@ import { AccountsComponent } from './components/pages/dashboard/accounts/account
 		DeleteAccountModalComponent
 	],
 	providers: [ ModalService, AuthService, AuthGuard, NotAuthGuard, StoreService,
-							AccountsService, UserService ],
+							AccountsService, TransactionsService ],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -35,7 +35,6 @@ export class AuthService {
 				this.storeService.setData('accounts', user.uid, {});
 				this.storeService.setData('transactions', user.uid, {});
 				this.storeService.setData('bills', user.uid, {});
-				this.storeService.setData('income', user.uid, {});
 			})
 	}
 

@@ -1,0 +1,33 @@
+<h3>Transactions</h3>
+
+<form [formGroup]="createTransactionForm" (ngSubmit)="createTransaction()">
+	<input type="text" placeholder="name" formControlName="name">
+	<input type="text" placeholder="category" formControlName="category">
+	<input type="text" placeholder="amount" formControlName="amount">
+	<select formControlName="account">
+		<option *ngFor="let account of accounts" [value]="account.name">{{ account.name }}</option>
+	</select>
+	<button 
+		md-button 
+		[disabled]="createTransactionForm.invalid"
+		type="submit">Save</button>
+</form>
+
+
+<div *ngFor="let trans of transactions; let i = index;">
+	<span *ngIf="!trans.update">
+		{{ trans.category }} | {{ trans.name }}:	${{ trans.amount }} | {{ trans.account }}
+		<button md-button (click)="trans.update = true">Update</button>
+		<button md-button (click)="deleteTransaction(trans.id)">Delete</button>
+	</span>
+	<span *ngIf="trans.update">
+		<input type="text" [(ngModel)]="trans.name">
+		<input type="text" [(ngModel)]="trans.category">
+		<input type="text" [(ngModel)]="trans.amount">
+		<button 
+			md-button
+			(click)="updateTransaction(i)"
+			(click)="trans.update = null">Save</button>
+		<button md-button (click)="trans.update = null">Cancel</button>
+	</span>
+</div>

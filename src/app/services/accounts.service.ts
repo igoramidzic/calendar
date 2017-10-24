@@ -1,37 +1,84 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { Accounts } from '../models/accounts';
 import { StoreService } from './store.service';
 import { AuthService } from './auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Account } from '../models/account';
 
 @Injectable()
 export class AccountsService {
 
-	accountsCollection: AngularFirestoreDocument<Accounts>;
-	accounts: Observable<Accounts>;
+	accounts: Observable<Account[]>;
+	cashAccounts: Observable<Account[]>;
+	creditAccounts: Observable<Account[]>;
+	assetsAccounts: Observable<Account[]>;
 	user: any;
 
 	constructor(
 		private afs: AngularFirestore,
-		private authService: AuthService,
+		private afAuth: AngularFireAuth,
 		private storeService: StoreService
 	) {
-		this.authService.afAuth.authState.subscribe(user => {
+		this.afAuth.authState.subscribe(user => {
 			if (user) {
 				this.user = user;
-				this.accountsCollection = this.afs.doc(`accounts/${this.user.uid}`);
-				this.accounts = this.accountsCollection.valueChanges();
+				this.cashAccounts = this.afs.collection(`accounts/${this.user.uid}/accounts/Cash/accounts`)
+					.snapshotChanges()
+					.map(actions => {
+						return actions.map(a => {
+							const data = a.payload.doc.data() as Account;
+							const id = a.payload.doc.id;
+							return { id, ...data };
+						})
+					})
+
+				this.creditAccounts = this.afs.collection(`accounts/${this.user.uid}/accounts/Credit/accounts`)
+					.snapshotChanges()
+					.map(actions => {
+						return actions.map(a => {
+							const data = a.payload.doc.data() as Account;
+							const id = a.payload.doc.id;
+							return { id, ...data };
+						})
+					})
+
+				this.assetsAccounts = this.afs.collection(`accounts/${this.user.uid}/accounts/Assets/accounts`)
+					.snapshotChanges()
+					.map(actions => {
+						return actions.map(a => {
+							const data = a.payload.doc.data() as Account;
+							const id = a.payload.doc.id;
+							return { id, ...data };
+						})
+					})
 			}
 		})
 	}
 
-	createAccountsData (doc, data) {
-		this.storeService.setData('accounts', doc, data);
+	createAccountsData (data) {
+		return new Promise((resolve, reject) => {
+			this.storeService.afs.collection(`accounts/${this.user.uid}/accounts`).add(data)
+				.then(() => resolve())
+				.catch(error => reject(error))
+		})
 	}
 
-	updateAccountData (doc, data) {
-		this.storeService.updateData('accounts', doc, data);
+	// updateAccountData (accID, data) {
+	// 	return new Promise((resolve, reject) => {
+	// 		this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/${accID}`)
+	// 		.update(data)
+	// 			.then(() => resolve())
+	// 			.catch(error => reject(error))
+	// 	})
+	// }
+
+	deleteAccount (accID) {
+		return new Promise((resolve, reject) => {
+			this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/cash/accounts/${accID}`).delete()
+				.then(() => resolve())
+				.catch(error => reject(error))
+		})
 	}
 
 }
