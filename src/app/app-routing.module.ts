@@ -17,11 +17,11 @@ import { ForgotPasswordComponent } from "./components/pages/forgot-password/forg
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent, canActivate: [ ] },
 	{ path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
-	{ path: 'settings', data: { title: 'Settings' }, component: SettingsComponent, canActivateChild: [ AuthGuard ], children: [
+	{ path: 'settings', data: { title: 'settings' }, component: SettingsComponent, canActivateChild: [ AuthGuard ], children: [
 		{ path: '', pathMatch: 'full', redirectTo: 'profile' },
-		{ path: 'profile', data: { title: 'Profile' }, component: ProfileComponent },
-		{ path: 'account',	data: { title: 'Account' }, component: AccountComponent },
-		{ path: 'notifications',	data: { title: 'Notifications' }, component: NotificationsComponent },
+		{ path: 'profile', data: { title: 'profile' }, component: ProfileComponent },
+		{ path: 'account',	data: { title: 'account' }, component: AccountComponent },
+		{ path: 'notifications',	data: { title: 'notifications' }, component: NotificationsComponent },
 	] },
 	{ path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ ] },
 	{ path: '**', component: PageNotFoundComponent }

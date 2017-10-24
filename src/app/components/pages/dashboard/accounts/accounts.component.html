@@ -4,15 +4,13 @@
 	</div>
 	<div class="card-content">
 		<ul class="accounts-list">
-			<li 
-				class="accounts-item" 
-				*ngFor="let accounts of accountTypes; let i = index;"
-				(click)="onToggleAccount()">
-				<span *ngIf="i == 0">Cash ${{ cashTotal }}</span>
-				<span *ngIf="i == 1">Credit ${{ creditTotal }}</span>
-				<span *ngIf="i == 2">Assets ${{ assetsTotal }}</span>
-				<div [@accountState]="state">Hello</div>
+			<li class="account-item" *ngFor="let account of accounts">
+				{{ account.id | capitalize }} 
+				<span style="float: right;">
+					{{ account.amount | currency : 'USD' : true }}
+				</span>
 			</li>
 		</ul>
+		{{ total | currency : 'USD' : true }}
 	</div>
 </div>

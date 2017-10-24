@@ -17,6 +17,9 @@ import { environment } from '../environments/environment';
 import { MatButtonModule, MatSidenavModule, MatDialogModule, MatListModule,
 	MatInputModule, MatCheckboxModule, MdExpansionModule } from '@angular/material';
 
+// Pipes
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+
 // Services
 import { ModalService } from './services/modal.service';
 import { StoreService } from './services/store.service';
@@ -49,6 +52,7 @@ import { ForgotPasswordComponent } from './components/pages/forgot-password/forg
 import { AccountsComponent } from './components/pages/dashboard/accounts/accounts.component';
 import { TransactionsComponent } from './components/pages/dashboard/transactions/transactions.component';
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -72,6 +76,7 @@ import { TransactionsComponent } from './components/pages/dashboard/transactions
 		ForgotPasswordComponent,
 		AccountsComponent,
 		TransactionsComponent,
+		CapitalizePipe,
 	],
 	imports: [
 		BrowserModule,
