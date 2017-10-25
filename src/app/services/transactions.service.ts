@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { Transaction } from '../models/transaction';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
@@ -8,7 +8,6 @@ import { StoreService } from './store.service';
 @Injectable()
 export class TransactionsService {
 
-	transactionsCollection: AngularFirestoreCollection<Transaction>;
 	transactions: Observable<Transaction[]>;
 	user: any;
 
@@ -20,8 +19,8 @@ export class TransactionsService {
 		this.authService.afAuth.authState.subscribe(user => {
 			if (user) {
 				this.user = user;
-				this.transactionsCollection = this.afs.collection(`transactions/${this.user.uid}/transactions`);
-				this.transactions = this.transactionsCollection.snapshotChanges()
+				this.transactions = this.afs.collection(`transactions/${this.user.uid}/transactions`)
+					.snapshotChanges()
 					.map(actions => {
 						return actions.map(a => {
 							const data = a.payload.doc.data() as Transaction;

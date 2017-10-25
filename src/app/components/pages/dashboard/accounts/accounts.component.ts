@@ -17,6 +17,13 @@ export class AccountsComponent implements OnInit, OnDestroy {
 
 	constructor(private accountsService: AccountsService) { }
 
+	ngOnInit () {
+		this.accountsSubscription = this.accountsService.accounts.subscribe(accounts => {
+			this.accounts = accounts;
+			this.accounts.forEach
+		})
+	}
+
 	get assets () {
 		let assets = 0;
 		if (this.accounts)
@@ -41,13 +48,6 @@ export class AccountsComponent implements OnInit, OnDestroy {
 		return this.assets + this.debts;
 	}
 	
-	ngOnInit () {
-		this.accountsSubscription = this.accountsService.accounts.subscribe(accounts => {
-			this.accounts = accounts;
-			this.accounts.forEach
-		})
-	}
-
 	ngOnDestroy () {
 		this.accountsSubscription.unsubscribe();
 	}
