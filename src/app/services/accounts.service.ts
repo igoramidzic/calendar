@@ -33,6 +33,21 @@ export class AccountsService {
 		})
 	}
 
+	createNewUserAccounts (user) {
+		let assetData = { amount: 0, type: 'asset' };
+		let debtData = { amount: 0, type: 'debt'};
+		this.storeService.afs.firestore.doc(`accounts/${user.uid}`).get()
+			.then(doc => {
+				if (!doc.exists) {
+					this.storeService.afs.doc(`accounts/${this.user.uid}`).set({})
+					this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/cash`).set(assetData)
+					this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/property`).set(assetData);
+					this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/credit`).set(debtData);
+					this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/loans`).set(debtData);
+				}
+			})
+	}
+
 	createAccountsData (data) {
 		return new Promise((resolve, reject) => {
 			this.storeService.afs.collection(`accounts/${this.user.uid}/accounts`).add(data)
@@ -41,14 +56,14 @@ export class AccountsService {
 		})
 	}
 
-	// updateAccountData (accID, data) {
-	// 	return new Promise((resolve, reject) => {
-	// 		this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/${accID}`)
-	// 		.update(data)
-	// 			.then(() => resolve())
-	// 			.catch(error => reject(error))
-	// 	})
-	// }
+	updateAccountData (accID, data) {
+		return new Promise((resolve, reject) => {
+			this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/${accID}`)
+			.update(data)
+				.then(() => resolve())
+				.catch(error => reject(error))
+		})
+	}
 
 	deleteAccount (accID) {
 		return new Promise((resolve, reject) => {

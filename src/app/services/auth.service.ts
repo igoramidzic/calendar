@@ -7,6 +7,7 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { StoreService } from './store.service';
+import { AccountsService } from './accounts.service';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,8 @@ export class AuthService {
 	constructor(
 		public afAuth: AngularFireAuth, 
 		private router: Router,
-		private storeService: StoreService
+		private storeService: StoreService,
+		private accountsService: AccountsService
 	) {
 		this.afAuth.authState.subscribe((auth) => {
 			this.authState = auth;
@@ -30,12 +32,7 @@ export class AuthService {
 
 	// New user set documents
 	setNewUserDocuments (user) {
-		this.storeService.updateData('accounts', user.uid, {})
-			.catch(error => {
-				this.storeService.setData('accounts', user.uid, {});
-				this.storeService.setData('transactions', user.uid, {});
-				this.storeService.setData('bills', user.uid, {});
-			})
+		this.accountsService.createNewUserAccounts(user);
 	}
 
 	// Signup | Email
