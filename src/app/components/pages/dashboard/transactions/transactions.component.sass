@@ -1,2 +1,20 @@
 @import '../../../../app.component.sass'
 @import '../dashboard.component.sass'
+
+.table-header
+	padding: 0 8px 12px 8px
+
+.table-data
+	.transactions-list
+		list-style-type: none
+		margin: 0
+		padding: 0
+		.transaction-item
+			padding: 8px
+			background-color: $list_item_background
+			cursor: pointer
+			margin-bottom: 4px
+			&:last-child
+				margin: 0
+			&:hover
+				background-color: $list_item_background_hover
