@@ -1,6 +1,6 @@
 <div class="card accounts-container">
 	<div class="card-header">
-		<h5 class="title">Accounts</h5>
+		<h5 class="title">ACCOUNTS</h5>
 	</div>
 	<div class="card-content">
 		<ul class="accounts-list">
@@ -11,6 +11,22 @@
 				</span>
 			</li>
 		</ul>
-		{{ total | currency : 'USD' : true }}
+		<div class="card-sub-content">
+			<div class="total-container">
+				<p class="calc-item">
+					<span class="title">ASSETS</span>
+					<span class="amount" style="float: right;">{{ assets | currency : 'USD' : true }}</span>
+				</p>
+				<p class="calc-item">
+					<span class="title">DEBTS</span>
+					<span class="amount" style="float: right;">{{ debts | currency : 'USD' : true }}</span>
+				</p>
+				<hr style="margin: 5px 0;">
+				<p class="calc-item">
+					<span class="title">NET WORTH</span>
+					<span class="amount bold" style="float: right;">{{ total | currency : 'USD' : true }}</span>
+				</p>
+			</div>
+		</div>
 	</div>
 </div>

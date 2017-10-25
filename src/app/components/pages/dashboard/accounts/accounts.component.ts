@@ -12,18 +12,39 @@ import { CurrencyPipe } from '@angular/common';
 export class AccountsComponent implements OnInit, OnDestroy {
 
 	accounts: Account[];
-	total: number;
 	accountsSubscription: Subscription;
+	
 
-	constructor(
-		private accountsService: AccountsService,
-	) {
+	constructor(private accountsService: AccountsService) { }
+
+	get assets () {
+		let assets = 0;
+		if (this.accounts)
+			this.accounts.forEach(account => {
+				if (account.amount > 0)
+					assets += account.amount;
+			})
+		return assets;
+	}
+
+	get debts () {
+		let debts = 0;
+		if (this.accounts)
+			this.accounts.forEach(account => {
+				if (account.amount < 0)
+					debts += account.amount;
+			})
+		return debts;
+	}
+
+	get total () {
+		return this.assets + this.debts;
 	}
 	
 	ngOnInit () {
 		this.accountsSubscription = this.accountsService.accounts.subscribe(accounts => {
 			this.accounts = accounts;
-			this.total = this.accounts[0].amount - this.accounts[1].amount;
+			this.accounts.forEach
 		})
 	}
 
