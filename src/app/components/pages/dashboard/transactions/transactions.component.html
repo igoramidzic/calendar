@@ -5,12 +5,25 @@
 	<div class="card-content">
 		<div class="table-header">
 			<div class="row">
-				<div class="col-xs-2">Date</div>
-				<div class="col-xs-3">Description</div>
-				<div class="col-xs-3">Category</div>
-				<div class="col-xs-2">Account</div>
-				<div class="col-xs-2">Amount</div>
+				<div class="col-sm-2 col-xs-3">Date</div>
+				<div class="col-sm-3 col-xs-5">Description</div>
+				<div class="col-sm-3 hidden-xs">Category</div>
+				<div class="col-sm-2 hidden-xs">Account</div>
+				<div class="col-sm-2 col-xs-4">Amount</div>
 			</div>
+		</div>
+		<div class="table-data">
+			<ul class="transactions-list">
+				<li class="transaction-item" *ngFor="let transaction of exTransactions">
+					<div class="row">
+						<div class="col-sm-2 col-xs-3">{{ transaction.timestamp | date:'MMM d' | truncate : 6 : '..' }}</div>
+						<div class="col-sm-3 col-xs-5">{{ transaction.description | truncate : 11 : '..' }}</div>
+						<div class="col-sm-3 hidden-xs">{{ transaction.category }}</div>
+						<div class="col-sm-2 hidden-xs">{{ transaction.account }}</div>
+						<div class="col-sm-2 col-xs-4">{{ transaction.amount | currency : 'USD' : true }}</div>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>
