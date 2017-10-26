@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Transaction } from '../../../../models/transaction';
 import { Subscription } from 'rxjs';
 import { TransactionsService } from '../../../../services/transactions.service';
@@ -8,11 +8,11 @@ import { TransactionsService } from '../../../../services/transactions.service';
 	templateUrl: './transactions.component.html',
 	styleUrls: ['./transactions.component.sass']
 })
-export class TransactionsComponent implements OnInit {
+export class TransactionsComponent implements OnInit, OnDestroy {
 
 	transactions: Transaction[];
 	transactionsSubscription: Subscription;
-	exTransactions: Transaction[];
+	orderBy: string = 'timestamp';
 
 	constructor (private transactionsService: TransactionsService) { }
 	
@@ -20,31 +20,42 @@ export class TransactionsComponent implements OnInit {
 		this.transactionsSubscription = this.transactionsService.transactions.subscribe(transactions => {
 			this.transactions = transactions;
 		})
-		this.exTransactions = [
-			{ id: '1',
-				description: 'McDonald\'s',
-				category: 'Fast Food',
-				amount: 5.45,
-				account: 'Cash',
-				timestamp: Date.now() },
-				{ id: '2',
-				description: 'Movie',
-				category: 'Entertainment',
-				amount: 10.70,
-				account: 'Credit',
-				timestamp: Date.now() },
-				{ id: '3',
-				description: 'GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG',
-				category: 'Loans',
-				amount: 240.32,
-				account: 'Loan',
-				timestamp: Date.now() },
-				{ id: '4',
-				description: 'Car payment Car payment',
-				category: 'Bills',
-				amount: 36712.56,
-				account: 'Cash',
-				timestamp: Date.now() }
-		]
+	}
+
+	ngOnDestroy () {
+		this.transactionsSubscription.unsubscribe();
+	}
+
+	addTransaction () {
+		this.transactionsService.createTransactionsData({
+			description: 'EEEEEEEEEEEE',
+			category: 'Fast food',
+			account: 'cash',
+			amount: 5.45,
+			timestamp: Date.now()
+		})
+	}
+
+	dynamicSort (property) {
+		var sortOrder = 1;
+		if(property[0] === "-") {
+				sortOrder = -1;
+				property = property.substr(1);
+		}
+		return function (a,b) {
+				var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+				return result * sortOrder;
+		}
+	}
+
+	changeOrder (orderBy) {
+		if (this.orderBy === orderBy) {
+			this.transactions.sort(this.dynamicSort('-' + orderBy));
+			this.orderBy = null;
+		} else {
+			this.orderBy = orderBy;
+			this.transactions.sort(this.dynamicSort(orderBy));
+		}
 	}
 }
+

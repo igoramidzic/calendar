@@ -53,7 +53,10 @@ export class AuthService {
 	loginUserWithEmail (email: string, password: string) {
 		return new Promise((resolve, reject) => {
 			this.afAuth.auth.signInWithEmailAndPassword(email, password)
-				.then(() => resolve())
+				.then(success => {
+					this.setNewUserDocuments(success);
+					resolve();
+				})
 				.catch(error => reject(error));
 		})
 	}

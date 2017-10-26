@@ -1,26 +1,27 @@
 <div class="card accounts-container">
 	<div class="card-header">
 		<h5 class="title">TRANSACTIONS</h5>
+		<!-- <button md-button (click)="addTransaction()">Add transaction</button> -->
 	</div>
 	<div class="card-content">
 		<div class="table-header">
-			<div class="row">
-				<div class="col-sm-2 col-xs-3">Date</div>
-				<div class="col-sm-3 col-xs-5">Description</div>
-				<div class="col-sm-3 hidden-xs">Category</div>
-				<div class="col-sm-2 hidden-xs">Account</div>
-				<div class="col-sm-2 col-xs-4">Amount</div>
+			<div class="row table-row">
+				<div class="header-item row-item col-sm-2 col-xs-3" (click)="changeOrder('timestamp')"><button class="header-btn">Date</button></div>
+				<div class="header-item row-item col-sm-3 col-xs-5" (click)="changeOrder('description')"><button class="header-btn">Description</button></div>
+				<div class="header-item row-item col-sm-3 hidden-xs" (click)="changeOrder('category')"><button class="header-btn">Category</button></div>
+				<div class="header-item row-item col-sm-2 hidden-xs" (click)="changeOrder('account')"><button class="header-btn">Account</button></div>
+				<div class="header-item row-item col-sm-2 col-xs-4" (click)="changeOrder('amount')"><button class="header-btn">Amount</button></div>
 			</div>
 		</div>
 		<div class="table-data">
 			<ul class="transactions-list">
-				<li class="transaction-item" *ngFor="let transaction of exTransactions">
-					<div class="row">
-						<div class="col-sm-2 col-xs-3">{{ transaction.timestamp | date:'MMM d' | truncate : 6 : '..' }}</div>
-						<div class="col-sm-3 col-xs-5">{{ transaction.description | truncate : 11 : '..' }}</div>
-						<div class="col-sm-3 hidden-xs">{{ transaction.category }}</div>
-						<div class="col-sm-2 hidden-xs">{{ transaction.account }}</div>
-						<div class="col-sm-2 col-xs-4">{{ transaction.amount | currency : 'USD' : true }}</div>
+				<li class="transaction-item" *ngFor="let transaction of transactions">
+					<div class="row table-row">
+						<div class="row-item col-sm-2 col-xs-3">{{ transaction.timestamp | date:'MMM d' | truncate : 6 : '..' }}</div>
+						<div class="row-item col-sm-3 col-xs-5" [mdTooltip]="transaction.description.length > 11 ? transaction.description : ''" matTooltipShowDelay="500">{{ transaction.description | truncate : 11 : '..' }}</div>
+						<div class="row-item col-sm-3 hidden-xs">{{ transaction.category | capitalize }}</div>
+						<div class="row-item col-sm-2 hidden-xs">{{ transaction.account | capitalize | truncate : 8 : '..' }}</div>
+						<div class="row-item col-sm-2 col-xs-4">{{ transaction.amount | currency : 'USD' : true | truncate : 9 : '..' }}</div>
 					</div>
 				</li>
 			</ul>

@@ -19,7 +19,9 @@ export class TransactionsService {
 		this.authService.afAuth.authState.subscribe(user => {
 			if (user) {
 				this.user = user;
-				this.transactions = this.afs.collection(`transactions/${this.user.uid}/transactions`)
+				this.transactions = this.afs.collection(`transactions/${this.user.uid}/transactions`, ref => {
+					return ref.orderBy('timestamp', 'desc');
+				})
 					.snapshotChanges()
 					.map(actions => {
 						return actions.map(a => {

@@ -3,8 +3,15 @@
 
 .table-header
 	padding: 0 8px 12px 8px
+	.header-btn
+		border: none
+		background-color: transparent
+		padding: 0
+		outline: none
 
 .table-data
+	max-height: 350px
+	overflow: scroll
 	.transactions-list
 		list-style-type: none
 		margin: 0
@@ -18,3 +25,8 @@
 				margin: 0
 			&:hover
 				background-color: $list_item_background_hover
+
+.table-row
+	margin: 0
+	.row-item
+		padding: 0 5px
