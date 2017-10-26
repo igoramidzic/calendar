@@ -15,7 +15,8 @@ import { environment } from '../environments/environment';
 
 // Material Theme
 import { MatButtonModule, MatSidenavModule, MatDialogModule, MatListModule,
-	MatInputModule, MatCheckboxModule, MdExpansionModule, MatTableModule } from '@angular/material';
+	MatInputModule, MatCheckboxModule, MdExpansionModule, MatTableModule,
+	MatTooltipModule } from '@angular/material';
 
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
@@ -98,7 +99,8 @@ import { TransactionsComponent } from './components/pages/dashboard/transactions
 		MatCheckboxModule,
 		TruncateModule,
 		MdExpansionModule,
-		MatTableModule
+		MatTableModule,
+		MatTooltipModule
 	],
 	entryComponents: [
 		SignupModalComponent,
