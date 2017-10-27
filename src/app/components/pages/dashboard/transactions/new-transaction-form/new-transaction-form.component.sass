@@ -1,0 +1,81 @@
+@import '../../../../../app.component.sass'
+@import '../../dashboard.component.sass'
+
+.new-transaction-container
+  margin-bottom: 24px
+  border-bottom: 1px solid $border_color
+  padding-bottom: 24px
+
+.transaction-type-container
+	.type-list
+		list-style-type: none
+		margin: 0
+		padding: 0
+		display: flex
+		.type-item
+			display: inline-block
+			width: 33.3333333%
+			text-align: center
+			padding: 8px 12px
+			cursor: pointer
+			font-size: 13px
+			&:hover
+				background-color: $border-color
+		.expense
+			-webkit-box-shadow: inset 0px -2px 0px 0px $danger_color
+			-moz-box-shadow: inset 0px -2px 0px 0px $danger_color
+			box-shadow: inset 0px -2px 0px 0px $danger_color
+		.income
+			-webkit-box-shadow: inset 0px -2px 0px 0px $success_color
+			-moz-box-shadow: inset 0px -2px 0px 0px $success_color
+			box-shadow: inset 0px -2px 0px 0px $success_color
+		.transfer
+			-webkit-box-shadow: inset 0px -2px 0px 0px $primary_color
+			-moz-box-shadow: inset 0px -2px 0px 0px $primary_color
+			box-shadow: inset 0px -2px 0px 0px $primary_color
+
+.transaction-form-container
+  margin-top: 24px
+
+.expense-income-container
+  display: flex
+
+.three-top-list
+  display: inline-block
+  width: 33.333333%
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.timestamp-container
+  .calendar-input
+    display: none
+  .calendar-btn
+    font-size: 20px
+    width: 50px !important
+  .display-date
+    cursor: pointer
+    padding: 8px 4px 8px 0
+
+.amount-container
+  text-align: center
+  .amount-input
+    outline: none
+    border: none
+    font-weight: 300
+    font-size: 24px
+    padding: 0
+    text-align: center !important
+
+
+@media only screen and (max-width: 475px)
+  .timestamp-container
+    text-align: center
+    .display-date
+      cursor: pointer
+      padding: 0
+      display: block
+
+  .amount-container
+    .amount-input
+      font-size: 20px

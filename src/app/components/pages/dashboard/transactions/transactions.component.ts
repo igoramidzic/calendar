@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Transaction } from '../../../../models/transaction';
 import { Subscription } from 'rxjs';
 import { TransactionsService } from '../../../../services/transactions.service';
@@ -8,32 +8,21 @@ import { TransactionsService } from '../../../../services/transactions.service';
 	templateUrl: './transactions.component.html',
 	styleUrls: ['./transactions.component.sass']
 })
-export class TransactionsComponent implements OnInit, OnDestroy {
+export class TransactionsComponent implements OnInit {
 
-	transactions: Transaction[];
-	transactionsSubscription: Subscription;
+	@Input('transactions') transactions: Transaction[];
+	@Input('accounts') accounts: Account[];
 	orderBy: string = 'timestamp';
+	newTransactionToggle: boolean = true;
 
 	constructor (private transactionsService: TransactionsService) { }
 	
 	ngOnInit () {
-		this.transactionsSubscription = this.transactionsService.transactions.subscribe(transactions => {
-			this.transactions = transactions;
-		})
+		
 	}
 
-	ngOnDestroy () {
-		this.transactionsSubscription.unsubscribe();
-	}
-
-	addTransaction () {
-		this.transactionsService.createTransactionsData({
-			description: 'EEEEEEEEEEEE',
-			category: 'Fast food',
-			account: 'cash',
-			amount: 5.45,
-			timestamp: Date.now()
-		})
+	toggleNewTransaction () {
+		this.newTransactionToggle = !this.newTransactionToggle;
 	}
 
 	dynamicSort (property) {
@@ -56,6 +45,12 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 			this.orderBy = orderBy;
 			this.transactions.sort(this.dynamicSort(orderBy));
 		}
+	}
+
+	
+
+	deleteTransaction (transaction) {
+		this.transactionsService.deleteTransaction(transaction);
 	}
 }
 

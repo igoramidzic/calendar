@@ -1,21 +1,46 @@
 <div class="card accounts-container">
 	<div class="card-header">
-		<h5 class="title">TRANSACTIONS</h5>
-		<!-- <button md-button (click)="addTransaction()">Add transaction</button> -->
+		<div class="card-header-content">
+			<h5 class="title">TRANSACTIONS</h5>
+			<button class="header-btn" md-button (click)="toggleNewTransaction()">
+				<span *ngIf="!newTransactionToggle">
+					Add transaction <i class="fa fa-plus-square-o"></i>
+				</span>
+				<span *ngIf="newTransactionToggle">
+					Cancel <i class="fa fa-minus-square-o"></i>
+				</span>
+			</button>
+		</div>
 	</div>
 	<div class="card-content">
-		<div class="table-header">
+		<!-- <div class="table-header">
 			<div class="row table-row">
-				<div class="header-item row-item col-sm-2 col-xs-3" (click)="changeOrder('timestamp')"><button class="header-btn">Date</button></div>
-				<div class="header-item row-item col-sm-3 col-xs-5" (click)="changeOrder('description')"><button class="header-btn">Description</button></div>
-				<div class="header-item row-item col-sm-3 hidden-xs" (click)="changeOrder('category')"><button class="header-btn">Category</button></div>
-				<div class="header-item row-item col-sm-2 hidden-xs" (click)="changeOrder('account')"><button class="header-btn">Account</button></div>
-				<div class="header-item row-item col-sm-2 col-xs-4" (click)="changeOrder('amount')"><button class="header-btn">Amount</button></div>
+				<div class="header-item row-item col-sm-2 col-xs-3">
+					<button class="header-btn" (click)="changeOrder('timestamp')">Date</button>
+				</div>
+				<div class="header-item row-item col-sm-3 col-xs-5">
+					<button class="header-btn" (click)="changeOrder('description')">Description</button>
+				</div>
+				<div class="header-item row-item col-sm-3 hidden-xs">
+					<button class="header-btn" (click)="changeOrder('category')">Category</button>
+				</div>
+				<div class="header-item row-item col-sm-2 hidden-xs">
+					<button class="header-btn" (click)="changeOrder('account')">Account</button>
+				</div>
+				<div class="header-item row-item col-sm-2 col-xs-4">
+					<button class="header-btn" (click)="changeOrder('amount')">Amount</button>
+				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="table-data">
+			<div class="no-transactions-container" *ngIf="transactions?.length === 0 && !newTransactionToggle">
+				No transactions
+			</div>
+
+			<app-new-transaction-form [accounts]="accounts"	*ngIf="newTransactionToggle"></app-new-transaction-form>
+
 			<ul class="transactions-list">
-				<li class="transaction-item" *ngFor="let transaction of transactions">
+				<li class="transaction-item" *ngFor="let transaction of transactions" (click)="deleteTransaction(transaction)">
 					<div class="row table-row">
 						<div class="row-item col-sm-2 col-xs-3">{{ transaction.timestamp | date:'MMM d' | truncate : 6 : '..' }}</div>
 						<div class="row-item col-sm-3 col-xs-5" [mdTooltip]="transaction.description.length > 11 ? transaction.description : ''" matTooltipShowDelay="500">{{ transaction.description | truncate : 11 : '..' }}</div>

@@ -2,6 +2,7 @@
 
 .dashboard-container
 	padding-top: 30px
+	margin-bottom: 100px
 
 .card-holder
 	margin-bottom: 30px
@@ -15,16 +16,21 @@
 	border: 1px solid $border_color
 	.card-header
 		border-bottom: 1px solid $border_color
-		.title
+		.card-header-content
 			margin: 0 0 24px
-			font-size: 14px
-			font-weight: 500
+			.title
+				font-size: 14px
+				font-weight: 500
+				display: inline-block
+				margin: 0
+			.header-btn
+				float: right
+				position: relative
+				top: -7px
+				color: #727272
 	.card-content
 		margin-top: 24px
 
 @media only screen and (max-width: 991px)
 	.dashboard-container
 		max-width: 650px
-	.card
-		border-right: none
-		border-left: none
