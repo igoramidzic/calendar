@@ -1,0 +1,45 @@
+<div class="new-transaction-container">
+
+	<div class="transaction-type-container">
+		<ul class="type-list">
+			<li *ngFor="let type of types"
+				class="type-item"
+				[ngClass]="{ 'expense': activeType === 'expense' && activeType === type,
+										 'income': activeType === 'income' && activeType === type,
+										 'transfer': activeType === 'transfer' && activeType === type }"
+				(click)="activeType = type;">{{ type | uppercase }}</li>
+		</ul>
+	</div>
+
+	<div class="transaction-form-container">
+    <form [formGroup]="newTransactionForm">
+      <div class="expense-income-container">
+
+        <div class="three-top-list timestamp-container">
+          <span (click)="picker.open()" style="cursor: pointer">
+            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+            <md-datepicker touchUi="true" #picker></md-datepicker>
+            <input class="calendar-input" [mdDatepicker]="picker" formControlName="timestamp">
+            <span class="display-date">
+              {{ newTransactionForm.controls['timestamp'].value | date: 'MMM d, yyyy' }}
+            </span>
+          </span>
+        </div>
+
+        <div class="three-top-list amount-container">
+          <input
+            currencyMask
+            [options]="{ align: 'left', prefix: activeType == 'expense' ? '-$ ' :  '$ ', allowNegative: false }"
+            class="amount-input"
+            [placeholder]="activeType == 'expense' ? '-$ 0.00' : '$ 0.00'" type="text" formControlName="amount">
+        </div>
+
+        <!--<div class="three-top-list account-container">-->
+          <!--Cash-->
+        <!--</div>-->
+
+      </div>
+    </form>
+	</div>
+
+</div>

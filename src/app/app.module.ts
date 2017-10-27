@@ -12,11 +12,13 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AppRoutingModule } from "./app-routing.module";
 import { TruncateModule } from 'ng2-truncate';
 import { environment } from '../environments/environment';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 // Material Theme
 import { MatButtonModule, MatSidenavModule, MatDialogModule, MatListModule,
 	MatInputModule, MatCheckboxModule, MdExpansionModule, MatTableModule,
-	MatTooltipModule } from '@angular/material';
+	MatTooltipModule, MatDatepickerModule, MdNativeDateModule,
+	MatSelectModule } from '@angular/material';
 
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
@@ -52,6 +54,7 @@ import { DeleteAccountModalComponent } from './components/modals/delete-account-
 import { ForgotPasswordComponent } from './components/pages/forgot-password/forgot-password.component';
 import { AccountsComponent } from './components/pages/dashboard/accounts/accounts.component';
 import { TransactionsComponent } from './components/pages/dashboard/transactions/transactions.component';
+import { NewTransactionFormComponent } from './components/pages/dashboard/transactions/new-transaction-form/new-transaction-form.component';
 
 
 @NgModule({
@@ -78,6 +81,7 @@ import { TransactionsComponent } from './components/pages/dashboard/transactions
 		AccountsComponent,
 		TransactionsComponent,
 		CapitalizePipe,
+		NewTransactionFormComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -100,7 +104,11 @@ import { TransactionsComponent } from './components/pages/dashboard/transactions
 		TruncateModule,
 		MdExpansionModule,
 		MatTableModule,
-		MatTooltipModule
+		MatTooltipModule,
+		MatDatepickerModule,
+		MdNativeDateModule,
+		MatSelectModule,
+		CurrencyMaskModule,
 	],
 	entryComponents: [
 		SignupModalComponent,

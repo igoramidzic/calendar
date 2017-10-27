@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AccountsService } from '../../../../services/accounts.service';
 import { Account } from '../../../../models/account';
@@ -9,19 +9,13 @@ import { CurrencyPipe } from '@angular/common';
 	templateUrl: './accounts.component.html',
 	styleUrls: ['./accounts.component.sass']
 })
-export class AccountsComponent implements OnInit, OnDestroy {
+export class AccountsComponent implements OnInit {
 
-	accounts: Account[];
-	accountsSubscription: Subscription;
-	
+	@Input('accounts') accounts: Account[];
 
 	constructor(private accountsService: AccountsService) { }
 
 	ngOnInit () {
-		this.accountsSubscription = this.accountsService.accounts.subscribe(accounts => {
-			this.accounts = accounts;
-			this.accounts.forEach
-		})
 	}
 
 	get assets () {
@@ -46,10 +40,6 @@ export class AccountsComponent implements OnInit, OnDestroy {
 
 	get total () {
 		return this.assets + this.debts;
-	}
-	
-	ngOnDestroy () {
-		this.accountsSubscription.unsubscribe();
 	}
 
 }

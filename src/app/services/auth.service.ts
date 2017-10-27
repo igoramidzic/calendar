@@ -33,6 +33,7 @@ export class AuthService {
 	// New user set documents
 	setNewUserDocuments (user) {
 		this.accountsService.createNewUserAccounts(user);
+		this.storeService.setData('transactions', user.uid, {});
 	}
 
 	// Signup | Email
