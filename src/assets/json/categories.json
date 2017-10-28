@@ -1,0 +1,287 @@
+﻿[
+ {
+   "id": 1,
+   "category": "Uncategorized",
+   "type": "Uncategorize"
+ },
+ {
+   "id": 2,
+   "category": "Automotive Expenses",
+   "type": "Expense"
+ },
+ {
+   "id": 3,
+   "category": "Charitable Giving",
+   "type": "Expense"
+ },
+ {
+   "id": 4,
+   "category": "Child/Dependent Expenses",
+   "type": "Expense"
+ },
+ {
+   "id": 5,
+   "category": "Clothing/Shoes",
+   "type": "Expense"
+ },
+ {
+   "id": 6,
+   "category": "Education",
+   "type": "Expense"
+ },
+ {
+   "id": 7,
+   "category": "Entertainment",
+   "type": "Expense"
+ },
+ {
+   "id": 8,
+   "category": "Gasoline/Fuel",
+   "type": "Expense"
+ },
+ {
+   "id": 9,
+   "category": "Gifts",
+   "type": "Expense"
+ },
+ {
+   "id": 10,
+   "category": "Groceries",
+   "type": "Expense"
+ },
+ {
+   "id": 11,
+   "category": "Healthcare/Medical",
+   "type": "Expense"
+ },
+ {
+   "id": 12,
+   "category": "Home Maintenance",
+   "type": "Expense"
+ },
+ {
+   "id": 13,
+   "category": "Home Improvement",
+   "type": "Expense"
+ },
+ {
+   "id": 14,
+   "category": "Insurance",
+   "type": "Expense"
+ },
+ {
+   "id": 15,
+   "category": "Cable/Satellite Services",
+   "type": "Expense"
+ },
+ {
+   "id": 16,
+   "category": "Online Services",
+   "type": "Expense"
+ },
+ {
+   "id": 17,
+   "category": "�Loans",
+   "type": "Expense"
+ },
+ {
+   "id": 18,
+   "category": "Mortgages",
+   "type": "Expense"
+ },
+ {
+   "id": 19,
+   "category": "Other Expenses",
+   "type": "Expense"
+ },
+ {
+   "id": 20,
+   "category": "Personal Care",
+   "type": "Expense"
+ },
+ {
+   "id": 21,
+   "category": "Rent",
+   "type": "Expense"
+ },
+ {
+   "id": 22,
+   "category": "Restaurants/Dining",
+   "type": "Expense"
+ },
+ {
+   "id": 23,
+   "category": "Travel",
+   "type": "Expense"
+ },
+ {
+   "id": 24,
+   "category": "Service Charges/Fees",
+   "type": "Expense"
+ },
+ {
+   "id": 25,
+   "category": "ATM/Cash Withdrawals",
+   "type": "Expense"
+ },
+ {
+   "id": 26,
+   "category": "Credit Card Payments",
+   "type": "Transfer"
+ },
+ {
+   "id": 27,
+   "category": "Deposits",
+   "type": "Income"
+ },
+ {
+   "id": 28,
+   "category": "Transfers",
+   "type": "Transfer"
+ },
+ {
+   "id": 29,
+   "category": "Paychecks/Salary",
+   "type": "Income"
+ },
+ {
+   "id": 30,
+   "category": "Investment Income",
+   "type": "Income"
+ },
+ {
+   "id": 31,
+   "category": "Retirement Income",
+   "type": "Income"
+ },
+ {
+   "id": 32,
+   "category": "Other Income",
+   "type": "Income"
+ },
+ {
+   "id": 33,
+   "category": "Checks",
+   "type": "Expense"
+ },
+ {
+   "id": 34,
+   "category": "Hobbies",
+   "type": "Expense"
+ },
+ {
+   "id": 35,
+   "category": "Other Bills",
+   "type": "Expense"
+ },
+ {
+   "id": 36,
+   "category": "Securities Trades",
+   "type": "Transfer"
+ },
+ {
+   "id": 37,
+   "category": "Taxes",
+   "type": "Expense"
+ },
+ {
+   "id": 38,
+   "category": "Telephone Services",
+   "type": "Expense"
+ },
+ {
+   "id": 39,
+   "category": "Utilities",
+   "type": "Expense"
+ },
+ {
+   "id": 40,
+   "category": "Savings",
+   "type": "Transfer"
+ },
+ {
+   "id": 41,
+   "category": "Retirement Contributions",
+   "type": "Deferred Compensation"
+ },
+ {
+   "id": 42,
+   "category": "Pets/Pet Care",
+   "type": "Expense"
+ },
+ {
+   "id": 43,
+   "category": "Electronics",
+   "type": "Expense"
+ },
+ {
+   "id": 44,
+   "category": "General Merchandise",
+   "type": "Expense"
+ },
+ {
+   "id": 45,
+   "category": "Office Supplies",
+   "type": "Expense"
+ },
+ {
+   "id": 46,
+   "category": "Consulting",
+   "type": "Income"
+ },
+ {
+   "id": 47,
+   "category": "Sales",
+   "type": "Income"
+ },
+ {
+   "id": 48,
+   "category": "Interest",
+   "type": "Income"
+ },
+ {
+   "id": 49,
+   "category": "Services",
+   "type": "Income"
+ },
+ {
+   "id": 50,
+   "category": "Advertising",
+   "type": "Expense"
+ },
+ {
+   "id": 51,
+   "category": "Business Miscellaneous",
+   "type": "Expense"
+ },
+ {
+   "id": 52,
+   "category": "Postage and Shipping",
+   "type": "Expense"
+ },
+ {
+   "id": 53,
+   "category": "Printing",
+   "type": "Expense"
+ },
+ {
+   "id": 54,
+   "category": "Dues and Subscriptions",
+   "type": "Expense"
+ },
+ {
+   "id": 55,
+   "category": "Office Maintenance",
+   "type": "Expense"
+ },
+ {
+   "id": 56,
+   "category": "Wages Paid",
+   "type": "Expense"
+ },
+ {
+   "id": 57,
+   "category": "Expense Reimbursement",
+   "type": "Income"
+ }
+]

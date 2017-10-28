@@ -13,12 +13,12 @@
 
 	<div class="transaction-form-container">
     <form [formGroup]="newTransactionForm">
-      <div class="expense-income-container">
+      <div class="holder">
 
-        <div class="three-top-list timestamp-container">
-          <span (click)="picker.open()" style="cursor: pointer">
+        <div class="form-component-holder timestamp-container">
+          <md-datepicker touchUi="true" #picker></md-datepicker>
+          <span (click)="picker.open()" class="click-holder">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-            <md-datepicker touchUi="true" #picker></md-datepicker>
             <input class="calendar-input" [mdDatepicker]="picker" formControlName="timestamp">
             <span class="display-date">
               {{ newTransactionForm.controls['timestamp'].value | date: 'MMM d, yyyy' }}
@@ -26,19 +26,36 @@
           </span>
         </div>
 
-        <div class="three-top-list amount-container">
+        <div class="form-component-holder amount-container">
           <input
             currencyMask
-            [options]="{ align: 'left', prefix: activeType == 'expense' ? '-$ ' :  '$ ', allowNegative: false }"
+            [options]="{ prefix: activeType == 'expense' ? '-$ ' : activeType == 'income' ? '+$ ' : '$ ', allowNegative: false }"
             class="amount-input"
             [placeholder]="activeType == 'expense' ? '-$ 0.00' : '$ 0.00'" type="text" formControlName="amount">
         </div>
 
-        <!--<div class="three-top-list account-container">-->
-          <!--Cash-->
-        <!--</div>-->
-
       </div>
+
+      <div class="holder" *ngIf="activeType != 'transfer'">
+        <div class="form-component-holder account-container" *ngIf="newTransactionForm">
+          <select class="account-selector" placeholder="Account" formControlName="account">
+            <option *ngFor="let account of accounts" value="account">{{ account.id }}</option>
+          </select>
+        </div>
+        <!--<div class="form-component-holder category-container">-->
+          <!--Category-->
+        <!--</div>-->
+      </div>
+
+      <div class="holder" *ngIf="activeType == 'transfer'">
+        <div class="form-component-holder account-container">
+          Account 1
+        </div>
+        <div class="form-component-holder account-container">
+          Acount 2
+        </div>
+      </div>
+
     </form>
 	</div>
 

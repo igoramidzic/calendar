@@ -16,9 +16,9 @@ export class TransactionsComponent implements OnInit {
 	newTransactionToggle: boolean = true;
 
 	constructor (private transactionsService: TransactionsService) { }
-	
+
 	ngOnInit () {
-		
+
 	}
 
 	toggleNewTransaction () {
@@ -47,7 +47,7 @@ export class TransactionsComponent implements OnInit {
 		}
 	}
 
-	
+
 
 	deleteTransaction (transaction) {
 		this.transactionsService.deleteTransaction(transaction);
