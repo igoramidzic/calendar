@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TransactionsService } from '../../../../../services/transactions.service';
+import { Http } from '@angular/http';
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'app-new-transaction-form',
@@ -13,8 +16,16 @@ export class NewTransactionFormComponent implements OnInit {
 	newTransactionForm: FormGroup;
 	activeType: string = 'expense';
 	types: string[] = ['expense', 'income', 'transfer'];
+	categories: string[];
 
-	constructor(private transactionsService: TransactionsService) { }
+	constructor(private transactionsService: TransactionsService, private http: Http) {
+    this.getJSON().subscribe(data => this.categories=data, error => console.log(error));
+  }
+
+  public getJSON(): Observable<any> {
+    return this.http.get("../../../../../../../assets/json/categories.json")
+      .map((res:any) => res.json());
+  }
 
 	ngOnInit() {
 		this.newTransactionForm = new FormGroup({
@@ -24,6 +35,10 @@ export class NewTransactionFormComponent implements OnInit {
 			'amount': new FormControl(0, [ Validators.required ]),
 			'timestamp': new FormControl(new Date(Date.now()), [ Validators.required ]),
 		})
+
+    setTimeout(() => {
+		  this.newTransactionForm.controls['account'].patchValue('hjk')
+    }, 2000)
 	}
 
 	addTransaction (transaction) {
@@ -33,5 +48,9 @@ export class NewTransactionFormComponent implements OnInit {
 	createNewTransaction () {
 
 	}
+
+	logAccount () {
+    console.log(this.newTransactionForm.controls['account'].value)
+  }
 
 }
