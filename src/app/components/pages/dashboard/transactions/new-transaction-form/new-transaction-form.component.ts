@@ -60,10 +60,8 @@ export class NewTransactionFormComponent implements OnInit {
 
 	  this.storeTransaction(transaction)
       .then(() => {
-        this.updateAccountAmount(accountData.id, accountData.data)
-          .then(() => {
-            this.onTransactionComplete();
-          })
+        this.updateAccountAmount(accountData.id, accountData.data);
+        this.onTransactionComplete();
       })
   }
 
@@ -72,6 +70,7 @@ export class NewTransactionFormComponent implements OnInit {
       let description = this.newTransactionForm.controls['description'].value;
       let category = this.newTransactionForm.controls['category'].value;
       let account = this.newTransactionForm.controls['account'].value;
+      let type = this.activeType;
       let timestamp = this.newTransactionForm.controls['timestamp'].value;
       let amount = this.newTransactionForm.controls['amount'].value;
 
@@ -84,6 +83,7 @@ export class NewTransactionFormComponent implements OnInit {
         category,
         account: account.id,
         amount,
+        type,
         timestamp
       }
 

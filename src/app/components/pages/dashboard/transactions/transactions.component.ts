@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Transaction } from '../../../../models/transaction';
-import { Subscription } from 'rxjs';
 import { TransactionsService } from '../../../../services/transactions.service';
+import { AccountsService } from "../../../../services/accounts.service";
+import { Account } from '../../../../models/account';
 
 @Component({
 	selector: 'app-transactions',
@@ -13,9 +14,9 @@ export class TransactionsComponent implements OnInit {
 	@Input('transactions') transactions: Transaction[];
 	@Input('accounts') accounts: Account[];
 	orderBy: string = 'timestamp';
-	newTransactionToggle: boolean = true;
+	newTransactionToggle: boolean = false;
 
-	constructor (private transactionsService: TransactionsService) { }
+	constructor (private transactionsService: TransactionsService, private accountsService: AccountsService) { }
 
 	ngOnInit () {
 
@@ -52,7 +53,14 @@ export class TransactionsComponent implements OnInit {
   }
 
 	deleteTransaction (transaction) {
-		this.transactionsService.deleteTransaction(transaction);
+    var index = this.accounts.map(function(o) { return o.id; }).indexOf(transaction.account);
+    let account = this.accounts[index];
+    let newAccountAmount = account.amount - transaction.amount;
+
+		this.transactionsService.deleteTransaction(transaction, account)
+      .then(() => {
+		    this.accountsService.updateAccountData(account.id, { amount: newAccountAmount })
+      })
 	}
 }
 

@@ -4,8 +4,6 @@ import { Transaction } from '../models/transaction';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
 import { StoreService } from './store.service';
-import { AccountsService } from './accounts.service';
-import { Subscription } from 'rxjs';
 
 @Injectable()
 export class TransactionsService {
@@ -17,8 +15,7 @@ export class TransactionsService {
 	constructor(
 		private afs: AngularFirestore,
 		private authService: AuthService,
-		private storeService: StoreService,
-		private accountsService: AccountsService
+		private storeService: StoreService
 	) {
 		this.authService.afAuth.authState.subscribe(user => {
 			if (user) {
@@ -43,7 +40,6 @@ export class TransactionsService {
 			this.storeService.afs.collection(`transactions/${this.user.uid}/transactions`)
 			.add(data)
 				.then(success => {
-					this.accountsService.updateAccountData(data.account, { amount: data.amount })
 					resolve(success);
 				})
 				.catch(error => reject(error))
@@ -59,12 +55,11 @@ export class TransactionsService {
 		})
 	}
 
-	deleteTransaction (transaction) {
+	deleteTransaction (transaction, account) {
 		return new Promise((resolve, reject) => {
 			this.storeService.afs.doc(`transactions/${this.user.uid}/transactions/${transaction.id}`)
 			.delete()
 				.then(() => {
-					this.accountsService.updateAccountData(transaction.account, { amount: 0 })
 					resolve();
 				})
 				.catch(error => reject(error))
