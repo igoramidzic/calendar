@@ -3,6 +3,7 @@ import { Transaction } from '../../../models/transaction';
 import { Subscription } from 'rxjs';
 import { TransactionsService } from '../../../services/transactions.service';
 import { AccountsService } from '../../../services/accounts.service';
+import { Account } from '../../../models/account';
 
 @Component({
 	selector: 'app-dashboard',
@@ -17,8 +18,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	transactionsSubscription: Subscription;
 
 	constructor (
-		private transactionsService: TransactionsService, 
-		private accountsService: AccountsService) { }
+		public transactionsService: TransactionsService,
+    public accountsService: AccountsService) { }
 
 	ngOnInit () {
 		this.accountsSubscription = this.accountsService.accounts.subscribe(accounts => {

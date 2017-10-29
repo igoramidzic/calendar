@@ -4,5 +4,6 @@ export interface Transaction {
 	category: string,
 	account: string,
 	amount: number,
+  type: string,
 	timestamp: any
 }
