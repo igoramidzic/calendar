@@ -81,11 +81,16 @@
     width: 100%
     text-align: center !important
 
-.account-container
-  .account-selector
+.options-container
+  padding: 0 24px
+  .account-btn
+    border: 1px solid $border-color
+    background-color: #ffffff
+    padding: 10px 0
     outline: none
-    border-radius: 0
-    border: 1px solid $border_color
+    font-size: 15px
+    &:hover
+      background-color: $border_color !important
 
 
 //@media only screen and (min-width: 501px)
@@ -98,8 +103,16 @@
     .display-date
       display: block
       padding: 0
+    .click-holder
+      padding: 0 10px 8px 10px
 
   .amount-container
     width: 60%
     .amount-input
       font-size: 20px
+
+  .options-container
+    &:first-child
+      padding: 0 5px 0 0px
+    &:last-child
+      padding: 0 0 0 5px

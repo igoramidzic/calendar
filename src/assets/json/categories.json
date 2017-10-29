@@ -1,12 +1,7 @@
 ﻿[
  {
-   "id": 1,
-   "category": "Uncategorized",
-   "type": "Uncategorize"
- },
- {
    "id": 2,
-   "category": "Automotive Expenses",
+   "category": "Auto Expenses",
    "type": "Expense"
  },
  {
@@ -16,7 +11,7 @@
  },
  {
    "id": 4,
-   "category": "Child/Dependent Expenses",
+   "category": "Child Expenses",
    "type": "Expense"
  },
  {
@@ -51,7 +46,7 @@
  },
  {
    "id": 11,
-   "category": "Healthcare/Medical",
+   "category": "Healthcare",
    "type": "Expense"
  },
  {
@@ -71,7 +66,7 @@
  },
  {
    "id": 15,
-   "category": "Cable/Satellite Services",
+   "category": "Cable Services",
    "type": "Expense"
  },
  {
@@ -81,7 +76,7 @@
  },
  {
    "id": 17,
-   "category": "�Loans",
+   "category": "Loans",
    "type": "Expense"
  },
  {
@@ -106,7 +101,7 @@
  },
  {
    "id": 22,
-   "category": "Restaurants/Dining",
+   "category": "Restaurants",
    "type": "Expense"
  },
  {
@@ -116,18 +111,13 @@
  },
  {
    "id": 24,
-   "category": "Service Charges/Fees",
+   "category": "Service Fee",
    "type": "Expense"
  },
  {
    "id": 25,
-   "category": "ATM/Cash Withdrawals",
+   "category": "Withdrawals",
    "type": "Expense"
- },
- {
-   "id": 26,
-   "category": "Credit Card Payments",
-   "type": "Transfer"
  },
  {
    "id": 27,
@@ -135,23 +125,18 @@
    "type": "Income"
  },
  {
-   "id": 28,
-   "category": "Transfers",
-   "type": "Transfer"
- },
- {
    "id": 29,
-   "category": "Paychecks/Salary",
+   "category": "Paychecks",
    "type": "Income"
  },
  {
    "id": 30,
-   "category": "Investment Income",
+   "category": "Investments",
    "type": "Income"
  },
  {
    "id": 31,
-   "category": "Retirement Income",
+   "category": "Retirement",
    "type": "Income"
  },
  {
@@ -175,34 +160,19 @@
    "type": "Expense"
  },
  {
-   "id": 36,
-   "category": "Securities Trades",
-   "type": "Transfer"
- },
- {
    "id": 37,
    "category": "Taxes",
    "type": "Expense"
  },
  {
    "id": 38,
-   "category": "Telephone Services",
+   "category": "Phone Services",
    "type": "Expense"
  },
  {
    "id": 39,
    "category": "Utilities",
    "type": "Expense"
- },
- {
-   "id": 40,
-   "category": "Savings",
-   "type": "Transfer"
- },
- {
-   "id": 41,
-   "category": "Retirement Contributions",
-   "type": "Deferred Compensation"
  },
  {
    "id": 42,
@@ -216,7 +186,7 @@
  },
  {
    "id": 44,
-   "category": "General Merchandise",
+   "category": "General Merch",
    "type": "Expense"
  },
  {
@@ -251,12 +221,12 @@
  },
  {
    "id": 51,
-   "category": "Business Miscellaneous",
+   "category": "Business Misc.",
    "type": "Expense"
  },
  {
    "id": 52,
-   "category": "Postage and Shipping",
+   "category": "Mail",
    "type": "Expense"
  },
  {
@@ -266,7 +236,7 @@
  },
  {
    "id": 54,
-   "category": "Dues and Subscriptions",
+   "category": "Subscriptions",
    "type": "Expense"
  },
  {
@@ -281,7 +251,7 @@
  },
  {
    "id": 57,
-   "category": "Expense Reimbursement",
+   "category": "Refunds",
    "type": "Income"
  }
 ]

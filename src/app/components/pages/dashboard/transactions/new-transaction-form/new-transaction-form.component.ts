@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TransactionsService } from '../../../../../services/transactions.service';
 import { Http } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import {AccountsService} from "../../../../../services/accounts.service";
 
 @Component({
 	selector: 'app-new-transaction-form',
@@ -17,8 +18,12 @@ export class NewTransactionFormComponent implements OnInit {
 	activeType: string = 'expense';
 	types: string[] = ['expense', 'income', 'transfer'];
 	categories: string[];
+  @Output() transactionComplete:EventEmitter<boolean> = new EventEmitter();
 
-	constructor(private transactionsService: TransactionsService, private http: Http) {
+	constructor(
+	  private transactionsService: TransactionsService,
+    private accountsService: AccountsService,
+    private http: Http) {
     this.getJSON().subscribe(data => this.categories=data, error => console.log(error));
   }
 
@@ -35,22 +40,56 @@ export class NewTransactionFormComponent implements OnInit {
 			'amount': new FormControl(0, [ Validators.required ]),
 			'timestamp': new FormControl(new Date(Date.now()), [ Validators.required ]),
 		})
-
-    setTimeout(() => {
-		  this.newTransactionForm.controls['account'].patchValue('hjk')
-    }, 2000)
 	}
 
-	addTransaction (transaction) {
-		this.transactionsService.createTransactionsData(transaction)
+	onTransactionComplete () {
+    this.transactionComplete.emit(true);
+  }
+
+  storeTransaction (transaction) {
+		return this.transactionsService.createTransactionsData(transaction);
 	}
 
-	createNewTransaction () {
-
+	updateAccountAmount (accID, data) {
+    return this.accountsService.updateAccountData(accID, data);
 	}
 
-	logAccount () {
-    console.log(this.newTransactionForm.controls['account'].value)
+	storeTransactionAndAccount (transaction, account) {
+	  let newAccountAmount = account.amount + transaction.amount;
+	  let accountData = { id: account.id, data: { amount: newAccountAmount } };
+
+	  this.storeTransaction(transaction)
+      .then(() => {
+        this.updateAccountAmount(accountData.id, accountData.data)
+          .then(() => {
+            this.onTransactionComplete();
+          })
+      })
+  }
+
+	onCreateNewTransaction () {
+	  if (this.newTransactionForm.valid) {
+      let description = this.newTransactionForm.controls['description'].value;
+      let category = this.newTransactionForm.controls['category'].value;
+      let account = this.newTransactionForm.controls['account'].value;
+      let timestamp = this.newTransactionForm.controls['timestamp'].value;
+      let amount = this.newTransactionForm.controls['amount'].value;
+
+      if (this.activeType === 'expense') {
+        amount *= -1;
+      }
+
+      let transaction = {
+        description,
+        category,
+        account: account.id,
+        amount,
+        timestamp
+      }
+
+      this.storeTransactionAndAccount(transaction, account);
+    }
+
   }
 
 }

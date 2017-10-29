@@ -37,14 +37,33 @@
       </div>
 
       <div class="holder" *ngIf="activeType != 'transfer'">
-        <div class="form-component-holder account-container" *ngIf="newTransactionForm">
-          <select class="account-selector" placeholder="Account" formControlName="account">
-            <option *ngFor="let account of accounts" value="account">{{ account.id }}</option>
-          </select>
+
+        <div class="form-component-holder options-container" *ngIf="newTransactionForm">
+          <button class="account-btn" [mdMenuTriggerFor]="menu">
+            {{ (newTransactionForm.controls['account'].value?.id || 'Choose account') | capitalize }}
+          </button>
+          <md-menu #menu="mdMenu">
+            <button
+              md-menu-item
+              *ngFor="let account of accounts"
+              (click)="newTransactionForm.controls['account'].patchValue(account)"
+            >{{ account.id }}</button>
+          </md-menu>
         </div>
-        <!--<div class="form-component-holder category-container">-->
-          <!--Category-->
-        <!--</div>-->
+
+        <div class="form-component-holder options-container">
+          <button class="account-btn" [mdMenuTriggerFor]="menu">
+            {{ (newTransactionForm.controls['category'].value || 'Choose category') | capitalize }}
+          </button>
+          <md-menu #menu="mdMenu">
+            <button
+              md-menu-item
+              *ngFor="let category of categories"
+              (click)="newTransactionForm.controls['category'].patchValue(category.category)"
+            >{{ category.category }}</button>
+          </md-menu>
+        </div>
+
       </div>
 
       <div class="holder" *ngIf="activeType == 'transfer'">
@@ -54,6 +73,11 @@
         <div class="form-component-holder account-container">
           Acount 2
         </div>
+      </div>
+
+      <div class="holder">
+        <input class="text-input" type="text" placeholder="Description" formControlName="description">
+        <button md-button (click)="onCreateNewTransaction()">Create</button>
       </div>
 
     </form>

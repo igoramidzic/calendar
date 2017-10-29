@@ -47,7 +47,9 @@ export class TransactionsComponent implements OnInit {
 		}
 	}
 
-
+  onTrasactionComplete () {
+	  this.newTransactionToggle = false;
+  }
 
 	deleteTransaction (transaction) {
 		this.transactionsService.deleteTransaction(transaction);

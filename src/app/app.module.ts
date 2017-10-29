@@ -18,7 +18,7 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { MatButtonModule, MatSidenavModule, MatDialogModule, MatListModule,
 	MatInputModule, MatCheckboxModule, MdExpansionModule, MatTableModule,
 	MatTooltipModule, MatDatepickerModule, MdNativeDateModule,
-	MatSelectModule } from '@angular/material';
+	MatSelectModule, MatMenuModule } from '@angular/material';
 
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
@@ -109,6 +109,7 @@ import { NewTransactionFormComponent } from './components/pages/dashboard/transa
 		MdNativeDateModule,
 		MatSelectModule,
 		CurrencyMaskModule,
+    MatMenuModule
 	],
 	entryComponents: [
 		SignupModalComponent,
