@@ -55,6 +55,7 @@ import { ForgotPasswordComponent } from './components/pages/forgot-password/forg
 import { AccountsComponent } from './components/pages/dashboard/accounts/accounts.component';
 import { TransactionsComponent } from './components/pages/dashboard/transactions/transactions.component';
 import { NewTransactionFormComponent } from './components/pages/dashboard/transactions/new-transaction-form/new-transaction-form.component';
+import { SpinnerComponent } from './components/animations/spinner/spinner.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { NewTransactionFormComponent } from './components/pages/dashboard/transa
 		TransactionsComponent,
 		CapitalizePipe,
 		NewTransactionFormComponent,
+		SpinnerComponent,
 	],
 	imports: [
 		BrowserModule,

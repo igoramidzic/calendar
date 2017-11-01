@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { StoreService } from './store.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Account } from '../models/account';
+import * as firebase from "firebase/app";
 
 @Injectable()
 export class AccountsService {
@@ -13,7 +14,7 @@ export class AccountsService {
 
 	constructor(
 		private afs: AngularFirestore,
-		private afAuth: AngularFireAuth,
+    private afAuth: AngularFireAuth,
 		private storeService: StoreService
 	) {
 		this.afAuth.authState.subscribe(user => {
@@ -47,29 +48,19 @@ export class AccountsService {
 			})
 	}
 
-	createAccountsData (data) {
-		return new Promise((resolve, reject) => {
-			this.storeService.afs.collection(`accounts/${this.user.uid}/accounts`).add(data)
-				.then(() => resolve())
-				.catch(error => reject(error))
-		})
-	}
-
-	updateAccountData (accID, data) {
-		return new Promise((resolve, reject) => {
-			this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/${accID}`)
-			.update(data)
-				.then(() => resolve())
-				.catch(error => reject(error))
-		})
-	}
-
-	deleteAccount (accID) {
-		return new Promise((resolve, reject) => {
-			this.storeService.afs.doc(`accounts/${this.user.uid}/accounts/cash/accounts/${accID}`).delete()
-				.then(() => resolve())
-				.catch(error => reject(error))
-		})
-	}
+	accountTransaction (accID, amount) {
+    const db = firebase.firestore();
+    const accountDocRef = db.doc('accounts/'.concat(this.user.uid, '/accounts/' ,accID));
+    return new Promise((resolve, reject) => {
+      db.runTransaction(function(transaction) {
+        return transaction.get(accountDocRef).then(accountDoc => {
+          const newAmount = accountDoc.data().amount + amount;
+          transaction.update(accountDocRef, { amount: newAmount });
+        });
+      })
+        .then(() => resolve())
+        .catch(error => console.log(error))
+    })
+  }
 
 }
