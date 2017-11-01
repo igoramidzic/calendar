@@ -15,7 +15,7 @@ export class AuthService {
 	authState: any = null;
 
 	constructor(
-		public afAuth: AngularFireAuth, 
+		public afAuth: AngularFireAuth,
 		private router: Router,
 		private storeService: StoreService,
 		private accountsService: AccountsService
@@ -44,6 +44,7 @@ export class AuthService {
 					success => {
 						this.updateDisplayName(name);
 						this.setNewUserDocuments(success);
+						this.sendEmailVerification();
 						resolve(success);
 					}
 				).catch(error => reject(error));
@@ -92,7 +93,7 @@ export class AuthService {
 				})
 				.catch(error => reject(error));
 		})
-		
+
 	}
 
 	// Logout
@@ -150,7 +151,7 @@ export class AuthService {
 	// Reauthenticate
 	reauthenticate (password) {
 		const credential = firebase.auth.EmailAuthProvider.credential(
-			this.afAuth.auth.currentUser.email, 
+			this.afAuth.auth.currentUser.email,
 			password
 		);
 		return new Promise((resolve, reject) => {
