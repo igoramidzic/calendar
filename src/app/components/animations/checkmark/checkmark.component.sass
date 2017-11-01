@@ -5,27 +5,27 @@
 	bottom: 0
 	left: 0
 	background-color: rgba(255, 255, 255, 0.6)
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	display: flex
+	flex-direction: column
+	justify-content: center
 
-.checkmark 
+.checkmark
 	width: 140px
 	margin: 0 auto
 
-.path 
+.path
 	stroke-dasharray: 1000
 	stroke-dashoffset: 0
 	animation: dash 1s ease-in-out
 	-webkit-animation: dash 1s ease-in-out
 
-.spin 
+.spin
 	animation: spin 1s
 	-webkit-animation: spin 1s
 	transform-origin: 50% 50%
 	-webkit-transform-origin: 50% 50%
 
-p 
+p
 	font-family: sans-serif
 	color: pink
 	font-size: 30px
@@ -35,42 +35,42 @@ p
 	animation: text .5s linear .4s
 	-webkit-animation: text .4s linear .3s
 
-@-webkit-keyframes dash 
- 0% 
+@-webkit-keyframes dash
+ 0%
 	 stroke-dashoffset: 1000
- 
- 100% 
+
+ 100%
 	 stroke-dashoffset: 0
- 
-@keyframes dash 
- 0% 
+
+@keyframes dash
+ 0%
 	 stroke-dashoffset: 1000
- 
- 100% 
+
+ 100%
 	 stroke-dashoffset: 0
- 
-@-webkit-keyframes spin 
-	0% 
+
+@-webkit-keyframes spin
+	0%
 		-webkit-transform: rotate(0deg)
-	
-	100% 
-		-webkit-transform: rotate(360deg)
-	
-@keyframes spin 
-	0% 
-		-webkit-transform: rotate(0deg)
-	
-	100% 
+
+	100%
 		-webkit-transform: rotate(360deg)
 
-@-webkit-keyframes text 
-	0% 
-		opacity: 0 
-	100% 
+@keyframes spin
+	0%
+		-webkit-transform: rotate(0deg)
+
+	100%
+		-webkit-transform: rotate(360deg)
+
+@-webkit-keyframes text
+	0%
+		opacity: 0
+	100%
 		opacity: 1
-	
-	@keyframes text 
-	0% 
-		opacity: 0 
-	100% 
+
+	@keyframes text
+	0%
+		opacity: 0
+	100%
 		opacity: 1

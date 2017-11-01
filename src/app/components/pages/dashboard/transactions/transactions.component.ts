@@ -26,40 +26,44 @@ export class TransactionsComponent implements OnInit {
 		this.newTransactionToggle = !this.newTransactionToggle;
 	}
 
-	dynamicSort (property) {
-		var sortOrder = 1;
-		if(property[0] === "-") {
-				sortOrder = -1;
-				property = property.substr(1);
-		}
-		return function (a,b) {
-				var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-				return result * sortOrder;
-		}
-	}
-
-	changeOrder (orderBy) {
-		if (this.orderBy === orderBy) {
-			this.transactions.sort(this.dynamicSort('-' + orderBy));
-			this.orderBy = null;
-		} else {
-			this.orderBy = orderBy;
-			this.transactions.sort(this.dynamicSort(orderBy));
-		}
-	}
+	// dynamicSort (property) {
+	// 	var sortOrder = 1;
+	// 	if(property[0] === "-") {
+	// 			sortOrder = -1;
+	// 			property = property.substr(1);
+	// 	}
+	// 	return function (a,b) {
+	// 			var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+	// 			return result * sortOrder;
+	// 	}
+	// }
+    //
+	// changeOrder (orderBy) {
+	// 	if (this.orderBy === orderBy) {
+	// 		this.transactions.sort(this.dynamicSort('-' + orderBy));
+	// 		this.orderBy = null;
+	// 	} else {
+	// 		this.orderBy = orderBy;
+	// 		this.transactions.sort(this.dynamicSort(orderBy));
+	// 	}
+	// }
 
   onTrasactionComplete () {
 	  this.newTransactionToggle = false;
   }
 
 	deleteTransaction (transaction) {
-    var index = this.accounts.map(function(o) { return o.id; }).indexOf(transaction.account);
-    let account = this.accounts[index];
-    let newAccountAmount = account.amount - transaction.amount;
+    const toAccountIndex = this.accounts.map(function(o) { return o.id; }).indexOf(transaction.toAccount);
+    const fromAccountIndex = this.accounts.map(function(o) { return o.id; }).indexOf(transaction.fromAccount);
+    let toAccount = this.accounts[toAccountIndex];
+    let fromAccount = this.accounts[fromAccountIndex];
 
-		this.transactionsService.deleteTransaction(transaction, account)
+		this.transactionsService.deleteTransaction(transaction)
       .then(() => {
-		    this.accountsService.updateAccountData(account.id, { amount: newAccountAmount })
+		    this.accountsService.accountTransaction(toAccount.id, transaction.amount * -1);
+		    if (transaction.fromAccount) {
+		      this.accountsService.accountTransaction(fromAccount.id, transaction.amount)
+        }
       })
 	}
 }

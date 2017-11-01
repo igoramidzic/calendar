@@ -4,6 +4,7 @@ import { Transaction } from '../models/transaction';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
 import { StoreService } from './store.service';
+import {AngularFireDatabase} from "angularfire2/database";
 
 @Injectable()
 export class TransactionsService {
@@ -46,16 +47,16 @@ export class TransactionsService {
 		})
 	}
 
-	updateTransactionsData (transactionID, data) {
-		return new Promise((resolve, reject) => {
-			this.storeService.afs.doc(`transactions/${this.user.uid}/transactions/${transactionID}`)
-			.update(data)
-				.then(() => resolve())
-				.catch(error => reject(error))
-		})
-	}
+	// updateTransactionsData (transactionID, data) {
+	// 	return new Promise((resolve, reject) => {
+	// 		this.storeService.afs.doc(`transactions/${this.user.uid}/transactions/${transactionID}`)
+	// 		.update(data)
+	// 			.then(() => resolve())
+	// 			.catch(error => reject(error))
+	// 	})
+	// }
 
-	deleteTransaction (transaction, account) {
+	deleteTransaction (transaction) {
 		return new Promise((resolve, reject) => {
 			this.storeService.afs.doc(`transactions/${this.user.uid}/transactions/${transaction.id}`)
 			.delete()

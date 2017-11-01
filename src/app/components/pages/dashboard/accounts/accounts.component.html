@@ -5,30 +5,33 @@
 		</div>
 	</div>
 	<div class="card-content">
-		<ul class="accounts-list">
-			<li class="account-item" *ngFor="let account of accounts">
-				{{ account.id | capitalize }} 
-				<span style="float: right;">
-					{{ account.amount | currency : 'USD' : true }}
-				</span>
-			</li>
-		</ul>
-		<div class="card-sub-content">
-			<div class="total-container">
-				<p class="calc-item">
-					<span class="title">ASSETS</span>
-					<span class="amount" style="float: right;">{{ assets | currency : 'USD' : true }}</span>
-				</p>
-				<p class="calc-item">
-					<span class="title">DEBTS</span>
-					<span class="amount" style="float: right;">{{ debts | currency : 'USD' : true }}</span>
-				</p>
-				<hr style="margin: 5px 0;">
-				<p class="calc-item">
-					<span class="title">NET WORTH</span>
-					<span class="amount bold" style="float: right;">{{ total | currency : 'USD' : true }}</span>
-				</p>
-			</div>
-		</div>
-	</div>
+    <span *ngIf="accounts">
+      <ul class="accounts-list">
+        <li class="account-item" *ngFor="let account of accounts">
+          {{ account.id | capitalize }}
+          <span style="float: right;">
+            {{ account.amount | currency : 'USD' : true }}
+          </span>
+        </li>
+      </ul>
+      <div class="card-sub-content">
+        <div class="total-container">
+          <p class="calc-item">
+            <span class="title">ASSETS</span>
+            <span class="amount" style="float: right;">{{ assets | currency : 'USD' : true }}</span>
+          </p>
+          <p class="calc-item">
+            <span class="title">DEBTS</span>
+            <span class="amount" style="float: right;">{{ debts | currency : 'USD' : true }}</span>
+          </p>
+          <hr style="margin: 5px 0;">
+          <p class="calc-item">
+            <span class="title">NET WORTH</span>
+            <span class="amount bold" style="float: right;">{{ total | currency : 'USD' : true }}</span>
+          </p>
+        </div>
+      </div>
+    </span>
+    <app-spinner *ngIf="!accounts"></app-spinner>
+  </div>
 </div>

@@ -67,17 +67,46 @@
       </div>
 
       <div class="holder" *ngIf="activeType == 'transfer'">
-        <div class="form-component-holder account-container">
-          Account 1
+
+        <div class="form-component-holder options-container">
+          <button class="account-btn" [mdMenuTriggerFor]="toAccountMenu">
+            {{
+              fromAccount
+              ? 'From ' + (fromAccount.id | capitalize)
+              :  'From account'
+            }}
+          </button>
+          <md-menu #toAccountMenu="mdMenu">
+            <button
+              md-menu-item
+              *ngFor="let account of accounts"
+              (click)="fromAccount = account; newTransactionForm.controls['category'].patchValue('transfer')"
+            >{{ account.id }}</button>
+          </md-menu>
         </div>
-        <div class="form-component-holder account-container">
-          Acount 2
+
+        <div class="form-component-holder options-container">
+          <button class="account-btn" [mdMenuTriggerFor]="menu">
+            {{
+              newTransactionForm.controls['account'].value
+              ? 'To ' + (newTransactionForm.controls['account'].value.id | capitalize)
+              : 'To account'
+            }}
+          </button>
+          <md-menu #menu="mdMenu">
+            <button
+              md-menu-item
+              *ngFor="let account of accounts"
+              (click)="newTransactionForm.controls['account'].patchValue(account)"
+            >{{ account.id }}</button>
+          </md-menu>
         </div>
+
       </div>
 
       <div class="holder">
         <input class="text-input" type="text" placeholder="Description" formControlName="description">
-        <button md-button (click)="onCreateNewTransaction()">Create</button>
+        <button md-button [disabled]="newTransactionForm.invalid" (click)="onCreateNewTransaction()">Create</button>
       </div>
 
     </form>

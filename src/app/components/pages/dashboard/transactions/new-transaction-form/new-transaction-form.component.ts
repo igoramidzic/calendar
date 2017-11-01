@@ -1,10 +1,10 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TransactionsService } from '../../../../../services/transactions.service';
 import { Http } from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import {AccountsService} from "../../../../../services/accounts.service";
+import { AccountsService } from "../../../../../services/accounts.service";
 
 @Component({
 	selector: 'app-new-transaction-form',
@@ -19,6 +19,7 @@ export class NewTransactionFormComponent implements OnInit {
 	types: string[] = ['expense', 'income', 'transfer'];
 	categories: string[];
   @Output() transactionComplete:EventEmitter<boolean> = new EventEmitter();
+  fromAccount: Account;
 
 	constructor(
 	  private transactionsService: TransactionsService,
@@ -51,16 +52,16 @@ export class NewTransactionFormComponent implements OnInit {
 	}
 
 	updateAccountAmount (accID, data) {
-    return this.accountsService.updateAccountData(accID, data);
+    return this.accountsService.accountTransaction(accID, data);
 	}
 
-	storeTransactionAndAccount (transaction, account) {
-	  let newAccountAmount = account.amount + transaction.amount;
-	  let accountData = { id: account.id, data: { amount: newAccountAmount } };
-
-	  this.storeTransaction(transaction)
+	storeTransactionAndAccount (transaction, accountTo, accountFrom) {
+    this.storeTransaction(transaction)
       .then(() => {
-        this.updateAccountAmount(accountData.id, accountData.data);
+	      if (accountFrom) {
+	        this.updateAccountAmount(accountFrom.id, transaction.amount * -1);
+        }
+        this.updateAccountAmount(accountTo.id, transaction.amount);
         this.onTransactionComplete();
       })
   }
@@ -69,7 +70,11 @@ export class NewTransactionFormComponent implements OnInit {
 	  if (this.newTransactionForm.valid) {
       let description = this.newTransactionForm.controls['description'].value;
       let category = this.newTransactionForm.controls['category'].value;
-      let account = this.newTransactionForm.controls['account'].value;
+      let toAccount = this.newTransactionForm.controls['account'].value;
+      let fromAccount = null;
+      if (this.activeType === 'transfer') {
+        fromAccount = this.fromAccount;
+      }
       let type = this.activeType;
       let timestamp = this.newTransactionForm.controls['timestamp'].value;
       let amount = this.newTransactionForm.controls['amount'].value;
@@ -81,13 +86,14 @@ export class NewTransactionFormComponent implements OnInit {
       let transaction = {
         description,
         category,
-        account: account.id,
+        toAccount: toAccount.id,
+        fromAccount: this.fromAccount ? this.fromAccount.id : null,
         amount,
         type,
         timestamp
-      }
+      };
 
-      this.storeTransactionAndAccount(transaction, account);
+      this.storeTransactionAndAccount(transaction, toAccount, fromAccount);
     }
 
   }

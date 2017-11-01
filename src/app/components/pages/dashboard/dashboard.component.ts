@@ -24,11 +24,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	ngOnInit () {
 		this.accountsSubscription = this.accountsService.accounts.subscribe(accounts => {
 			this.accounts = accounts;
-			this.accounts.forEach
 		})
 		this.transactionsSubscription = this.transactionsService.transactions.subscribe(transactions => {
 			this.transactions = transactions;
-		})
+    })
 	}
 
 	ngOnDestroy () {
