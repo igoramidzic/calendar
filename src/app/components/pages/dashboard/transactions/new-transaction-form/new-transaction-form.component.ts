@@ -38,7 +38,7 @@ export class NewTransactionFormComponent implements OnInit {
 			'description': new FormControl(null, [ Validators.required ]),
 			'category': new FormControl(null, [ Validators.required ]),
 			'account': new FormControl(null, [ Validators.required ]),
-			'amount': new FormControl(0, [ Validators.required ]),
+			'amount': new FormControl(0, [ Validators.required, Validators.min(0.01) ]),
 			'timestamp': new FormControl(new Date(Date.now()), [ Validators.required ]),
 		})
 	}

@@ -79,6 +79,7 @@
           <md-menu #toAccountMenu="mdMenu">
             <button
               md-menu-item
+              [disabled]="account == newTransactionForm.controls['account'].value"
               *ngFor="let account of accounts"
               (click)="fromAccount = account; newTransactionForm.controls['category'].patchValue('transfer')"
             >{{ account.id }}</button>
@@ -96,6 +97,7 @@
           <md-menu #menu="mdMenu">
             <button
               md-menu-item
+              [disabled]="account == fromAccount"
               *ngFor="let account of accounts"
               (click)="newTransactionForm.controls['account'].patchValue(account)"
             >{{ account.id }}</button>
