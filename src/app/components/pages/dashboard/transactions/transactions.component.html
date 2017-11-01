@@ -33,11 +33,12 @@
 			</div>
 		</div> -->
 		<div class="table-data">
-			<div class="no-transactions-container" *ngIf="transactions?.length === 0 && !newTransactionToggle">
-				No transactions
-			</div>
 
 			<app-new-transaction-form (transactionComplete)="onTrasactionComplete()" [accounts]="accounts"	*ngIf="newTransactionToggle"></app-new-transaction-form>
+
+      <div class="no-transactions-container" *ngIf="transactions?.length === 0">
+        No transactions
+      </div>
 
 			<ul class="transactions-list" *ngIf="accounts">
 				<li
