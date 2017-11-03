@@ -1,0 +1,138 @@
+@import '../../../../../app.component.sass'
+
+.attention-grabber
+	background-position: center
+	background-size: cover
+	position: relative
+	.content
+		max-width: 980px
+		margin: auto
+		text-align: center
+		transition: padding .25s
+
+.header
+	color: #fff
+	font-weight: 300
+	font-family: 'Roboto', sans-serif
+	letter-spacing: 1px
+	line-height: 1.4
+	margin: 0
+
+.sub-header-1
+  color: #fff
+  font-weight: 300
+  font-family: 'Roboto', sans-serif
+  letter-spacing: 1px
+  line-height: 1.4
+  margin: 0
+  font-size: 16px
+
+.primary-btn
+	background-color: $primary_color
+	color: #fff
+	font-weight: 300
+	margin-top: 40px
+
+.scroll-down-holder
+	position: absolute
+	bottom: 10px
+	text-align: center
+	width: 100%
+	.scroll-down-link
+		color: rgba(255, 255, 255, .75)
+		font-size: 11px
+		text-decoration: none
+		margin: auto
+
+// Large
+@media only screen and (min-width : 1200px)
+	.attention-grabber
+		.content
+			padding: 150px 15px
+
+	.header
+		font-size: 30px
+
+	.primary-btn
+		font-size: 16px
+		margin-top: 40px
+
+// Medium
+@media only screen and (max-width : 1199px) and (min-width : 979px)
+	.attention-grabber
+		.content
+			padding: 135px 15px
+
+	.header
+		font-size: 27px
+
+  .sub-header-1
+    font-size: 19px
+
+	.primary-btn
+		font-size: 16px
+		margin-top: 40px
+
+// small
+@media only screen and (max-width : 978px) and (min-width : 767px)
+	.attention-grabber
+		.content
+			padding: 120px 15px
+
+	.header
+		font-size: 25px
+
+  .sub-header-1
+    font-size: 18px
+
+	.primary-btn
+		font-size: 15px
+		margin-top: 35px
+
+// Extra small
+@media only screen and (max-width : 766px) and (min-width : 480px)
+	.attention-grabber
+		.content
+			padding: 100px 15px
+
+	.header
+		font-size: 22px
+
+  .sub-header-1
+    font-size: 17px
+
+	.primary-btn
+		font-size: 14px
+		margin-top: 35px
+
+// Mobile
+@media only screen and (max-width : 479px) and (min-width : 320px)
+	.attention-grabber
+		.content
+			padding: 90px 15px
+
+	.header
+		font-size: 18px
+
+  .sub-header-1
+    font-size: 10px
+
+	.primary-btn
+		font-size: 13px
+		margin-top: 35px
+
+// Extra small mobile
+@media only screen and (max-width : 319px)
+	.attention-grabber
+		.content
+			padding: 90px 15px
+
+	.header
+		font-size: 19px
+
+  .sub-header-1
+    font-size: 14px
+
+	.primary-btn
+		font-size: 13px
+		margin-top: 35px

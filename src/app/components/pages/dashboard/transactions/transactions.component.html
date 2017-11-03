@@ -50,7 +50,7 @@
 						<div class="row-item col-sm-3 col-xs-5" [mdTooltip]="transaction.description.length > 11 ? transaction.description : ''" matTooltipShowDelay="500">{{ transaction.description | truncate : 11 : '..' }}</div>
 						<div class="row-item col-sm-3 hidden-xs">{{ transaction.category | capitalize }}</div>
 						<div class="row-item col-sm-2 hidden-xs">{{ transaction.toAccount | capitalize }}</div>
-						<div class="row-item col-sm-2 col-xs-4">{{ transaction.amount | currency : 'USD' : true | truncate : 9 : '..' }}</div>
+						<div class="row-item col-sm-2 col-xs-4">{{ transaction.amount | currency : 'USD' : true | truncate : 11 : '..' }}</div>
 					</div>
 				</li>
 			</ul>

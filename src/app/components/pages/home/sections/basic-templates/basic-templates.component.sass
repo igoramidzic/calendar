@@ -1,0 +1,165 @@
+@import '../../../../../app.component.sass'
+
+.basic-templates
+	transition: padding .25s
+	.content
+		max-width: 980px
+		margin: auto
+		padding: 0px 15px
+
+.header
+	text-align: center
+	color: #545252
+	font-weight: 300
+	transition: font-size .25s
+
+.basic-templates-holder
+	.template-option-holder
+		max-width: 360px
+		.template-option-content
+			border-radius: 6px
+			text-align: center
+			padding: 20px 10px
+			border: 1px solid #979797
+			&:hover
+				border-color: $primary_color
+		.option1
+		.option2
+		.option3
+
+.technology-logos-holder
+	display: flex
+	flex-direction: column
+	justify-content: center
+	.technology-logos-list
+		width: 100%
+		.technology-logo-item
+			display: inline-block
+			width: 33.3333333333333%
+			vertical-align: middle
+			.logo-img
+				margin: auto
+				max-height: 35px
+				min-height: 35px
+
+.hor-line
+	width: 75%
+	border-color: #D6D6D6
+	margin: 20px auto 0px
+
+.technology-name-list
+	padding: 30px 0px
+	.name-holder
+			&:first-child, &:nth-child(2)
+				margin: 0px 0px 40px 0px
+	.technology-name
+		margin: 0
+		letter-spacing: 1px
+		font-weight: 300
+		font-size: 22px
+
+.select-option-holder
+	.mat-button
+		background-color: $primary_color
+		color: #fff
+		font-weight: 300
+		width: 130px
+		font-size: 16px
+
+.select-customize-holder
+	margin-top: 5px
+	.customize-link
+		color: #7A7A7A
+		text-decoration: none
+		font-size: 12px
+		padding: 3px 10px
+		&:hover
+			color: #4D4C4C
+
+
+// Large
+@media only screen and (min-width : 1200px)
+	.basic-templates
+		padding: 45px 0px 60px 0px
+
+	.header
+		margin: 0px 0px 45px
+		font-size: 23px
+
+	.basic-templates-holder
+		.template-option-holder
+			margin: auto
+			display: inline-block
+			width: 33.3333333333333%
+			padding: 0px 20px
+
+// Medium
+@media only screen and (max-width : 1199px) and (min-width : 979px)
+	.basic-templates
+		padding: 40px 0px 55px 0px
+
+	.header
+		margin: 0px 0px 40px
+		font-size: 23px
+
+	.basic-templates-holder
+		.template-option-holder
+			margin: auto
+			display: inline-block
+			width: 33.3333333333333%
+			padding: 0px 15px
+
+// small
+@media only screen and (max-width : 978px) and (min-width : 767px)
+	.basic-templates
+		padding: 35px 0px 50px 0px
+
+	.header
+		margin: 0px 0px 35px
+		font-size: 22px
+
+	.basic-templates-holder
+		.template-option-holder
+			margin: auto
+			display: inline-block
+			width: 33.3333333333333%
+			padding: 0px 10px
+
+// Extra small
+@media only screen and (max-width : 766px) and (min-width : 480px)
+	.basic-templates
+		padding: 30px 0px 45px 0px
+
+	.header
+		margin: 0px 0px 30px
+		font-size: 21px
+
+	.basic-templates-holder
+		.template-option-holder
+			margin: 0 auto 25px
+
+// Mobile
+@media only screen and (max-width : 479px) and (min-width : 320px)
+	.basic-templates
+		padding: 25px 0px 40px 0px
+
+	.header
+		margin: 0px 0px 25px
+		font-size: 20px
+
+	.basic-templates-holder
+		.template-option-holder
+			margin: 0 auto 25px
+
+// Extra small mobile
+@media only screen and (max-width : 319px)
+	.basic-templates
+		padding: 20px 0px 35px 0px
+
+	.header
+		margin: 0px 0px 20px
+		font-size: 19px
+
+	.basic-templates-holder
+		.template-option-holder
+			margin: 0 auto 25px

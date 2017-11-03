@@ -31,6 +31,8 @@ import { AccountsService } from './services/accounts.service';
 import { TransactionsService } from './services/transactions.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { NotAuthGuard } from './services/not-auth-guard.service';
+import { LoaderService } from "./services/loader.service";
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -56,6 +58,12 @@ import { AccountsComponent } from './components/pages/dashboard/accounts/account
 import { TransactionsComponent } from './components/pages/dashboard/transactions/transactions.component';
 import { NewTransactionFormComponent } from './components/pages/dashboard/transactions/new-transaction-form/new-transaction-form.component';
 import { SpinnerComponent } from './components/animations/spinner/spinner.component';
+
+import { AttentionGrabberComponent } from './components/pages/home/sections/attention-grabber/attention-grabber.component';
+import { CustomizableTemplateComponent } from './components/pages/home/sections/customizable-template/customizable-template.component';
+import { BasicTemplatesComponent } from './components/pages/home/sections/basic-templates/basic-templates.component';
+import { CallToActionComponent } from './components/pages/home/sections/call-to-action/call-to-action.component';
+import { FooterComponent } from './components/pages/home/sections/footer/footer.component';
 
 
 @NgModule({
@@ -84,6 +92,11 @@ import { SpinnerComponent } from './components/animations/spinner/spinner.compon
 		CapitalizePipe,
 		NewTransactionFormComponent,
 		SpinnerComponent,
+    AttentionGrabberComponent,
+    CustomizableTemplateComponent,
+    BasicTemplatesComponent,
+    CallToActionComponent,
+    FooterComponent
 	],
 	imports: [
 		BrowserModule,
@@ -119,7 +132,7 @@ import { SpinnerComponent } from './components/animations/spinner/spinner.compon
 		DeleteAccountModalComponent
 	],
 	providers: [ ModalService, AuthService, AuthGuard, NotAuthGuard, StoreService,
-							AccountsService, TransactionsService ],
+							AccountsService, TransactionsService, LoaderService ],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,0 +1,65 @@
+@import '../../../../../app.component.sass'
+
+.landing-page-footer
+	transition: padding .25s
+	background-color: #0C474A
+	.content
+		max-width: 980px
+		margin: auto
+		padding: 0px 15px
+		text-align: center
+
+.footer-links
+	list-style-type: none
+	padding: 0
+	margin: 0 auto 15px
+	.link-item
+		display: inline-block
+		&:first-child, &:nth-child(2)
+			margin-right: 15px
+		.footer-link
+			color: #fff
+			text-decoration: none
+			font-weight: 300
+			font-size: 12px
+			padding: 2px 0px 5px 0px
+			&:hover
+				border-bottom: 1px solid #fff
+
+.copyright
+	color: #fff
+	font-weight: 300
+	font-size: 12px
+	margin: 0
+	padding: 0
+
+
+// Large
+@media only screen and (min-width : 1200px)
+	.landing-page-footer
+		padding: 110px 0px
+
+// Medium
+@media only screen and (max-width : 1199px) and (min-width : 979px)
+	.landing-page-footer
+		padding: 100px 0px
+
+// small
+@media only screen and (max-width : 978px) and (min-width : 767px)
+	.landing-page-footer
+		padding: 90px 0px
+
+// Extra small
+@media only screen and (max-width : 766px) and (min-width : 480px)
+	.landing-page-footer
+		padding: 80px 0px
+
+// Mobile
+@media only screen and (max-width : 479px) and (min-width : 320px)
+	.landing-page-footer
+		padding: 70px 0px
+
+// Extra small mobile
+@media only screen and (max-width : 319px)
+	.landing-page-footer
+		padding: 60px 0px
