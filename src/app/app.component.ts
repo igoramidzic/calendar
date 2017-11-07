@@ -23,5 +23,4 @@ export class AppComponent implements OnInit, AfterContentChecked {
   ngAfterContentChecked () {
     // this.loaderService.display(false);
   }
-
 }
